@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:topuptest/Api_Section/Bloc/BrandNameModel/brand_name_bloc.dart';
+import 'package:topuptest/Api_Section/Bloc/bannerBloc/banner_bloc.dart';
 import 'package:topuptest/Api_Section/ModelClasses/BrandName.dart';
 
 class HomeScreen extends StatelessWidget {
   HomeScreen({Key? key}) : super(key: key);
   late BrandName brandName;
+  TextEditingController titleController = TextEditingController();
+  TextEditingController  noteController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -32,12 +35,43 @@ class HomeScreen extends StatelessWidget {
                 height: mHieght * .1,
                 child: AlertDialog(
 
-                  content: Text("gfhfjh"),
+                  content: Column(
+                    children: [
+                      TextFormField(
+                        controller: titleController,
+
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(),
+                          labelText: 'tiltle',
+                        ),
+
+
+                      ),
+                      SizedBox(
+                        height:  mHieght*.02,
+
+                      ),
+                      TextFormField(
+                        controller: noteController,
+
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(),
+                          labelText: 'note',
+                        ),
+                      )
+                    ],
+                  ),
                   actions: <Widget>[
                     new TextButton(
                       child: Text("create"),
                       onPressed: () {
-                        Navigator.of(context).pop();
+                        BlocProvider.of<BannerBloc>(context).add(
+                          CreateBannerEvent(
+
+
+                              title: titleController.text, note: noteController.text,
+                              BranchID: 1, CompanyID: "9a380d3f-bf38-44a3-a3d4-38c12e964496", createUserId: 332),
+                        );
                       },
                     ),
                   ],
@@ -68,7 +102,6 @@ class HomeScreen extends StatelessWidget {
                 leading: const Icon(Icons.add),
                 title:  Text(
                   brandName.data![index].brandName.toString(),
-
                 ),
                 trailing: const Icon(Icons.done),
 

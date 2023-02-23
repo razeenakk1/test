@@ -33,15 +33,15 @@ class ApiClient {
         method == "DELETE") {
       print("Methode POST OR GET");
       headerParams = {
-        // "authorization" : "Bearer $tokens",
+         "authorization" : "Bearer $token",
         'Content-Type': 'application/json',
         'Cookie': 'csrftoken=sPO3nP6fHvTWmiExp2OMr7BFRfm8F6M9mTWRKR42ia3TqPF9jmBAsfdU8FocYgWJ; sessionid=pabokcthprx2d28gb6sfzxrpv86qcwul'
       };
     }
     Response response;
 
-    String url = isLogin ? basePathAccounts +path + '?api_key=$token' :basePath + path + '?api_key=$token';
-    //String urlbasepathaccount = basePathAccounts +path;
+    String url =  basePath + path ;
+    String urlbasepathaccount = basePathAccounts +path  ;
     // String searchurl =  basePath + 'search/movie'+'?api_key=$token'+ path;
     print('========================================' + url);
 
@@ -55,7 +55,7 @@ class ApiClient {
         break;
       case "LOGIN":
         response =
-            await post(Uri.parse(url), headers: headerParams, body: body);
+            await post(Uri.parse(urlbasepathaccount), headers: headerParams, body: body);
         break;
 
       case "PUT":

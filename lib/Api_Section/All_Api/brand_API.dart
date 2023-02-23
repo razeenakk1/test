@@ -9,6 +9,7 @@ class BrandApi {
   ApiClient apiClient = ApiClient();
   BrandName brandModelClass = BrandName();
 
+
   String path = 'brands/search-brand-list/';
 
 
