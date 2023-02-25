@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:topuptest/Api_Section/All_Api/brand_API.dart';
-import 'package:topuptest/Api_Section/All_Api/create_api.dart';
+import 'package:topuptest/Api_Section/All_Api/get_api.dart';
+
 import 'package:topuptest/Api_Section/All_Api/login_api.dart';
-import 'package:topuptest/Api_Section/Bloc/BrandNameModel/brand_name_bloc.dart';
+import 'package:topuptest/Api_Section/Bloc/BrandBloc/brand_bloc.dart';
+
 import 'package:topuptest/Api_Section/Bloc/LoginBloc/login_bloc.dart';
-import 'package:topuptest/Api_Section/Bloc/bannerBloc/banner_bloc.dart';
+import 'package:topuptest/Api_Section/Bloc/get_bloc/get_bloc.dart';
+
 import 'package:topuptest/screens/Login_Screen/loginScreen.dart';
+import 'package:topuptest/screens/profile_screen.dart';
+import 'package:topuptest/screens/sample_screen.dart';
 
 void main() {
   runApp( MyApp());
@@ -16,7 +21,8 @@ class MyApp extends StatelessWidget {
    MyApp({super.key});
   UserApi userApi = UserApi();
   BrandApi brandApi = BrandApi();
-  BannerApi bannerApi= BannerApi();
+   GetApi getApi = GetApi();
+
 
   // This widget is the root of your application.
   @override
@@ -26,12 +32,14 @@ class MyApp extends StatelessWidget {
         BlocProvider<LoginBloc>(
           create: (context) => LoginBloc(userApi),
         ),
-        BlocProvider<BrandNameBloc>(
-          create: (context) => BrandNameBloc(brandApi),
+
+        BlocProvider<BrandBloc>(
+          create: (context) => BrandBloc(brandApi),
         ),
-        BlocProvider<BannerBloc>(
-          create: (context) => BannerBloc(bannerApi),
+        BlocProvider<GetBloc>(
+          create: (context) => GetBloc(getApi),
         ),
+
 
       ],
        child: MaterialApp(
@@ -41,7 +49,7 @@ class MyApp extends StatelessWidget {
 
             primarySwatch: Colors.blue,
           ),
-          home: LoginScreen()
+          home: ProfileScreen()
         ),
 
     );

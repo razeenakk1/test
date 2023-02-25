@@ -1,56 +1,56 @@
+import 'dart:convert';
 /// StatusCode : 6000
-/// data : [{"id":"a025e3e0-dd4c-4023-95ff-3e5c38c9ef34","name":"Primary Brand","BrandID":1,"BranchID":1,"BrandName":"Primary Brand","Notes":"Default Note","CreatedUserID":1,"CreatedDate":"2023-01-12T11:54:12.232909","UpdatedDate":null,"Action":"A","IsDefault":false}]
+/// data : {"id":"e2d3d32a-3681-4c22-a300-9bfa819e9d46","name":"ihojoj","BrandID":9,"BranchID":1,"BrandName":"ihojoj","Notes":"khooj","CreatedUserID":332,"CreatedDate":"2023-02-24T10:39:40.646745","UpdatedDate":"2023-02-24T10:39:40.641373","Action":"A","IsDefault":false}
 
-class BrandName {
-  BrandName({
+SingleViewBrandModelClass singleViewBrandModelClassFromJson(String str) => SingleViewBrandModelClass.fromJson(json.decode(str));
+String singleViewBrandModelClassToJson(SingleViewBrandModelClass data) => json.encode(data.toJson());
+class SingleViewBrandModelClass {
+  SingleViewBrandModelClass({
       num? statusCode, 
-      List<Data>? data,}){
+      Data? data,}){
     _statusCode = statusCode;
     _data = data;
 }
 
-  BrandName.fromJson(dynamic json) {
+  SingleViewBrandModelClass.fromJson(dynamic json) {
     _statusCode = json['StatusCode'];
-    if (json['data'] != null) {
-      _data = [];
-      json['data'].forEach((v) {
-        _data?.add(Data.fromJson(v));
-      });
-    }
+    _data = json['data'] != null ? Data.fromJson(json['data']) : null;
   }
   num? _statusCode;
-  List<Data>? _data;
-BrandName copyWith({  num? statusCode,
-  List<Data>? data,
-}) => BrandName(  statusCode: statusCode ?? _statusCode,
+  Data? _data;
+SingleViewBrandModelClass copyWith({  num? statusCode,
+  Data? data,
+}) => SingleViewBrandModelClass(  statusCode: statusCode ?? _statusCode,
   data: data ?? _data,
 );
   num? get statusCode => _statusCode;
-  List<Data>? get data => _data;
+  Data? get data => _data;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
     map['StatusCode'] = _statusCode;
     if (_data != null) {
-      map['data'] = _data?.map((v) => v.toJson()).toList();
+      map['data'] = _data?.toJson();
     }
     return map;
   }
 
 }
 
-/// id : "a025e3e0-dd4c-4023-95ff-3e5c38c9ef34"
-/// name : "Primary Brand"
-/// BrandID : 1
+/// id : "e2d3d32a-3681-4c22-a300-9bfa819e9d46"
+/// name : "ihojoj"
+/// BrandID : 9
 /// BranchID : 1
-/// BrandName : "Primary Brand"
-/// Notes : "Default Note"
-/// CreatedUserID : 1
-/// CreatedDate : "2023-01-12T11:54:12.232909"
-/// UpdatedDate : null
+/// BrandName : "ihojoj"
+/// Notes : "khooj"
+/// CreatedUserID : 332
+/// CreatedDate : "2023-02-24T10:39:40.646745"
+/// UpdatedDate : "2023-02-24T10:39:40.641373"
 /// Action : "A"
 /// IsDefault : false
 
+Data dataFromJson(String str) => Data.fromJson(json.decode(str));
+String dataToJson(Data data) => json.encode(data.toJson());
 class Data {
   Data({
       String? id, 
@@ -61,7 +61,7 @@ class Data {
       String? notes, 
       num? createdUserID, 
       String? createdDate, 
-      dynamic updatedDate, 
+      String? updatedDate, 
       String? action, 
       bool? isDefault,}){
     _id = id;
@@ -98,7 +98,7 @@ class Data {
   String? _notes;
   num? _createdUserID;
   String? _createdDate;
-  dynamic _updatedDate;
+  String? _updatedDate;
   String? _action;
   bool? _isDefault;
 Data copyWith({  String? id,
@@ -109,7 +109,7 @@ Data copyWith({  String? id,
   String? notes,
   num? createdUserID,
   String? createdDate,
-  dynamic updatedDate,
+  String? updatedDate,
   String? action,
   bool? isDefault,
 }) => Data(  id: id ?? _id,
@@ -132,7 +132,7 @@ Data copyWith({  String? id,
   String? get notes => _notes;
   num? get createdUserID => _createdUserID;
   String? get createdDate => _createdDate;
-  dynamic get updatedDate => _updatedDate;
+  String? get updatedDate => _updatedDate;
   String? get action => _action;
   bool? get isDefault => _isDefault;
 
