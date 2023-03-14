@@ -1,5 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+//return type function
+// int ShowMyAge(){
+//   int age = 20;
+//   return age;
+//
+// }
+// void main(){
+//   int myAge = ShowMyAge();
+//   print(myAge);
+// }
 
 class SampleScreen extends StatefulWidget {
   const SampleScreen({Key? key}) : super(key: key);
@@ -26,6 +36,10 @@ class _SampleScreenState extends State<SampleScreen> {
 
   @override
   Widget build(BuildContext context) {
+
+
+
+
     final space = SizedBox(
       height: MediaQuery.of(context).size.height * .02,
     );
@@ -172,4 +186,104 @@ class _SampleScreenState extends State<SampleScreen> {
       percentageCalculating;
     });
   }
+  //
+  // alertBoxOrderStatus(BuildContext context) async {
+  //   // final mWidth = MediaQuery
+  //   //     .of(context)
+  //   //     .size
+  //   //     .width;
+  //   final mHeight = MediaQuery
+  //       .of(context)
+  //       .size
+  //       .height;
+  //   final space =    SizedBox(height: mHeight*.02,);
+  //   return showDialog(
+  //     context: context,
+  //     builder: (ctx) {
+  //       return AlertDialog(
+  //
+  //         content: Column(
+  //           mainAxisSize: MainAxisSize.min,
+  //           children: [
+  //             alertBoxWidget(buttonText: 'This Year',
+  //                 onPressed: () {
+  //                   setState(() {
+  //                     orderStatus = 'This Year';
+  //                     Navigator.pop(context);
+  //                   });
+  //                 }),
+  //             space,
+  //             alertBoxWidget(buttonText: 'This Month',
+  //                 onPressed: () {
+  //                   setState(() {
+  //                     orderStatus = 'This Month';
+  //                     Navigator.pop(context);
+  //                   });
+  //                 }),
+  //             space,
+  //             alertBoxWidget(buttonText: 'This Week',
+  //                 onPressed: () {
+  //                   setState(() {
+  //                     orderStatus = 'This Week';
+  //                     Navigator.pop(context);
+  //                   });
+  //                 }),
+  //           ],
+  //         ),
+  //       );
+  //     },
+  //   );
+  // }
+  // Container(
+  // height: mHeight * .037,
+  // width: mWidth * .25,
+  // decoration: BoxDecoration(
+  // color: color, borderRadius: BorderRadius.circular(15)),
+  // child: ValueListenableBuilder(
+  // valueListenable: valueListenableValue,
+  //
+  // builder: (BuildContext context, SomeValue , _) {
+  // return Container(
+  // padding: EdgeInsets.only(left: mWidth * .03),
+  // child: DropdownButton(
+  // underline: Container(),
+  // isExpanded: true,
+  // value: valueListenableValue.value,
+  // style: const TextStyle(
+  // fontSize: 13,
+  // color: Color(0xff818181),
+  // fontWeight: FontWeight.w600),
+  // icon: const SizedBox.shrink(),
+  // items: items.map((String items) {
+  // return DropdownMenuItem(
+  // value: items,
+  // child: Text(items),
+  // );
+  // }).toList(),
+  // onChanged: (newValue) {
+  // print(newValue);
+  // print(newValue);
+  // if(type == 1 )
+  // {
+  // valueListenableValue.value!= newValue.toString();
+  //
+  // } else if(type == 2){
+  // valueListenableValue.value!= newValue.toString();
+  //
+  // }else if(type == 3){
+  // valueListenableValue.value!= newValue.toString();
+  //
+  // } else{
+  // valueListenableValue.value!= newValue.toString();
+  //
+  //
+  // }
+  //
+  //
+  //
+  // },
+  // ),
+  // );
+  // }
+  // ));
 }
