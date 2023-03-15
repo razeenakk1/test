@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import '../CameraSecton/camera_screen.dart';
 import '../Constens/constens.dart';
 import '../Widgets/appbar_widget.dart';
@@ -80,7 +81,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               size: size,
                               firstText: "Phone",
                             icon: const Icon(Icons.phone,
-                                size: 20, color: Color(0xff707070)), secondText: phone,
+                                size: 20, color: Color(0xff707070)), secondText: "+$phone",
                               buttonOnPressed: () {
                                 profileBottomSheetClass.profileModelBottomSheet(
                                   type: 'Phone',
@@ -116,13 +117,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   SizedBox(
                                     width: size.width * .04,
                                   ),
-                                  const Text(
+                                   Text(
                                     "Security",
-                                    style: TextStyle(
+                                    style:GoogleFonts.poppins(textStyle: const TextStyle(
                                         // color: Color(0xff707070),
                                         fontWeight: FontWeight.w900,
                                         fontSize: 15),
                                   )
+                                   )
                                 ],
                               )),
                           SizedBox(
@@ -148,7 +150,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 SizedBox(
                                   width: size.width * .01,
                                 ),
-                                const Text("Change Password"),
+                                 Text("Change Password", style:GoogleFonts.poppins(fontWeight: FontWeight.w500,color: Colors.grey),),
                                 SizedBox(
                                   width: size.width * .23,
                                 ),
@@ -268,7 +270,7 @@ class ProfileRowWidget extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(firstText,style:  const TextStyle(fontSize: 15,color: Colors.grey,fontWeight: FontWeight.w700,),),
+                      Text(firstText, style:GoogleFonts.poppins(textStyle: const  TextStyle(fontSize: 13,color: Colors.grey,fontWeight: FontWeight.w700,),)),
                       SizedBox(
                         width: size.width*.6,
                        // color: Colors.blue,
@@ -276,8 +278,8 @@ class ProfileRowWidget extends StatelessWidget {
                             child: Text(secondText, overflow: TextOverflow.ellipsis,
 
 
-                              style: const TextStyle(fontWeight: FontWeight.bold,fontSize: 16),)),
-                      )
+                                style:GoogleFonts.poppins(textStyle: const  TextStyle(fontWeight: FontWeight.bold,fontSize: 15),)),
+                      ))
                     ],
                   )
 

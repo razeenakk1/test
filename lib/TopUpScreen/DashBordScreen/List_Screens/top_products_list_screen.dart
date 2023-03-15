@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import '../../Constens/constens.dart';
 import '../../Widgets/appbar_widget.dart';
@@ -65,26 +66,26 @@ class TopProductsListScreen extends StatelessWidget {
                           ),
                           title: Padding(
                             padding: EdgeInsets.only(top: mHeight * .01),
-                            child: const Text(
+                            child:  Text(
                               "ID7688",
-                              style: TextStyle(color: Color(0xffC73C13)),
+                    style:GoogleFonts.poppins(textStyle: const TextStyle(color: Color(0xffC73C13)),
                             ),
-                          ),
-                          subtitle: const Column(
+                            )  ),
+                          subtitle:  Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
+                            children:  [
                               Text(
                                 "Yeezy 380 Alien",
-                                style: TextStyle(
+                    style:GoogleFonts.poppins(textStyle: const  TextStyle(
                                     fontWeight: FontWeight.w900,
-                                    fontSize: 16,
-                                    color: Colors.black),
+                                    fontSize: 15,
+                                    color: Colors.black),)
                               ),
                               Text(
                                 "Red",
-                                style: TextStyle(
+                                style:GoogleFonts.poppins(textStyle: const  TextStyle(
                                     fontWeight: FontWeight.bold,
-                                    color: Colors.black),
+                                    color: Colors.black),)
                               ),
                             ],
                           ),
@@ -92,12 +93,12 @@ class TopProductsListScreen extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.end,
                             children: [
-                              const Text("Sold",
-                                  style: TextStyle(color: Color(0xff818181))),
+                               Text("Sold",
+                            style:GoogleFonts.poppins(textStyle: const TextStyle(color: Color(0xff818181)))),
                               Text(topCustomersCountList[index],
-                                  style: const TextStyle(
-                                      fontSize: 17,
-                                      fontWeight: FontWeight.w900)),
+                                style:GoogleFonts.poppins(textStyle: const  TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w900))),
                             ],
                           ),
                         ),

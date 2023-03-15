@@ -7,7 +7,7 @@ class TaxBottomSheetClass {
   TextEditingController salesTaxController = TextEditingController();
   TextEditingController purchaseTaxController = TextEditingController();
 
-  taxModelBottomSheet(   {required BuildContext context}) {
+  taxModelBottomSheet(   {required BuildContext context }) {
     return showModalBottomSheet(
       context: context,
       isScrollControlled: true,

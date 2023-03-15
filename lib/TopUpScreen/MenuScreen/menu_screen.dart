@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import '../Constens/constens.dart';
 import '../Widgets/appbar_widget.dart';
@@ -197,10 +198,10 @@ class MenuSectionsWidget extends StatelessWidget {
                 padding: EdgeInsets.only(top: mHeight*.01),
                 child: Text(
                   text,
-                  style: const TextStyle(
+                  style:GoogleFonts.poppins(textStyle: const   TextStyle(
                       fontSize: 15,
                       fontWeight: FontWeight.w600,
-                      color: Colors.black),
+                      color: Colors.black),),
                 ),
               ),
             ),
@@ -231,7 +232,7 @@ class MenuTitleWidget extends StatelessWidget {
       padding: EdgeInsets.only(top: mHeight*.01,bottom: mHeight*.01),
       child: Text(
         text,
-        style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w900),
+      style:GoogleFonts.poppins(textStyle: const  TextStyle(fontSize: 18, fontWeight: FontWeight.w900),),
       ),
     );
   }

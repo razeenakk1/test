@@ -1,5 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import '../../Constens/constens.dart';
 import '../../Widgets/appbar_widget.dart';
@@ -83,7 +84,7 @@ class StockFinderScreen extends StatelessWidget {
                     text1: 'Yeezy Boost 350 v2',
                     text1Color: Colors.black,
                     text1fontSize: 20,
-                    fontWeighText1: FontWeight.w900,
+                    fontWeighText1: FontWeight.w800,
                     crossAxisAlignment: CrossAxisAlignment.start,
                   ),
                   SizedBox(
@@ -201,8 +202,8 @@ class ColorAndSizeWidget extends StatelessWidget {
         children: [
           Container(
               padding: EdgeInsets.only(left: mWidth * .03),
-              child: const Text("Red",
-                  style: TextStyle(fontSize: 12, fontWeight: FontWeight.w900))),
+              child:  Text("Red",
+                  style:GoogleFonts.poppins(textStyle: const TextStyle(fontSize: 14, fontWeight: FontWeight.w900)))),
           SizedBox(
             height: mHeight * .1,
             // color: Colors.orange,
@@ -222,19 +223,19 @@ class ColorAndSizeWidget extends StatelessWidget {
                           color: const Color(0xffF5F5F5),
                           borderRadius: BorderRadius.circular(15)),
                       width: mWidth * .16,
-                      child: const Column(
+                      child:  Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Text(
                             "4",
-                            style: TextStyle(
-                                fontSize: 23, fontWeight: FontWeight.w900),
-                          ),
+                        style:GoogleFonts.poppins(textStyle: const  TextStyle(
+                                fontSize: 23, fontWeight: FontWeight.w700),
+                        ) ),
                           Text(
                             "10",
-                            style: TextStyle(
-                                fontSize: 12, color: Color(0xffC93D14)),
+                            style:GoogleFonts.poppins(textStyle: const TextStyle(
+                                fontSize: 12, color: Color(0xffC93D14)),)
                           ),
                         ],
                       ),
@@ -277,14 +278,14 @@ class SearchProductDetailsWidget extends StatelessWidget {
       children: [
         Text(
           text,
-          style: TextStyle(color: textColor, fontSize: fontSize),
+      style:GoogleFonts.poppins(textStyle:   TextStyle(color: textColor, fontSize: fontSize),)
         ),
         Text(
           text1,
-          style: TextStyle(
+        style:GoogleFonts.poppins(textStyle:   TextStyle(
               color: text1Color,
               fontWeight: fontWeighText1,
-              fontSize: text1fontSize),
+              fontSize: text1fontSize),)
         ),
       ],
     );

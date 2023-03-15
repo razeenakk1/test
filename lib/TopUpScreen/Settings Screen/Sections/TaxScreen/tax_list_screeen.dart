@@ -41,7 +41,10 @@ class TaxListScreen extends StatelessWidget {
                 itemCount: 5,
                 itemBuilder: (BuildContext context, int index) {
                   return GestureDetector(
-                    onTap: () {},
+                    onTap: () {
+                      taxBottomSheetClass.taxModelBottomSheet(
+                          context: context);
+                    },
                     child: Card(
                       elevation: 0,
                       child: Container(

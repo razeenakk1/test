@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import '../Constens/constens.dart';
 import '../Widgets/appbar_widget.dart';
 import 'Custom_Commen_Class_BottomSheet/commen_function.dart';
@@ -34,7 +35,7 @@ class SettingsScreen extends StatelessWidget {
       appBar: appBar(appBarTitle: 'Settings'),
       body: Container(
         padding: EdgeInsets.only(
-            left: mWidth * .02, right: mWidth * .02),
+            left: mWidth * .05,),
         height: mHeight,
         decoration: containerDecoration,
         child: ListView(
@@ -271,39 +272,49 @@ class SectionTwoWidget extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   //  SizedBox(width: mWidth*.01,),
-                  Container(
-                      padding: const EdgeInsets.only(left: 20),
-                      child: TextButton(
-                          onPressed: onPressed,
-                          child: Text(
-                            subTitle,
-                            style: const TextStyle(
-                                color: Color(0xff707070),
-                                fontSize: 16,
-                                fontWeight: FontWeight.w500),
-                          ))),
+                  InkWell(
+                    onTap: onPressed,
+                    child: Container(
+                        padding:  EdgeInsets.only(top: mHeight*.01,left: mWidth*.075),
+                     // color: Colors.yellow,
+                        width: mWidth*.62,
+                        height: mHeight*.05,
+                        child: Text(
+                          subTitle,
+                            style:GoogleFonts.poppins(textStyle: const  TextStyle(
+                              color: Color(0xff707070),
+                              fontSize: 16,
+                              fontWeight: FontWeight.w500),
+                        )),
+                    )),
 
-                  GestureDetector(onTap: onTapp, child: addButton)
+                  InkWell(
+                    onTap: onTapp,
+                    child: AddIconButton(mHeight: mHeight, mWidth: mWidth),
+                  )
                 ],
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   //  SizedBox(width: mWidth*.01,),
-                  Container(
-                      padding: const EdgeInsets.only(left: 20),
-                      child: TextButton(
-                        onPressed: onPressedd,
+                  InkWell(
+                    onTap: onPressedd,
+                    child: Container(
+                        padding:  EdgeInsets.only(top: mHeight*.01,left: mWidth*.075),
                         child: Text(
                           subTitle1,
-                          style: const TextStyle(
+                            style:GoogleFonts.poppins(textStyle: const  TextStyle(
                               color: Color(0xff707070),
                               fontSize: 16,
                               fontWeight: FontWeight.w500),
-                        ),
-                      )),
+                        )),
+                    )),
 
-                  GestureDetector(onTap: onTap, child: addButton)
+                  InkWell(
+                    onTap: onTap,
+                    child: AddIconButton(mHeight: mHeight, mWidth: mWidth),
+                  )
                 ],
               ),
             ],
@@ -333,18 +344,6 @@ class SectionOneWidget extends StatelessWidget {
   final String subTitle;
   final Function() onPressed;
   final Function()? onTap;
-  final container = Container(
-
-      decoration: BoxDecoration(
-      //  color: Colors.orange,
-        borderRadius: const BorderRadius.all(Radius.circular(50.0)),
-        border: Border.all(color: const Color(0xffB53211)),
-      ),
-      child: const Icon(
-        Icons.add,
-        color: Color(0xffB53211),
-      ));
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -362,11 +361,11 @@ class SectionOneWidget extends StatelessWidget {
               ),
               Text(
                 title,
-                style: const TextStyle(
+                style:GoogleFonts.poppins(textStyle: const TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 20,
                     color: Color(0xff000000)),
-              ),
+                ) ),
             ],
           ),
           SizedBox(
@@ -376,24 +375,58 @@ class SectionOneWidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               //  SizedBox(width: mWidth*.01,),
-              Container(
-                //color: Colors.blue,
-                  padding: const EdgeInsets.only(left: 22),
-                  child: TextButton(
-                    onPressed: onPressed,
+              InkWell(
+                onTap: onPressed,
+                child: Container(
+                //    color: Colors.blue,
+                    width: mWidth*.62,
+                   height: mHeight*.05,
+                    padding:  EdgeInsets.only(top: mHeight*.01,left: mWidth*.075),
                     child: Text(
-                      subTitle,
-                      style: const TextStyle(
-                          color: Color(0xff707070),
-                          fontWeight: FontWeight.w500,
-                          fontSize: 16),
-                    ),
-                  )),
-              InkWell(onTap: onTap, child: container)
+                        subTitle,textAlign: TextAlign.start,
+                        style:GoogleFonts.poppins(textStyle: const  TextStyle(
+                            color: Color(0xff707070),
+                            fontWeight: FontWeight.w500,
+                            fontSize: 16),
+                        ) ),
+                ),
+              ),
+              InkWell(
+                onTap: onTap,
+                child: AddIconButton(mHeight: mHeight, mWidth: mWidth),
+              )
             ],
           ),
         ],
       ),
+    );
+  }
+}
+
+class AddIconButton extends StatelessWidget {
+  const AddIconButton({
+    super.key,
+    required this.mHeight,
+    required this.mWidth,
+  });
+
+  final double mHeight;
+  final double mWidth;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.only(left: mWidth*.02),
+      height: mHeight*.05,
+        width: mWidth*.2,
+        decoration: BoxDecoration(
+         // color: Colors.green,
+          image: DecorationImage(
+              scale: 1.4,
+            image: AssetImage("assets/Add_icon/plus-circle-line.png",)
+          )
+        ),
+        // child: Image.asset("assets/Add_icon/plus-circle-line.png",width: mWidth*.06,height: mHeight*.06,)
     );
   }
 }

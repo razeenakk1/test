@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import '../Constens/constens.dart';
 import '../MenuScreen/menu_screen.dart';
@@ -76,7 +77,7 @@ class ContainerWidget extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(title,style: const TextStyle(fontWeight: FontWeight.bold),),
+              Text(title, style:GoogleFonts.poppins(textStyle:  const TextStyle(fontWeight: FontWeight.bold),)),
               const Icon(Icons.arrow_forward_ios,size: 10,color: Colors.black,)
             ],
           ),

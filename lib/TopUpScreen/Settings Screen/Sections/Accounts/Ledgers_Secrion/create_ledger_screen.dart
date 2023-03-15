@@ -373,7 +373,7 @@ class AddressWidget extends StatelessWidget {
                           ),
                           subtitle: Transform(
                             transform: Matrix4.translationValues(-30, 20, 0.0),
-                            child: const Column(
+                            child:  Column(
                               //  mainAxisAlignment: MainAxisAlignment.spaceAround,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [

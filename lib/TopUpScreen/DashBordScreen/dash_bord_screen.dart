@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:topuptest/TopUpScreen/DashBordScreen/SearchScreen/search_screen.dart';
 import 'package:topuptest/TopUpScreen/ProfileScreen/profile_screen.dart';
 import '../Constens/constens.dart';
@@ -60,7 +61,7 @@ final  bool isTrue = false;
           backgroundColor: backGroundColor,
           elevation: 0,
           bottom: PreferredSize(
-            preferredSize: Size.fromHeight(mHeight * .05),
+            preferredSize: Size.fromHeight(mHeight * .06),
             child: Container(
               alignment: Alignment.centerLeft,
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
@@ -72,23 +73,24 @@ final  bool isTrue = false;
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      const Text(
+                       Text(
                         "Hello,",
-                        style:
-                            TextStyle(fontSize: 15, color: Color(0xffA1A1A1)),
+                        style:GoogleFonts.poppins(textStyle: const
+                            TextStyle(fontSize: 15, color: Color(0xffA1A1A1))),
                       ),
                       Text(
                         name,
                         textAlign: TextAlign.end,
-                        style: const TextStyle(
-                            color: Colors.black,
+                        style:GoogleFonts.poppins(textStyle: const TextStyle(
+                        color: Colors.black,
                             fontSize: 22,
                             fontWeight: FontWeight.w900),
+                        )
                       )
                     ],
                   ),
                   SizedBox(
-                    width: mWidth * .25,
+                    width: mWidth * .19,
                   ),
                   AppBarButtonWidget(
                       mHeight: mHeight,
@@ -100,7 +102,7 @@ final  bool isTrue = false;
                         "assets/LogoutImage/logout.png",
                       )),
                   SizedBox(
-                    width: mWidth * .01,
+                    width: mWidth * .02,
                   ),
                   AppBarButtonWidget(
                     mHeight: mHeight,
@@ -217,10 +219,10 @@ final  bool isTrue = false;
                             // color: Colors.red,
                             child: Column(
                               children: [
-                                const Text("Total Profit",
-                                    style: TextStyle(
+                                 Text("Total Profit",
+                              style:GoogleFonts.poppins(textStyle: const  TextStyle(
                                         fontWeight: FontWeight.w900,
-                                        fontSize: 18)),
+                                        fontSize: 18)),),
                                 ThisMonthWidget(
                                   mHeight: mHeight,
                                   mWidth: mWidth,
@@ -247,9 +249,9 @@ final  bool isTrue = false;
                       ),
                       Row(
                         children: [
-                          const Text('\$ 45,000,000.00',
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w900, fontSize: 18)),
+                           Text('\$ 45,000,000.00',
+                            style:GoogleFonts.poppins(textStyle: const  TextStyle(
+                                  fontWeight: FontWeight.w900, fontSize: 18)),),
                           SizedBox(
                             width: mWidth * .02,
                           ),
@@ -259,12 +261,12 @@ final  bool isTrue = false;
                               decoration: BoxDecoration(
                                   color: const Color(0xffB0F6C8),
                                   borderRadius: BorderRadius.circular(15)),
-                              child: const Center(
+                              child:  Center(
                                   child: Text(
                                 "56%",
-                                style: TextStyle(
+                                      style:GoogleFonts.poppins(textStyle: const  TextStyle(
                                     color: Colors.green, fontSize: 13),
-                              ))),
+                                      )))),
                         ],
                       )
                     ],
@@ -350,26 +352,27 @@ final  bool isTrue = false;
                           ),
                           title: Padding(
                             padding: EdgeInsets.only(top: mHeight * .01),
-                            child: const Text(
+                            child:  Text(
                               "ID7688",
-                              style: TextStyle(color: Color(0xffC73C13)),
+                    style:GoogleFonts.poppins(textStyle: const  TextStyle(color: Color(0xffC73C13)),
                             ),
                           ),
-                          subtitle: const Column(
+                          ),
+                          subtitle:  Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
+                            children:  [
                               Text(
                                 "Yeezy 380 Alien",
-                                style: TextStyle(
+                    style:GoogleFonts.poppins(textStyle: const  TextStyle(
                                     fontWeight: FontWeight.w900,
-                                    fontSize: 16,
-                                    color: Colors.black),
+                                    fontSize: 15,
+                                    color: Colors.black),)
                               ),
                               Text(
                                 "Red",
-                                style: TextStyle(
+                                style:GoogleFonts.poppins(textStyle: const  TextStyle(
                                     fontWeight: FontWeight.bold,
-                                    color: Colors.black),
+                                    color: Colors.black),)
                               ),
                             ],
                           ),
@@ -377,12 +380,12 @@ final  bool isTrue = false;
                             mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.end,
                             children: [
-                              const Text("Sold",
-                                  style: TextStyle(color: Color(0xff818181))),
+                               Text("Sold",
+                            style:GoogleFonts.poppins(textStyle: const  TextStyle(color: Color(0xff818181))),),
                               Text(topCustomersCountList[index],
-                                  style: const TextStyle(
-                                      fontSize: 17,
-                                      fontWeight: FontWeight.w900)),
+                                style:GoogleFonts.poppins(textStyle: const  TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w900)),)
                             ],
                           ),
                         ),
@@ -462,12 +465,12 @@ class CardWidget extends StatelessWidget {
             padding: EdgeInsets.only(top: mHeight * .02),
             child: Text(
               title,
-              style: const TextStyle(fontSize: 17, fontWeight: FontWeight.w900),
+    style:GoogleFonts.poppins(textStyle: const  TextStyle(fontSize: 16, fontWeight: FontWeight.w900),
             ),
-          ),
+          ),),
           subtitle: Text(
             subtitle,
-            style: const TextStyle(color: Color(0xff818181)),
+    style:GoogleFonts.poppins(textStyle: const  TextStyle(color: Color(0xff818181),fontWeight: FontWeight.w700),)
           ),
           trailing: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -475,11 +478,12 @@ class CardWidget extends StatelessWidget {
             children: [
               Text(
                 trailingTitleOne,
-                style: const TextStyle(color: Color(0xff818181)),
+            style:GoogleFonts.poppins(textStyle: const  TextStyle(color: Color(0xff818181),fontWeight: FontWeight.w700),
+              ),
               ),
               Text(trailingTitleTwo,
-                  style: const TextStyle(
-                      fontSize: 17, fontWeight: FontWeight.w900)),
+                style:GoogleFonts.poppins(textStyle: const TextStyle (
+                      fontSize: 16, fontWeight: FontWeight.w900)),),
             ],
           ),
         ),
@@ -507,13 +511,13 @@ class HeadingTitleWidget extends StatelessWidget {
         children: [
           Text(
             text,
-            style: const TextStyle(fontWeight: FontWeight.w900, fontSize: 21),
+        style:GoogleFonts.poppins(textStyle: const  TextStyle(fontWeight: FontWeight.w900, fontSize: 21),)
           ),
           TextButton(
               onPressed: onPressed,
-              child: const Text(
+              child:  Text(
                 "View All",
-                style: TextStyle(color: Color(0xff08589E)),
+                  style:GoogleFonts.poppins(textStyle: const  TextStyle(color: Color(0xff08589E)),)
               ))
         ],
       ),
@@ -559,17 +563,18 @@ class OrderStatusContainerWidget extends StatelessWidget {
             children: [
               Text(
                 orderStatusText,
-                style: TextStyle(
+            style:GoogleFonts.poppins(textStyle:   TextStyle(
                     fontSize: 13,
                     fontWeight: FontWeight.bold,
                     color: orderStatusTextColor),
-              ),
+              ),),
               Text(
                 orderStatusCount,
-                style: const TextStyle(
+                style:GoogleFonts.poppins(textStyle: const   TextStyle(
                   fontSize: 22,
                   fontWeight: FontWeight.w900,
                 ),
+              ),
               ),
             ],
           ),
@@ -638,8 +643,8 @@ class AnalyticsSectionContainer extends StatelessWidget {
                 child: const Icon(Icons.attach_money),
               ),
               Text(text,
-                  style: const TextStyle(
-                      fontWeight: FontWeight.w900, fontSize: 18)),
+                  style:GoogleFonts.poppins(textStyle: const TextStyle(
+                  fontWeight: FontWeight.w900, fontSize: 18)),),
               ThisMonthWidget(
                 mHeight: mHeight,
                 mWidth: mWidth,
@@ -660,8 +665,8 @@ class AnalyticsSectionContainer extends StatelessWidget {
                 ),
               ),
               Text(text1,
-                  style: const TextStyle(
-                      fontWeight: FontWeight.w900, fontSize: 18)),
+                style:GoogleFonts.poppins(textStyle: const  TextStyle(
+                      fontWeight: FontWeight.w900, fontSize: 18))),
               Container(
                   height: mHeight * .033,
                   width: mWidth * .1,
@@ -671,7 +676,7 @@ class AnalyticsSectionContainer extends StatelessWidget {
                   child: Center(
                       child: Text(
                     percentageText,
-                    style: TextStyle(color: percentageTextColor, fontSize: 13),
+                          style:GoogleFonts.poppins(textStyle:  TextStyle(color: percentageTextColor, fontSize: 13),),
                   ))),
               SizedBox(
                 height: mHeight * .06,
@@ -692,7 +697,7 @@ class AnalyticsSectionContainer extends StatelessWidget {
                               Icons.add,
                               size: 22,
                             )),
-                        Text(buttonText),
+                        Text(buttonText,style: GoogleFonts.poppins(),),
                       ],
                     )),
               )
@@ -735,7 +740,8 @@ class MainTitleWidget extends StatelessWidget {
         children: [
           Text(
             text,
-            style: const TextStyle(fontWeight: FontWeight.w900, fontSize: 21),
+        style:GoogleFonts.poppins(textStyle: const  TextStyle(fontWeight: FontWeight.w900, fontSize: 21),
+          ),
           ),
           ThisMonthWidget(
             mHeight: mHeight,
@@ -803,7 +809,7 @@ class _ThisMonthWidgetState extends State<ThisMonthWidget> {
             items: items.map((String items) {
               return DropdownMenuItem(
                 value: items,
-                child: Text(items),
+                child: Text(items , style:GoogleFonts.poppins() ),
               );
             }).toList(),
             onChanged: (newValue) {

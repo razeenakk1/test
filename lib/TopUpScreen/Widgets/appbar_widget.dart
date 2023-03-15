@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 PreferredSizeWidget appBar(
     {required String appBarTitle,
@@ -12,7 +13,7 @@ PreferredSizeWidget appBar(
       elevation: 0,
       title: Text(
         appBarTitle,
-        style: const TextStyle(
-            color: Colors.black, fontWeight: FontWeight.w900, fontSize: 21),),
+  style:GoogleFonts.poppins(textStyle: const  TextStyle(
+            color: Colors.black, fontWeight: FontWeight.w900, fontSize: 21),),),
       actions: actions);
 }

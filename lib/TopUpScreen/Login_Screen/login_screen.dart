@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:topuptest/Api_Section/Bloc/LoginBloc/login_bloc.dart';
 import 'package:topuptest/Api_Section/ModelClasses/LoginModelClass.dart';
 import 'package:topuptest/TopUpScreen/MainScreen/main_screen.dart';
@@ -73,14 +75,14 @@ class LoginScreen extends StatelessWidget {
                           height: mHeight * .06,
                         ),
                         SizedBox(
-                          height: mHeight * .02,
+                          height: mHeight * .01,
                         ),
-                        const Text(
+                         Text(
                           "Login.",
-                          style: TextStyle(
+                          style: GoogleFonts.poppins(textStyle: const TextStyle(
                               fontWeight: FontWeight.bold, fontSize: 37),
                         )
-                      ],
+                         )],
                     ),
                   ),
                   LoginTextFieldWidget(
@@ -158,9 +160,9 @@ class LoginScreen extends StatelessWidget {
                                 },
                               );
                             }),
-                        const Text(
+                         Text(
                           "Remember me",
-                          style: TextStyle(fontSize: 16),
+                          style: GoogleFonts.poppins(textStyle: const TextStyle(fontSize: 16,fontWeight: FontWeight.bold)),
                         ),
                       ],
                     ),
@@ -177,12 +179,12 @@ class LoginScreen extends StatelessWidget {
                           height: mHeight * .07,
                           width: mWidth * .4,
                           child: ElevatedButton(
-                            onPressed: () {
-                              Navigator.of(context).pushAndRemoveUntil(
-                                  MaterialPageRoute(
-                                    builder: (context) => MainScreen(),
-                                  ),
-                                      (route) => false);
+                            onPressed: () async {
+                              SharedPreferences pref = await SharedPreferences.getInstance();
+                              pref.setString("userName", "vikntest");
+                              Navigator.pushReplacement(context, MaterialPageRoute(builder: ( _ ){
+                                return MainScreen();
+                              }));
                               // return BlocProvider.of<LoginBloc>(context).add(
                               //     FetchLogin(
                               //         username: userNameController.text,
@@ -195,7 +197,7 @@ class LoginScreen extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(30),
                               ),
                             ),
-                            child: const Text('Login'),
+                            child:  Text('Login',style: GoogleFonts.poppins(),),
                           )),
                     ],
                   ),
@@ -237,7 +239,7 @@ class LoginTextFieldWidget extends StatelessWidget {
       height: mHeight * .07,
       child: TextFormField(
         obscureText: obscureText,
-        style: const TextStyle(fontWeight: FontWeight.bold),
+        style: GoogleFonts.poppins(textStyle: const TextStyle(fontWeight: FontWeight.bold)),
         key: _formFieldKey,
         onChanged: onChanged,
         validator: validator,
@@ -257,7 +259,7 @@ class LoginTextFieldWidget extends StatelessWidget {
           ),
           suffixIcon: suffixIcon,
           labelText: labelText,
-          labelStyle: const TextStyle(color: Color(0xffA1A1A1), fontSize: 13),
+          labelStyle:GoogleFonts.poppins(textStyle: const TextStyle(color: Color(0xffA1A1A1), fontSize: 13),)
         ),
       ),
     );

@@ -120,7 +120,7 @@ class SalesInvoice extends StatelessWidget {
             SizedBox(
               // color: Colors.grey,
               height: mHeight * .1,
-              child: const Column(
+              child:  Column(
                // mainAxisSize: MainAxisSize.max,
                 children: [
                   Text(
