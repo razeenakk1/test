@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 DateTime dateTime =DateTime.now();
 DateFormat dateFormat = DateFormat("dd/MM/yyy");
@@ -25,14 +26,14 @@ showDatePickerFunction(context,ValueNotifier dateNotifier) {
                 Padding(
                   padding:
                   EdgeInsets.only(left: mWidth * .13, top: mHeight * .01),
-                  child: const Center(
+                  child:  Center(
                     child: Text(
                       "Select Date",
-                      style: TextStyle(
+                      style: GoogleFonts.poppins(textStyle: const TextStyle(
                         color: Colors.black,
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
-                      ),
+                      )),
                     ),
                   ),
                 ),

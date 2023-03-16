@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class ButtonWidget extends StatelessWidget {
   const ButtonWidget({
@@ -15,11 +16,11 @@ class ButtonWidget extends StatelessWidget {
             onPressed: () {
               Navigator.pop(context);
             },
-            child: const Text("cancel", style: TextStyle(color: Color(0xffB53211)),
-            )),
+            child:  Text("cancel",   style: GoogleFonts.poppins(textStyle: const  TextStyle(color: Color(0xffB53211)),
+            )  )),
         TextButton(
             onPressed: onPressed,
-            child: const Text("save", style: TextStyle(color: Color(0xffB53211)),)),
+            child:  Text("save",   style: GoogleFonts.poppins(textStyle: const TextStyle(color: Color(0xffB53211)),))),
       ],
     );
   }

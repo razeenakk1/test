@@ -37,8 +37,7 @@ class StockFinderScreen extends StatelessWidget {
             },)
           ]),
       body: Container(
-        padding: EdgeInsets.only(
-            left: mWidth * .02, right: mWidth * .02),
+
         height: mHeight,
         decoration: containerDecoration,
         child: ListView(
@@ -192,8 +191,7 @@ class ColorAndSizeWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.only(
-          left: mWidth * .02, right: mWidth * .02, top: mHeight * .02),
+
       height: mHeight * .15,
       // color: Colors.grey,
       child: Column(

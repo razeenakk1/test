@@ -33,6 +33,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
   TextEditingController oldPasswordController = TextEditingController();
 
   TextEditingController newPasswordController = TextEditingController();
+  final formKey = GlobalKey<FormState>();
+
 
   @override
   Widget build(BuildContext context) {
@@ -137,12 +139,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   labelText: "Old password",
                                   controller: oldPasswordController,
                                   onPressed: () {
+                                    formKey.currentState!.validate() ? Navigator.pop(context): const SizedBox();
                                     /// save onPressed api call function
+                                    ///
                                   //  Navigator.pop(context);
                                   },
                                   headingText: 'Change Password',
                                   labelTextOne: "new password",
-                                  controllerOne: newPasswordController);
+                                  controllerOne: newPasswordController, formKey: formKey);
                             },
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,

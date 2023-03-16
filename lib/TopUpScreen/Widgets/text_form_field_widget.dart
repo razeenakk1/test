@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class TextFormFieldWidget extends StatelessWidget {
   TextFormFieldWidget(
@@ -12,7 +13,7 @@ class TextFormFieldWidget extends StatelessWidget {
       this.readOnly,
       required this.textInputType,
       this.onChanged,
-      required this.obscureText,this.autoFocus});
+      required this.obscureText,this.autoFocus,  this.validator, required this.textInputAction});
 
   final TextEditingController controller;
   final String labelText;
@@ -27,10 +28,17 @@ class TextFormFieldWidget extends StatelessWidget {
 
   final bool obscureText;
   bool? autoFocus;
+    String? Function(String?)?  validator;
+    final TextInputAction textInputAction;
+ // final Key textFieldKey;
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+        textInputAction: textInputAction,
+
+      validator: validator ,
+
       autofocus:autoFocus == null ? false : true ,
         obscureText: obscureText,
         readOnly: readOnly != null ? true : false,
@@ -38,11 +46,11 @@ class TextFormFieldWidget extends StatelessWidget {
         maxLines: maxLines,
         onChanged: onChanged,
         onTap: onTap,
-        style: const TextStyle(fontWeight: FontWeight.bold),
+        style: GoogleFonts.poppins(textStyle: const TextStyle(fontWeight: FontWeight.bold)),
         controller: controller,
         decoration: InputDecoration(
             labelText: labelText,
-            labelStyle: const TextStyle(color: Colors.grey),
+            labelStyle:   GoogleFonts.poppins(textStyle: const TextStyle(color: Colors.grey)),
             enabledBorder: const UnderlineInputBorder(
               borderSide: BorderSide(color: Colors.grey),
             ),

@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import '../../../../Constens/constens.dart';
 import '../../../../Functions/floating_action_function.dart';
 import '../../../../Widgets/appbar_widget.dart';
 import '../../../../Widgets/search_widget.dart';
 import '../../Accounts/Ledgers_Secrion/ledgers_screen.dart';
-import 'add_user_screen.dart';
+import 'add_and_edit_user_screen.dart';
 
 class UserListScreen extends StatelessWidget {
    UserListScreen({Key? key}) : super(key: key);
@@ -44,7 +45,10 @@ class UserListScreen extends StatelessWidget {
                   itemBuilder: (BuildContext context, int index) {
                     return GestureDetector(
                       onTap: () {
-                        // edit page navigation
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => AddAndEitUser(type: 'Edit',)),
+                        );
                       },
                       child: Card(
                         elevation: 0,
@@ -55,17 +59,17 @@ class UserListScreen extends StatelessWidget {
                           child: Center(
                             child: ListTile(
                               title: Text(particulars[index],
-                                style: const TextStyle(fontWeight: FontWeight.bold),),
+                                style:GoogleFonts.poppins(textStyle: const TextStyle(fontWeight: FontWeight.bold),)),
 
                               trailing: Column(
                                 crossAxisAlignment: CrossAxisAlignment.end,
                                 children: [
                                   SizedBox(height: mHeight * .01,),
-                                  const Text("Balance", style: TextStyle(
+                                   Text("Balance", style: GoogleFonts.poppins(textStyle: const TextStyle(
                                       fontWeight: FontWeight.bold,
-                                      color: Color(0xff9C9C9C))),
-                                  const Text("121.00", style: TextStyle(
-                                    fontWeight: FontWeight.bold,))
+                                      color: Color(0xff9C9C9C)))),
+                                   Text("121.00", style: GoogleFonts.poppins(textStyle:  const TextStyle(
+                                    fontWeight: FontWeight.bold,)))
                                 ],
                               ),
                             ),
@@ -84,7 +88,7 @@ class UserListScreen extends StatelessWidget {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => AddUserScreen()),
+                MaterialPageRoute(builder: (context) => AddAndEitUser(type: 'Add',)),
               );
 
             })

@@ -9,9 +9,11 @@ import '../../Widgets/text_field_widget.dart';
 class CommonBottomSheetClass {
   TextEditingController controller = TextEditingController()
     ..text = "controller";
+  final formKey = GlobalKey<FormState>();
 
 
-  settingsBottomSheetFunction(  {required BuildContext context, required String type}) {
+
+  settingsBottomSheetFunction(  {required BuildContext context, required String type , required String addOrEdit}) {
     return showModalBottomSheet(
       context: context,
       isScrollControlled: true,
@@ -21,24 +23,36 @@ class CommonBottomSheetClass {
           EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
           child: Padding(
             padding: const EdgeInsets.all(16.0),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                TextWidget(text: type == "Area" ? "Add Area" :"Create $type"),
-                TextFieldWidget(
-                  controller: controller,
-                  labelText: 'Enter $type Name',
-                ),
-                ButtonWidget(
-                  onPressed: () {
-                    // check type and pass each suit controller  in api
+            child: Form(
+              key:formKey ,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  TextWidget(text: "$addOrEdit $type"),
+                  TextFieldWidget(
+                    controller: controller,
+                    labelText: 'Enter $type Name',
+                    validator: (val ) {
+                      if (val == null || val.isEmpty) {
+                        return 'This field is required';
+                      }
+                      return null;
+                    }, textInputAction: TextInputAction.done,
+                  ),
+                  ButtonWidget(
+                    onPressed: () {
+                      /// check type an addOrEdit type and pass suit apis
+                      formKey.currentState!.validate() ? Navigator.pop(context):const SizedBox();
+
+                      // check type and pass each suit controller  in api
 
 
 
-                  },
-                )
-              ],
+                    },
+                  )
+                ],
+              ),
             ),
           ),
         );

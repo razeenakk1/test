@@ -4,9 +4,10 @@ import 'package:google_fonts/google_fonts.dart';
 PreferredSizeWidget appBar(
     {required String appBarTitle,
     List<Widget>? actions,
-    bool? automaticallyImplyLeading}) {
+    bool? automaticallyImplyLeading, Widget? leading}) {
   return AppBar(
       automaticallyImplyLeading: automaticallyImplyLeading ?? true,
+      leading: leading,
       iconTheme: const IconThemeData(
         color: Colors.black,),
       backgroundColor: const Color(0xffF2F2F2),

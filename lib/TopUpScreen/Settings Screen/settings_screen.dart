@@ -3,18 +3,18 @@ import 'package:google_fonts/google_fonts.dart';
 import '../Constens/constens.dart';
 import '../Widgets/appbar_widget.dart';
 import 'Custom_Commen_Class_BottomSheet/commen_function.dart';
-import 'Sections/Accounts/DeliveryManScreen/add_deliverman_screen.dart';
+import 'Sections/Accounts/DeliveryManScreen/add_and_edit_deliverman_screen.dart';
 import 'Sections/Accounts/DeliveryManScreen/deliveryman_screen.dart';
-import 'Sections/Accounts/Ledgers_Secrion/create_ledger_screen.dart';
+import 'Sections/Accounts/Ledgers_Secrion/create_and_edit_ledger_screen.dart';
 import 'Sections/Accounts/Ledgers_Secrion/ledgers_screen.dart';
 import 'Sections/Location/area_list_screen.dart';
 import 'Sections/Products/categories_list.dart';
 import 'Sections/Products/groups_list_screen.dart';
 import 'Sections/TaxScreen/Class/tax_bottom_sheet_class.dart';
 import 'Sections/TaxScreen/tax_list_screeen.dart';
-import 'Sections/UserSection/Users/add_user_screen.dart';
+import 'Sections/UserSection/Users/add_and_edit_user_screen.dart';
 import 'Sections/UserSection/Users/user_list_screen.dart';
-import 'Sections/UserSection/userRoleSection/add_user_role_screen.dart';
+import 'Sections/UserSection/userRoleSection/add_and_edit_user_role_screen.dart';
 import 'Sections/UserSection/userRoleSection/user_role_list_screen.dart';
 
 class SettingsScreen extends StatelessWidget {
@@ -53,7 +53,7 @@ class SettingsScreen extends StatelessWidget {
               subTitle: 'TAX Types',
               onTap: () {
                 taxBottomSheetClass.taxModelBottomSheet(
-                  context: context);
+                  context: context, type: 'Add');
 
               },
               onPressed: () {
@@ -68,7 +68,7 @@ class SettingsScreen extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) =>  CreateLedgerScreen(type: 'Create',)),
+                      builder: (context) => const  CreateAndEditLedger(type: 'Create',)),
                 );
               },
               mWidth: mWidth,
@@ -96,7 +96,7 @@ class SettingsScreen extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => AddDeliveryManScreen()),
+                      builder: (context) => AddAndEditDeliveryMan(type: 'Add',)),
                 );
               },
             ),
@@ -125,13 +125,13 @@ class SettingsScreen extends StatelessWidget {
               },
               onTap: () {
                 commonBottomSheetClass.settingsBottomSheetFunction(
-                    context: context, type: "Group");
+                    context: context, type: "Group", addOrEdit: 'Add');
               },
               onTapp: () {
                 // onTap for category
                 commonBottomSheetClass.settingsBottomSheetFunction(
                     context: context,
-                    type: "Category",
+                    type: "Category", addOrEdit: 'Add',
                     );
               },
             ),
@@ -163,14 +163,13 @@ class SettingsScreen extends StatelessWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => AddUserRoleScreen()),
+                        builder: (context) => AddAndEditUserole(type: 'Add',)),
                   );
                 },
                 onTapp: () {
-                  // navigation for user screen
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => AddUserScreen()),
+                    MaterialPageRoute(builder: (context) => AddAndEitUser(type: 'Add',)),
                   );
                 }),
             SectionOneWidget(
@@ -187,9 +186,8 @@ class SettingsScreen extends StatelessWidget {
                 );
               },
               onTap: () {
-                //   areaBottomSheetClass.areaBottomSheetFunction(context: context, type: 1);
                 commonBottomSheetClass.settingsBottomSheetFunction(
-                    context: context, type: "Area",);
+                    context: context, type: "Area", addOrEdit: 'Add',);
               },
             ),
           ],
@@ -240,7 +238,7 @@ class SectionTwoWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.only(left: 20, right: 30, top: 10, bottom: 10),
-      // color: Colors.grey,
+     //  color: Colors.grey,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.start,
@@ -268,54 +266,63 @@ class SectionTwoWidget extends StatelessWidget {
           ),
           Column(
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  //  SizedBox(width: mWidth*.01,),
-                  InkWell(
-                    onTap: onPressed,
-                    child: Container(
-                        padding:  EdgeInsets.only(top: mHeight*.01,left: mWidth*.075),
-                     // color: Colors.yellow,
-                        width: mWidth*.62,
-                        height: mHeight*.05,
-                        child: Text(
-                          subTitle,
-                            style:GoogleFonts.poppins(textStyle: const  TextStyle(
-                              color: Color(0xff707070),
-                              fontSize: 16,
-                              fontWeight: FontWeight.w500),
-                        )),
-                    )),
+              InkWell(
+                onTap: onPressed,
+                child: SizedBox(
+                  height: mHeight*.07,
+                //  color: Colors.orange,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      //  SizedBox(width: mWidth*.01,),
+                      Container(
+                          padding:  EdgeInsets.only(top: mHeight*.01,left: mWidth*.075),
+                       // color: Colors.yellow,
+                       //    width: mWidth*.62,
+                       //    height: mHeight*.05,
+                          child: Text(
+                            subTitle,
+                              style:GoogleFonts.poppins(textStyle: const  TextStyle(
+                                color: Color(0xff707070),
+                                fontSize: 16,
+                                fontWeight: FontWeight.w500),
+                          )),
+                      ),
 
-                  InkWell(
-                    onTap: onTapp,
-                    child: AddIconButton(mHeight: mHeight, mWidth: mWidth),
-                  )
-                ],
+                      InkWell(
+                        onTap: onTapp,
+                        child: AddIconButton(mHeight: mHeight, mWidth: mWidth),
+                      )
+                    ],
+                  ),
+                ),
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  //  SizedBox(width: mWidth*.01,),
-                  InkWell(
-                    onTap: onPressedd,
-                    child: Container(
-                        padding:  EdgeInsets.only(top: mHeight*.01,left: mWidth*.075),
-                        child: Text(
-                          subTitle1,
-                            style:GoogleFonts.poppins(textStyle: const  TextStyle(
-                              color: Color(0xff707070),
-                              fontSize: 16,
-                              fontWeight: FontWeight.w500),
-                        )),
-                    )),
+              InkWell(
+                onTap: onPressedd,
+                child: SizedBox(
+                  height: mHeight*.07,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      //  SizedBox(width: mWidth*.01,),
+                      Container(
+                          padding:  EdgeInsets.only(top: mHeight*.01,left: mWidth*.075),
+                          child: Text(
+                            subTitle1,
+                              style:GoogleFonts.poppins(textStyle: const  TextStyle(
+                                color: Color(0xff707070),
+                                fontSize: 16,
+                                fontWeight: FontWeight.w500),
+                          )),
+                      ),
 
-                  InkWell(
-                    onTap: onTap,
-                    child: AddIconButton(mHeight: mHeight, mWidth: mWidth),
-                  )
-                ],
+                      InkWell(
+                        onTap: onTap,
+                        child: AddIconButton(mHeight: mHeight, mWidth: mWidth),
+                      )
+                    ],
+                  ),
+                ),
               ),
             ],
           ),
@@ -326,7 +333,7 @@ class SectionTwoWidget extends StatelessWidget {
 }
 
 class SectionOneWidget extends StatelessWidget {
-  SectionOneWidget({
+  const SectionOneWidget({
     super.key,
     required this.mWidth,
     required this.mHeight,
@@ -371,31 +378,36 @@ class SectionOneWidget extends StatelessWidget {
           SizedBox(
             height: mHeight * .01,
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              //  SizedBox(width: mWidth*.01,),
-              InkWell(
-                onTap: onPressed,
-                child: Container(
-                //    color: Colors.blue,
-                    width: mWidth*.62,
-                   height: mHeight*.05,
-                    padding:  EdgeInsets.only(top: mHeight*.01,left: mWidth*.075),
-                    child: Text(
-                        subTitle,textAlign: TextAlign.start,
-                        style:GoogleFonts.poppins(textStyle: const  TextStyle(
-                            color: Color(0xff707070),
-                            fontWeight: FontWeight.w500,
-                            fontSize: 16),
-                        ) ),
-                ),
+          InkWell(
+            onTap: onPressed,
+            child: SizedBox(
+             // color: Colors.blue,
+              height: mHeight*.07,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  //  SizedBox(width: mWidth*.01,),
+                  Container(
+                  //    color: Colors.blue,
+                  //     width: mWidth*.62,
+                  //    height: mHeight*.05,
+                      padding:  EdgeInsets.only(top: mHeight*.01,left: mWidth*.075),
+                      child: Text(
+                          subTitle,textAlign: TextAlign.start,
+                          style:GoogleFonts.poppins(textStyle: const  TextStyle(
+                              color: Color(0xff707070),
+                              fontWeight: FontWeight.w500,
+                              fontSize: 16),
+                          ) ),
+                  ),
+                  InkWell(
+                    onTap: onTap,
+                    child: AddIconButton(
+                        mHeight: mHeight, mWidth: mWidth),
+                  )
+                ],
               ),
-              InkWell(
-                onTap: onTap,
-                child: AddIconButton(mHeight: mHeight, mWidth: mWidth),
-              )
-            ],
+            ),
           ),
         ],
       ),
@@ -419,7 +431,7 @@ class AddIconButton extends StatelessWidget {
       padding: EdgeInsets.only(left: mWidth*.02),
       height: mHeight*.05,
         width: mWidth*.2,
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
          // color: Colors.green,
           image: DecorationImage(
               scale: 1.4,

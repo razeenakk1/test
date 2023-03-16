@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import '../../../Constens/constens.dart';
 import '../../../Functions/floating_action_function.dart';
 import '../../../Widgets/appbar_widget.dart';
@@ -43,7 +44,7 @@ class TaxListScreen extends StatelessWidget {
                   return GestureDetector(
                     onTap: () {
                       taxBottomSheetClass.taxModelBottomSheet(
-                          context: context);
+                          context: context, type: 'Edit');
                     },
                     child: Card(
                       elevation: 0,
@@ -52,25 +53,27 @@ class TaxListScreen extends StatelessWidget {
                         decoration: listPageContainerDecorationVariable,
                         child: Center(
                           child: ListTile(
-                            title: Text(
-                              particulars[index],
-                              style:
-                                  const TextStyle(fontWeight: FontWeight.bold),
-                            ),
+                            title: Text(particulars[index],
+                                style: GoogleFonts.poppins(
+                                  textStyle: const TextStyle(
+                                      fontWeight: FontWeight.bold),
+                                )),
                             trailing: Column(
                               crossAxisAlignment: CrossAxisAlignment.end,
                               children: [
                                 SizedBox(
                                   height: mHeight * .01,
                                 ),
-                                const Text("Balance",
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        color: Color(0xff9C9C9C))),
-                                const Text("121.00",
-                                    style: TextStyle(
+                                Text("Balance",
+                                    style: GoogleFonts.poppins(
+                                        textStyle: const TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            color: Color(0xff9C9C9C)))),
+                                Text("121.00",
+                                    style: GoogleFonts.poppins(
+                                        textStyle: const TextStyle(
                                       fontWeight: FontWeight.bold,
-                                    ))
+                                    )))
                               ],
                             ),
                           ),
@@ -87,7 +90,8 @@ class TaxListScreen extends StatelessWidget {
           color: const Color(0xffB73312),
           icon: Icons.add,
           onPressed: () {
-            taxBottomSheetClass.taxModelBottomSheet(context: context);
+            taxBottomSheetClass.taxModelBottomSheet(
+                context: context, type: 'Add');
           }),
     );
   }

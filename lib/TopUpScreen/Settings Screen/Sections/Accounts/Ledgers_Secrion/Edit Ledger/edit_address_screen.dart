@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import '../../../../../Constens/constens.dart';
 import '../../../../../Widgets/appbar_widget.dart';
+import '../../../../../Widgets/bottom_sheet_button_widget.dart';
 import '../../../../../Widgets/text_form_field_widget.dart';
 
 
@@ -15,6 +17,8 @@ class EditAddresScreen extends StatelessWidget {
         "kerala \n"
         "676123";
  final TextEditingController areaController = TextEditingController()..text = "Doha";
+  final formKey = GlobalKey<FormState>();
+
 
   @override
   Widget build(BuildContext context) {
@@ -26,53 +30,67 @@ class EditAddresScreen extends StatelessWidget {
           child: Container(
             padding: const EdgeInsets.only(left: 20, right: 20, top: 10),
             height: mHeight,
-            child: ListView(
-              physics: const BouncingScrollPhysics(),
-              children: [
-                const Text(
-                  "Add Address",
-                  style: TextStyle(fontWeight: FontWeight.w900, fontSize: 18),
-                ),
-                TextFormFieldWidget(
-                  autoFocus: true,
-                  obscureText: false,
+            child: Form(
+              key: formKey,
 
-                  controller: nameController,
-                  labelText: 'Name',
-                  textInputType: TextInputType.name,
-                ),
-                TextFormFieldWidget(
-                  obscureText: false,
+              child: ListView(
+                physics: const BouncingScrollPhysics(),
+                children: [
+                   Text(
+                    "Add Address",
+                style: GoogleFonts.poppins(textStyle: const TextStyle(fontWeight: FontWeight.w900, fontSize: 18),
+                )),
+                  TextFormFieldWidget(
+                    textInputAction: TextInputAction.next,
+                    validator: (val ) {
+                      if (val == null || val.isEmpty) {
+                        return 'This field is required';
+                      }
+                      return null;
+                    },
+                    autoFocus: true,
+                    obscureText: false,
 
-                  controller: addressController,
-                  labelText: 'Address',
-                  textInputType: TextInputType.streetAddress,
-                ),
-                TextFormFieldWidget(
-                  obscureText: false,
+                    controller: nameController,
+                    labelText: 'Name',
+                    textInputType: TextInputType.name,
+                  ),
+                  TextFormFieldWidget(
+                    textInputAction: TextInputAction.next,
+                    validator: (val ) {
+                      if (val == null || val.isEmpty) {
+                        return 'This field is required';
+                      }
+                      return null;
+                    },
+                    obscureText: false,
 
-                  controller: areaController,
-                  labelText: 'Area',
-                  textInputType: TextInputType.text,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    TextButton(
-                        onPressed: () {
-                          Navigator.pop(context);
-                        },
-                        child: const Text("Cancel",
-                            style: TextStyle(color: Color(0xffB53211)))),
-                    TextButton(
-                        onPressed: () {
-                          Navigator.pop(context);
-                        },
-                        child: const Text("Save",
-                            style: TextStyle(color: Color(0xffB53211))))
-                  ],
-                )
-              ],
+                    controller: addressController,
+                    labelText: 'Address',
+                    textInputType: TextInputType.streetAddress,
+                  ),
+                  TextFormFieldWidget(
+                    textInputAction: TextInputAction.done,
+                    validator: (val ) {
+                      if (val == null || val.isEmpty) {
+                        return 'This field is required';
+                      }
+                      return null;
+                    },
+                    obscureText: false,
+
+                    controller: areaController,
+                    labelText: 'Area',
+                    textInputType: TextInputType.text,
+                  ),
+              ButtonWidget(onPressed: () {
+
+                formKey.currentState!.validate() == true
+                    ? Navigator.pop(context)
+                    : const SizedBox();
+              }
+              ) ],
+              ),
             ),
           ),
         ));

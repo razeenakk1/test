@@ -8,7 +8,11 @@ import 'package:topuptest/Api_Section/All_Api/login_api.dart';
 import 'package:topuptest/Api_Section/Bloc/BrandBloc/brand_bloc.dart';
 import 'package:topuptest/Api_Section/Bloc/LoginBloc/login_bloc.dart';
 import 'package:topuptest/Api_Section/Bloc/get_bloc/get_bloc.dart';
+import 'package:topuptest/TopUpScreen/Login_Screen/login_screen.dart';
+import 'package:topuptest/TopUpScreen/MainScreen/main_screen.dart';
 import 'package:topuptest/TopUpScreen/SplashScreen/splash_screen.dart';
+import 'package:topuptest/screens/HomeScreen/homeScreen.dart';
+import 'package:topuptest/share_example.dart';
 import 'TopUpScreen/CameraSecton/camera_screen.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -39,7 +43,32 @@ final  UserApi userApi = UserApi();
           debugShowCheckedModeBanner: false,
            theme: ThemeData(
              primarySwatch: Colors.blue,),
-          home:   const SplashScreen()
+         home:   const ShareExample()
+
+         // initialRoute: "/splashScreen",
+         // routes: {
+         //   '/splashScreen': (context) => SplashScreen(),
+         //   '/loginScreen': (context) => LoginScreen(),
+         //   '/': (context) => MainScreen(
+         //     initialPageIndex: 0,
+         //   ),
+         //   '/dashBord': (context) => MainScreen(
+         //     initialPageIndex: 0,
+         //   ),
+         //   '/menu': (context) => MainScreen(
+         //     initialPageIndex: 1,
+         //   ),
+         //   '/menuScreen': (context) => MainScreen(
+         //     initialPageIndex: 2,
+         //   ),
+         //   '/profile': (context) => MainScreen(
+         //     initialPageIndex: 3,
+         //   ),
+         //   '/settings': (context) => MainScreen(
+         //     initialPageIndex: 4,
+         //   ),
+         //
+         // },
         ),
 
     );

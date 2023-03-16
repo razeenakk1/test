@@ -3,8 +3,11 @@ import '../../Widgets/bottom_sheet_button_widget.dart';
 import '../../Widgets/text_field_widget.dart';
 
 class ProfileBottomSheetClass {
+
   profileModelBottomSheet(
       {required BuildContext context, required String type,required String data}) {
+    final formKey = GlobalKey<FormState>();
+
     TextEditingController controller = TextEditingController()
       ..text = data;
     return showModalBottomSheet(
@@ -16,21 +19,34 @@ class ProfileBottomSheetClass {
               EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
           child: Padding(
             padding: const EdgeInsets.all(16.0),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                TextFieldWidget(
-                  controller: controller,
-                  labelText:   "Enter your $type",
-                ),
+            child: Form(
+              key: formKey,
 
-                ButtonWidget(
-                  onPressed: () {
-                    // check type and pass each suit controller  in api
-                  },
-                )
-              ],
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  TextFieldWidget(
+                    textInputAction: TextInputAction.done,
+                    controller: controller,
+                    labelText:   "Enter your $type",
+                    validator: (val ) {
+                      if (val == null || val.isEmpty) {
+                        return 'This field is required';
+                      }
+                      return null;
+                    },
+                  ),
+
+                  ButtonWidget(
+                    onPressed: () {
+                      /// check type and pass apis
+                      formKey.currentState!.validate() ? Navigator.pop(context): const SizedBox();
+                      // check type and pass each suit controller  in api
+                    },
+                  )
+                ],
+              ),
             ),
           ),
         );
@@ -46,6 +62,7 @@ class ProfileBottomSheetClass {
     required String headingText,
     required String labelTextOne,
     required TextEditingController controllerOne,
+    required Key formKey,
   }) {
     return showModalBottomSheet(
       context: context,
@@ -56,25 +73,49 @@ class ProfileBottomSheetClass {
           EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
           child: Padding(
             padding: const EdgeInsets.all(16.0),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                Text(
-                  headingText,
-                  style:
-                  const TextStyle(fontWeight: FontWeight.w900, fontSize: 18),
-                ),
-                TextFieldWidget(
-                  controller: controller,
-                  labelText: labelText,
-                ),
-                TextFieldWidget(
-                  controller: controllerOne,
-                  labelText: labelTextOne,
-                ),
-                ButtonWidget(onPressed: onPressed)
-              ],
+            child: Form(
+              key: formKey ,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Text(
+                    headingText,
+                    style:
+                    const TextStyle(fontWeight: FontWeight.w900, fontSize: 18),
+                  ),
+                  TextFieldWidget(
+                    textInputAction: TextInputAction.next,
+                    controller: controller,
+                    labelText: labelText,
+                    validator: (val ) {
+                      if (val == null || val.isEmpty) {
+                        return 'This field is required';
+                      }  if (val.length < 8 ) {
+                        return 'Too short';
+                      }
+                      return null;
+                    },
+                  ),
+                  TextFieldWidget(
+                      textInputAction: TextInputAction.done,
+                    controller: controllerOne,
+                    labelText: labelTextOne,
+
+                      validator: (val ) {
+                        if (val == null || val.isEmpty) {
+                          return 'This field is required';
+                        }
+                        if (val.length < 8) {
+                          return 'Too short';
+                        }
+                        return null;
+                      }
+
+                  ),
+                  ButtonWidget(onPressed: onPressed)
+                ],
+              ),
             ),
           ),
         );

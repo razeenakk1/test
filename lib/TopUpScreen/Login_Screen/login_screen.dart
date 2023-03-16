@@ -34,11 +34,11 @@ class LoginScreen extends StatelessWidget {
           const CircularProgressIndicator();
         }
         if (state is LoginLoaded) {
-          Navigator.of(context).pushAndRemoveUntil(
-              MaterialPageRoute(
-                builder: (context) => MainScreen(),
-              ),
-              (route) => false);
+          // Navigator.of(context).pushAndRemoveUntil(
+          //     MaterialPageRoute(
+          //       builder: (context) => MainScreen(),
+          //     ),
+          //     (route) => false);
         }
         if (state is LoginError) {
           const Text("Something went wrong");
@@ -87,11 +87,9 @@ class LoginScreen extends StatelessWidget {
                   ),
                   LoginTextFieldWidget(
                     mHeight: mHeight,
-                    formFieldKey: _formFieldKey,
+
                     controller: userNameController,
-                    onChanged: (value) {
-                      (_formFieldKey.currentState!.validate());
-                    },
+
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return 'Please enter username';
@@ -107,11 +105,9 @@ class LoginScreen extends StatelessWidget {
                       builder: (BuildContext context, bool newValue, _) {
                         return LoginTextFieldWidget(
                           mHeight: mHeight,
-                          formFieldKey: _formFieldKey1,
+
                           controller: passwordController,
-                          onChanged: (value) {
-                            (_formFieldKey1.currentState!.validate());
-                          },
+
                           validator: (value) {
                             if (value == null || value.isEmpty) {
                               return 'Please enter password ';
@@ -182,9 +178,9 @@ class LoginScreen extends StatelessWidget {
                             onPressed: () async {
                               SharedPreferences pref = await SharedPreferences.getInstance();
                               pref.setString("userName", "vikntest");
-                              Navigator.pushReplacement(context, MaterialPageRoute(builder: ( _ ){
+                           formKey.currentState!.validate()  ?  Navigator.pushReplacement(context, MaterialPageRoute(builder: ( _ ){
                                 return MainScreen();
-                              }));
+                              })): Null;
                               // return BlocProvider.of<LoginBloc>(context).add(
                               //     FetchLogin(
                               //         username: userNameController.text,
@@ -213,20 +209,19 @@ class LoginTextFieldWidget extends StatelessWidget {
   LoginTextFieldWidget(
       {super.key,
       required this.mHeight,
-      required GlobalKey<FormFieldState> formFieldKey,
       required this.controller,
-      required this.onChanged,
+       this.onChanged,
       required this.validator,
       required this.prefixIcon,
       required this.labelText,
       required this.obscureText,
       this.suffixIcon})
-      : _formFieldKey = formFieldKey;
+  ;
 
   final double mHeight;
-  final GlobalKey<FormFieldState> _formFieldKey;
+  // final GlobalKey<FormFieldState> _formFieldKey;
   final TextEditingController controller;
-  final Function(String) onChanged;
+   Function(String)? onChanged;
   final String? Function(String?) validator;
   final IconData prefixIcon;
   final String labelText;
@@ -240,7 +235,7 @@ class LoginTextFieldWidget extends StatelessWidget {
       child: TextFormField(
         obscureText: obscureText,
         style: GoogleFonts.poppins(textStyle: const TextStyle(fontWeight: FontWeight.bold)),
-        key: _formFieldKey,
+        // key: _formFieldKey,
         onChanged: onChanged,
         validator: validator,
         controller: controller,

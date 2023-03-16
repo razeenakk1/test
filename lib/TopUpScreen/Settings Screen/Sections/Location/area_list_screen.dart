@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import '../../../Constens/constens.dart';
 import '../../../Functions/floating_action_function.dart';
 import '../../../Widgets/appbar_widget.dart';
@@ -20,7 +21,7 @@ class AreaListScreen extends StatelessWidget {
         resizeToAvoidBottomInset: false,
         backgroundColor: backGroundColor,
         appBar: appBar(
-            appBarTitle: 'Categories'),
+            appBarTitle: 'Areas'),
         body: Container(
           padding: EdgeInsets.only(left: mWidth * .02, right: mWidth * .02),
           height: mHeight,
@@ -44,7 +45,8 @@ class AreaListScreen extends StatelessWidget {
                   itemBuilder: (BuildContext context, int index) {
                     return GestureDetector(
                       onTap: () {
-                        // edit page navigation
+                        commonBottomSheetClass.
+                        settingsBottomSheetFunction(context: context, type: "Area", addOrEdit: 'Edit');
                       },
                       child: Card(
                         elevation: 0,
@@ -55,17 +57,17 @@ class AreaListScreen extends StatelessWidget {
                           child: Center(
                             child: ListTile(
                               title: Text(particulars[index],
-                                style: const TextStyle(fontWeight: FontWeight.bold),),
+                                style: GoogleFonts.poppins(textStyle: const TextStyle(fontWeight: FontWeight.bold),)),
 
                               trailing: Column(
                                 crossAxisAlignment: CrossAxisAlignment.end,
                                 children: [
                                   SizedBox(height: mHeight * .01,),
-                                  const Text("Balance", style: TextStyle(
+                                   Text("Balance", style: GoogleFonts.poppins(textStyle: const TextStyle(
                                       fontWeight: FontWeight.bold,
-                                      color: Color(0xff9C9C9C))),
-                                  const Text("121.00", style: TextStyle(
-                                    fontWeight: FontWeight.bold,))
+                                      color: Color(0xff9C9C9C)))),
+                                   Text("121.00", style: GoogleFonts.poppins(textStyle: const TextStyle(
+                                    fontWeight: FontWeight.bold,)))
                                 ],
                               ),
                             ),
@@ -84,7 +86,7 @@ class AreaListScreen extends StatelessWidget {
             icon: Icons.add,
             onPressed: () {
               commonBottomSheetClass.
-              settingsBottomSheetFunction(context: context, type: "Area");
+              settingsBottomSheetFunction(context: context, type: "Area", addOrEdit: 'Add');
             }));
   }
 }

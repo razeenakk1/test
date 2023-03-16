@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import '../../../../Constens/constens.dart';
 import '../../../../Functions/floating_action_function.dart';
 import '../../../../Widgets/appbar_widget.dart';
 import '../../../../Widgets/search_widget.dart';
-import 'create_ledger_screen.dart';
+import 'create_and_edit_ledger_screen.dart';
 
 final particulars = [
   "Cash in hand",
@@ -35,7 +36,10 @@ class LedgersScreen extends StatelessWidget {
       resizeToAvoidBottomInset: false,
 
         backgroundColor: backGroundColor,
-        appBar: appBar(automaticallyImplyLeading: true, appBarTitle: 'Ledgers'),
+        appBar: appBar( appBarTitle: 'Ledgers',
+        leading: IconButton(onPressed: (){
+          Navigator.pop(context);
+        }, icon: const Icon(Icons.arrow_back))),
         body: Container(
           padding: EdgeInsets.only(
               left: mWidth * .02, right: mWidth * .02),
@@ -63,7 +67,7 @@ class LedgersScreen extends StatelessWidget {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => const CreateLedgerScreen(type: "Edit")));
+                                builder: (context) => const CreateAndEditLedger(type: "Edit")));
                       },
                       child: Card(
                         elevation: 0,
@@ -73,27 +77,27 @@ class LedgersScreen extends StatelessWidget {
                           child: ListTile(
                             title: Text(
                               particulars[index],
-                              style: const TextStyle(
+                              style: GoogleFonts.poppins(textStyle:  const TextStyle(
                                   fontWeight: FontWeight.bold),
-                            ),
+                              )),
                             subtitle: Text(purpose[index],
-                                style: const TextStyle(
+                    style: GoogleFonts.poppins(textStyle:  const TextStyle(
                                     fontWeight: FontWeight.bold,
-                                    color: Color(0xffB73312))),
+                                    color: Color(0xffB73312)))),
                             trailing: Column(
                               crossAxisAlignment: CrossAxisAlignment.end,
                               children: [
                                 SizedBox(
                                   height: mHeight * .01,
                                 ),
-                                const Text("Balance",
-                                    style: TextStyle(
+                                 Text("Balance",
+                                  style: GoogleFonts.poppins(textStyle:  const TextStyle(
                                         fontWeight: FontWeight.bold,
-                                        color: Color(0xff9C9C9C))),
-                                const Text("121.00",
-                                    style: TextStyle(
+                                        color: Color(0xff9C9C9C)))),
+                                 Text("121.00",
+                                   style: GoogleFonts.poppins(textStyle: const TextStyle(
                                       fontWeight: FontWeight.bold,
-                                    ))
+                                   )))
                               ],
                             ),
                           ),
@@ -111,7 +115,7 @@ class LedgersScreen extends StatelessWidget {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) =>  const CreateLedgerScreen(type: 'Create',)),
+                MaterialPageRoute(builder: (context) =>  const CreateAndEditLedger(type: 'Create',)),
               );
             }));
   }

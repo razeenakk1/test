@@ -8,7 +8,8 @@ import '../ProfileScreen/profile_screen.dart';
 import '../Settings Screen/settings_screen.dart';
 
 class MainScreen extends StatelessWidget {
-  MainScreen({Key? key}) : super(key: key);
+  MainScreen({Key? key, }) : super(key: key,);
+//  final int  initialPageIndex;
 
   final PageController pageController = PageController(initialPage: 0);
   final ValueNotifier<int> selectedIndex = ValueNotifier(0);
