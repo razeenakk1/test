@@ -43,7 +43,7 @@ final  UserApi userApi = UserApi();
           debugShowCheckedModeBanner: false,
            theme: ThemeData(
              primarySwatch: Colors.blue,),
-         home:   const ShareExample()
+         home:   const SplashScreen()
 
          // initialRoute: "/splashScreen",
          // routes: {

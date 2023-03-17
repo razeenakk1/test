@@ -89,6 +89,8 @@ class _CreateAndEditLedgerState extends State<CreateAndEditLedger> {
               physics: const BouncingScrollPhysics(),
               children: [
                 TextFormFieldWidget(
+                  readOnly: false,
+
 
                   obscureText: false,
                   controller: nameController,
@@ -163,6 +165,8 @@ class _CreateAndEditLedgerState extends State<CreateAndEditLedger> {
                   children: [
                     Expanded(
                         child: TextFormFieldWidget(
+                          readOnly: false,
+
                           textInputAction: TextInputAction.done,
 
                           validator: (val ) {
@@ -226,6 +230,8 @@ class _CreateAndEditLedgerState extends State<CreateAndEditLedger> {
                           TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
                       )),
                     TextFormFieldWidget(
+                      readOnly: false,
+
                       textInputAction: TextInputAction.next,
                       obscureText: false,
                       controller: phoneNumberController,
@@ -237,6 +243,8 @@ class _CreateAndEditLedgerState extends State<CreateAndEditLedger> {
                       textInputType: TextInputType.phone,
                     ),
                     TextFormFieldWidget(
+                        readOnly: false,
+
                         textInputAction: widget.type  == "Create" ? TextInputAction.next :TextInputAction.done,
                         obscureText: false,
                         textInputType: TextInputType.multiline,
@@ -248,6 +256,8 @@ class _CreateAndEditLedgerState extends State<CreateAndEditLedger> {
                         ? Column(
                             children: [
                               TextFormFieldWidget(
+                                readOnly: false,
+
                                 textInputAction: TextInputAction.done,
                                 obscureText: false,
                                 controller: addressController,
@@ -288,6 +298,8 @@ class _CreateAndEditLedgerState extends State<CreateAndEditLedger> {
                                           ],
                                         ),
                                    newCheckValue ?     TextFormFieldWidget(
+                                     readOnly: false,
+
                                      textInputAction: TextInputAction.done,
                                      validator: (val ) {
                                        if (val == null || val.isEmpty) {

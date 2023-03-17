@@ -51,9 +51,10 @@ class AddAndEditDeliveryMan extends StatelessWidget {
                   prefixIcon: const Icon(Icons.person,color: Color(0xff707070),),
                   controller: nameController,
                   labelText: 'Name',
-                  textInputType: TextInputType.name,
+                  textInputType: TextInputType.name, readOnly: false,
                 ),
                 TextFormFieldWidget(
+                  readOnly: false,
                   textInputAction: TextInputAction.next,
                   validator: (val ) {
                     if (val == null || val.isEmpty) {
@@ -69,6 +70,8 @@ class AddAndEditDeliveryMan extends StatelessWidget {
                   textInputType: TextInputType.streetAddress,
                 ),
                 TextFormFieldWidget(
+                  readOnly: false,
+
                   textInputAction: TextInputAction.done,
 
                   validator: (val ) {

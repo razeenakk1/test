@@ -10,10 +10,10 @@ class TextFormFieldWidget extends StatelessWidget {
       this.onTap,
       this.prefixIcon,
       this.maxLines,
-      this.readOnly,
+     required this.readOnly,
       required this.textInputType,
       this.onChanged,
-      required this.obscureText,this.autoFocus,  this.validator, required this.textInputAction});
+      required this.obscureText,this.autoFocus,  this.validator, required this.textInputAction,this.focusNode,this.enabled});
 
   final TextEditingController controller;
   final String labelText;
@@ -23,8 +23,10 @@ class TextFormFieldWidget extends StatelessWidget {
   void Function(String)? onChanged;
 
   final int? maxLines;
-  bool? readOnly = false;
+   final bool readOnly ;
   final TextInputType textInputType;
+  FocusNode? focusNode;
+  bool? enabled;
 
   final bool obscureText;
   bool? autoFocus;
@@ -35,13 +37,13 @@ class TextFormFieldWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      enabled: enabled,
+      focusNode: focusNode,
         textInputAction: textInputAction,
-
-      validator: validator ,
-
-      autofocus:autoFocus == null ? false : true ,
+        validator: validator ,
+        autofocus: autoFocus == null ? false : true ,
         obscureText: obscureText,
-        readOnly: readOnly != null ? true : false,
+        readOnly: readOnly ,
         keyboardType: textInputType,
         maxLines: maxLines,
         onChanged: onChanged,

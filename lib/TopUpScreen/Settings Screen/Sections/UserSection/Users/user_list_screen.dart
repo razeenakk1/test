@@ -7,10 +7,16 @@ import '../../../../Widgets/search_widget.dart';
 import '../../Accounts/Ledgers_Secrion/ledgers_screen.dart';
 import 'add_and_edit_user_screen.dart';
 
+
 class UserListScreen extends StatelessWidget {
    UserListScreen({Key? key}) : super(key: key);
+
   final TextEditingController searchController = TextEditingController();
 
+
+   String userName = "savad";
+
+   String password = "123456";
 
   @override
   Widget build(BuildContext context) {
@@ -43,42 +49,65 @@ class UserListScreen extends StatelessWidget {
                   physics: const NeverScrollableScrollPhysics(),
                   itemCount: 5,
                   itemBuilder: (BuildContext context, int index) {
-                    return GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => AddAndEitUser(type: 'Edit',)),
-                        );
-                      },
-                      child: Card(
-                        elevation: 0,
-                        child: Container(
-
-                          height: mHeight * .1,
-                          decoration: listPageContainerDecorationVariable,
-                          child: Center(
-                            child: ListTile(
-                              title: Text(particulars[index],
-                                style:GoogleFonts.poppins(textStyle: const TextStyle(fontWeight: FontWeight.bold),)),
-
-                              trailing: Column(
-                                crossAxisAlignment: CrossAxisAlignment.end,
-                                children: [
-                                  SizedBox(height: mHeight * .01,),
-                                   Text("Balance", style: GoogleFonts.poppins(textStyle: const TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      color: Color(0xff9C9C9C)))),
-                                   Text("121.00", style: GoogleFonts.poppins(textStyle:  const TextStyle(
-                                    fontWeight: FontWeight.bold,)))
-                                ],
+                    return Card(
+                      elevation: 0,
+                      child: Container(
+                        height: mHeight * .1,
+                        decoration: listPageContainerDecorationVariable,
+                        child: Center(
+                          child: ListTile(
+                            title: GestureDetector(
+                              onTap: (){
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(builder: (context) => AddAndEitUser(type: 'Edit',)),
+                                );
+                              },
+                              child: Container(
+                               // color: Colors.blue,
+                                height: mHeight * .1,
+                                width: mWidth*.4,
+                                child: Text(particulars[index],
+                                  style:GoogleFonts.poppins(textStyle: const TextStyle(fontWeight: FontWeight.bold),)),
                               ),
                             ),
-                          ),
+                            trailing: Column(
+                            children: [
+                              Icon(Icons.share),
+                              Container(
+                               height: mHeight*.04,
+                                child: IconButton(
+                                  onPressed: (){
+                                    shareFunction(context, userName, password);
+                                  },
+                                  icon: Image.asset(
+                                    "assets/settingsimage/share.png",
+                                    height: mHeight * .02,
+                                  ),
+                                ),
+                              ),
+                            ],
+                              ),
 
+
+                          ),
                         ),
+
                       ),
                     );
                   }),
+              // Container(
+              //   height: mHeight*.1,
+              //   color: Colors.red,
+              //   child: GestureDetector(
+              //       onTap: (){
+              //
+              //         shareFunction(context, userName, password);
+              //
+              //
+              //       },
+              //       child: share_button_widget(mHeight: mHeight, mWidth: mWidth,)),
+              // )
             ],
           ),
         ),
@@ -94,5 +123,5 @@ class UserListScreen extends StatelessWidget {
             })
     );
   }
-
 }
+

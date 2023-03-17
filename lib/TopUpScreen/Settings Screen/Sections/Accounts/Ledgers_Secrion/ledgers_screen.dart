@@ -38,7 +38,7 @@ class LedgersScreen extends StatelessWidget {
         backgroundColor: backGroundColor,
         appBar: appBar( appBarTitle: 'Ledgers',
         leading: IconButton(onPressed: (){
-          Navigator.pop(context);
+          Navigator.of(context).pop();
         }, icon: const Icon(Icons.arrow_back))),
         body: Container(
           padding: EdgeInsets.only(

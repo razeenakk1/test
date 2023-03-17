@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:video_player/video_player.dart';
 
 import '../TopUpScreen/CameraSecton/camera_screen.dart';
 
@@ -25,7 +24,6 @@ class _CustomCameraState extends State<CustomCamera> {
   bool _cameraNotAvailable = false;
   XFile? imageFile;
   XFile? videoFile;
-  VideoPlayerController? videoController;
 
 
 

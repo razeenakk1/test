@@ -20,7 +20,8 @@ class TaxListScreen extends StatelessWidget {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: backGroundColor,
-      appBar: appBar(appBarTitle: 'Tax Types'),
+      appBar: appBar(appBarTitle: 'Tax Types',
+      ),
       body: Container(
         padding: EdgeInsets.only(left: mWidth * .02, right: mWidth * .02),
         height: mHeight,

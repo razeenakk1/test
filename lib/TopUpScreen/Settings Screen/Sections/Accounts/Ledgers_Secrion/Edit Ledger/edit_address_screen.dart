@@ -41,6 +41,8 @@ class EditAddresScreen extends StatelessWidget {
                 style: GoogleFonts.poppins(textStyle: const TextStyle(fontWeight: FontWeight.w900, fontSize: 18),
                 )),
                   TextFormFieldWidget(
+                    readOnly: false,
+
                     textInputAction: TextInputAction.next,
                     validator: (val ) {
                       if (val == null || val.isEmpty) {
@@ -56,6 +58,8 @@ class EditAddresScreen extends StatelessWidget {
                     textInputType: TextInputType.name,
                   ),
                   TextFormFieldWidget(
+                    readOnly: false,
+
                     textInputAction: TextInputAction.next,
                     validator: (val ) {
                       if (val == null || val.isEmpty) {
@@ -70,6 +74,8 @@ class EditAddresScreen extends StatelessWidget {
                     textInputType: TextInputType.streetAddress,
                   ),
                   TextFormFieldWidget(
+                    readOnly: false,
+
                     textInputAction: TextInputAction.done,
                     validator: (val ) {
                       if (val == null || val.isEmpty) {

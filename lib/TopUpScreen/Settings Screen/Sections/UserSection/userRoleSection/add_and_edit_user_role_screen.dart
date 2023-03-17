@@ -44,6 +44,8 @@ class AddAndEditUserole extends StatelessWidget {
                 physics: const BouncingScrollPhysics(),
                   children: [
                 TextFormFieldWidget(
+                  readOnly: false,
+
                   validator: (val ) {
                     if (val == null || val.isEmpty) {
                       return 'This field is required';
