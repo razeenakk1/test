@@ -60,10 +60,10 @@ class UserListScreen extends StatelessWidget {
                               onTap: (){
                                 Navigator.push(
                                   context,
-                                  MaterialPageRoute(builder: (context) => AddAndEitUser(type: 'Edit',)),
+                                  MaterialPageRoute(builder: (context) => const AddAndEitUser(type: 'Edit',)),
                                 );
                               },
-                              child: Container(
+                              child: SizedBox(
                                // color: Colors.blue,
                                 height: mHeight * .1,
                                 width: mWidth*.4,
@@ -73,8 +73,8 @@ class UserListScreen extends StatelessWidget {
                             ),
                             trailing: Column(
                             children: [
-                              Icon(Icons.share),
-                              Container(
+                              const Icon(Icons.share),
+                              SizedBox(
                                height: mHeight*.04,
                                 child: IconButton(
                                   onPressed: (){
@@ -117,7 +117,7 @@ class UserListScreen extends StatelessWidget {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => AddAndEitUser(type: 'Add',)),
+                MaterialPageRoute(builder: (context) => const AddAndEitUser(type: 'Add',)),
               );
 
             })

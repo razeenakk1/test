@@ -101,7 +101,7 @@ class _AddAndEitUserState extends State<AddAndEitUser> {
                     print("after");
                   },
                   child: share_button_widget(mHeight: mHeight, mWidth: mWidth),
-                ):SizedBox()
+                ):const SizedBox()
               ),
             ]),
             body: Container(

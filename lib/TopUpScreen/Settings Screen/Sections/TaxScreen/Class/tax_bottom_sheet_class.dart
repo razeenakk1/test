@@ -43,7 +43,7 @@ class TaxBottomSheetClass {
                     }, textInputAction: TextInputAction.next,
                   ),
                   TextFieldWidget(
-                    controller: salesTaxController,
+                    controller:  salesTaxController  ,
                     labelText: 'Sales Tax',
                     validator: (val) {
                       if (val == null || val.isEmpty) {

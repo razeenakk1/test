@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
-
 import '../../../../Constens/constens.dart';
 import '../../../../Functions/date_picker_function.dart';
 import '../../../../Functions/floating_action_function.dart';
 import '../../../../Widgets/appbar_widget.dart';
 import '../../../../Widgets/text_form_field_widget.dart';
-import 'Edit Ledger/edit_address_screen.dart';
+import 'Edit Ledger/add_address_screen.dart';
 import 'supplier_list_screen.dart';
 
 class CreateAndEditLedger extends StatefulWidget {
@@ -54,11 +53,14 @@ class _CreateAndEditLedgerState extends State<CreateAndEditLedger> {
   bool ledgerGroup = true;
 
   bool value = false;
+  ValueNotifier<bool> ledgerGroups = ValueNotifier(true);
 
   ValueNotifier<bool> isChecked = ValueNotifier(true);
   int groupId= 2;
   int grpId = 3;
   final formKey = GlobalKey<FormState>();
+
+
 
 
   @override
@@ -90,8 +92,6 @@ class _CreateAndEditLedgerState extends State<CreateAndEditLedger> {
               children: [
                 TextFormFieldWidget(
                   readOnly: false,
-
-
                   obscureText: false,
                   controller: nameController,
                   labelText: "Ledger name",
@@ -146,12 +146,13 @@ class _CreateAndEditLedgerState extends State<CreateAndEditLedger> {
                     var a = k[0];
                     setState(() {
                       groupId = result[1];
-
-
-                    });
-                    setState(() {
                       grpId = result[1];
+
+
                     });
+                    // setState(() {
+                    //   grpId = result[1];
+                    // });
 
 
                   //  groupId = supplierController.text;
@@ -326,7 +327,7 @@ class _CreateAndEditLedgerState extends State<CreateAndEditLedger> {
                         : const SizedBox(),
 
 
-                    widget.type == "Edit" ? AddressWidget() : const SizedBox()
+                    widget.type == "Edit" ? const AddressWidget() : const SizedBox()
                   ],
                 )
                    : Container()
@@ -346,7 +347,7 @@ class _CreateAndEditLedgerState extends State<CreateAndEditLedger> {
 }
 
 class AddressWidget extends StatefulWidget {
-  AddressWidget({Key? key}) : super(key: key);
+  const AddressWidget({Key? key}) : super(key: key);
 
   @override
   State<AddressWidget> createState() => _AddressWidgetState();
@@ -354,8 +355,12 @@ class AddressWidget extends StatefulWidget {
 
 class _AddressWidgetState extends State<AddressWidget> {
   final particulars = [
-    "Cash in hand"];
+    "Cash in hand"
+  ]; ///
   bool valueFirst = true;
+  ValueNotifier<int> buttonClickedTimes =ValueNotifier(0);
+  // ValueNotifier<bool>
+
 
 
   final decorationContainer = BoxDecoration(
@@ -410,7 +415,7 @@ class _AddressWidgetState extends State<AddressWidget> {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => EditAddresScreen()),
+                                      builder: (context) => AddAddressScreen()),
                                 );
                               },
                               child: const Icon(Icons.add),
@@ -486,21 +491,4 @@ class _AddressWidgetState extends State<AddressWidget> {
   }
 }
 
-class AddressDetailsWidget extends StatelessWidget {
-  const AddressDetailsWidget({
-    super.key,
-    required this.addressDetails,
-    required this.color,
-  });
 
-  final String addressDetails;
-  final Color color;
-
-  @override
-  Widget build(BuildContext context) {
-    return Text(
-      addressDetails,
-        style: GoogleFonts.poppins(textStyle:  TextStyle(color: color)),
-    );
-  }
-}
