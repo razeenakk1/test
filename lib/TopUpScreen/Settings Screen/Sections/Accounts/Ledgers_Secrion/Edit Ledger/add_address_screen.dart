@@ -10,18 +10,11 @@ import 'list_area_screen.dart';
 class AddAddressScreen extends StatelessWidget {
    AddAddressScreen({Key? key}) : super(key: key);
 
-  final TextEditingController nameController = TextEditingController()
-    ..text = "Home";
+  final TextEditingController nameController = TextEditingController();
 
-  final TextEditingController addressController = TextEditingController()
-    ..text = "Kunnummal House \n"
-        "karakkkunn \n"
-        "malappuram \n"
-        "kerala \n"
-        "676123";
+  final TextEditingController addressController = TextEditingController();
 
-  final TextEditingController areaController = TextEditingController()
-    ..text = "Doha";
+  final TextEditingController areaController = TextEditingController();
 
   final formKey = GlobalKey<FormState>();
 
@@ -65,8 +58,11 @@ class AddAddressScreen extends StatelessWidget {
                     textInputType: TextInputType.name,
                   ),
                   TextFormFieldWidget(
+                    maxLines: null,
+                    textInputType: TextInputType.multiline,
+
+                    textInputAction: TextInputAction.newline,
                     readOnly: false,
-                    textInputAction: TextInputAction.next,
                     validator: (val) {
                       if (val == null || val.isEmpty) {
                         return 'This field is required';
@@ -76,7 +72,6 @@ class AddAddressScreen extends StatelessWidget {
                     obscureText: false,
                     controller: addressController,
                     labelText: 'Address',
-                    textInputType: TextInputType.streetAddress,
                   ),
                   ValueListenableBuilder(
                     valueListenable: buttonClickedTimes,

@@ -7,7 +7,7 @@ import '../../../../Functions/floating_action_function.dart';
 import '../../../../Widgets/appbar_widget.dart';
 import '../../../../Widgets/text_form_field_widget.dart';
 import 'Edit Ledger/add_address_screen.dart';
-import 'supplier_list_screen.dart';
+import 'leger_group_list_screen.dart';
 
 class CreateAndEditLedger extends StatefulWidget {
   const CreateAndEditLedger({Key? key, required this.type}) : super(key: key);
@@ -42,6 +42,8 @@ class _CreateAndEditLedgerState extends State<CreateAndEditLedger> {
 
   TextEditingController vatNumberController = TextEditingController()
     ..text = "0126547896532";
+  TextEditingController controller = TextEditingController();
+  TextEditingController controllerLedgerGroup = TextEditingController();
 
   // ValueNotifier<String> dateNotifier = ValueNotifier("");
   DateTime dateTime = DateTime.now();
@@ -55,7 +57,7 @@ class _CreateAndEditLedgerState extends State<CreateAndEditLedger> {
   bool value = false;
   ValueNotifier<bool> ledgerGroups = ValueNotifier(true);
 
-  ValueNotifier<bool> isChecked = ValueNotifier(true);
+  ValueNotifier<bool> isChecked = ValueNotifier(false);
   int groupId= 2;
   int grpId = 3;
   final formKey = GlobalKey<FormState>();
@@ -93,7 +95,7 @@ class _CreateAndEditLedgerState extends State<CreateAndEditLedger> {
                 TextFormFieldWidget(
                   readOnly: false,
                   obscureText: false,
-                  controller: nameController,
+                  controller:   widget.type == "Create" ?controller  : nameController,
                   labelText: "Ledger name",
                   textInputType: TextInputType.name,
                   validator: (val ) {
@@ -117,7 +119,7 @@ class _CreateAndEditLedgerState extends State<CreateAndEditLedger> {
                     return null;
                   },
 
-                  controller: supplierController,
+                  controller:widget.type == "Create" ?controllerLedgerGroup  : supplierController,
                   readOnly: true,
                   labelText: "Ledger Group",
                   suffixIcon: const Icon(
@@ -128,7 +130,7 @@ class _CreateAndEditLedgerState extends State<CreateAndEditLedger> {
                     final result = await Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => SupplierListScreen()),
+                          builder: (context) => LedgerGroupListScreen()),
                     );
 
                     //
@@ -142,17 +144,11 @@ class _CreateAndEditLedgerState extends State<CreateAndEditLedger> {
                     //
                     //print(result);
                     result != null ? supplierController.text = result[0] : Null;
-                    var k= [1,2];
-                    var a = k[0];
-                    setState(() {
+                     result != null ? controllerLedgerGroup.text = result[0] : Null;
+                     setState(() {
                       groupId = result[1];
-                      grpId = result[1];
+                      grpId = result[1];});
 
-
-                    });
-                    // setState(() {
-                    //   grpId = result[1];
-                    // });
 
 
                   //  groupId = supplierController.text;
@@ -177,7 +173,7 @@ class _CreateAndEditLedgerState extends State<CreateAndEditLedger> {
                             return null;
                           },
                       obscureText: false,
-                      controller: balanceController,
+                      controller:widget.type == "Create" ?controller  : balanceController,
                       labelText: "Balance",
                       textInputType: TextInputType.number,
                     )),
@@ -235,7 +231,7 @@ class _CreateAndEditLedgerState extends State<CreateAndEditLedger> {
 
                       textInputAction: TextInputAction.next,
                       obscureText: false,
-                      controller: phoneNumberController,
+                      controller:widget.type == "Create" ?controller  : phoneNumberController,
                       labelText: "Phone",
                       prefixIcon: const Icon(
                         Icons.phone,
@@ -249,7 +245,7 @@ class _CreateAndEditLedgerState extends State<CreateAndEditLedger> {
                         textInputAction: widget.type  == "Create" ? TextInputAction.next :TextInputAction.done,
                         obscureText: false,
                         textInputType: TextInputType.multiline,
-                        controller: emailController,
+                        controller:   widget.type == "Create" ? controller  : emailController,
                         labelText: "Email",
                         prefixIcon:
                             Image.asset("assets/profile_image/sendimage.png")),
@@ -258,13 +254,14 @@ class _CreateAndEditLedgerState extends State<CreateAndEditLedger> {
                             children: [
                               TextFormFieldWidget(
                                 readOnly: false,
+                                maxLines: null,
+                                textInputType: TextInputType.multiline,
 
-                                textInputAction: TextInputAction.done,
+                                textInputAction: TextInputAction.newline,
                                 obscureText: false,
-                                controller: addressController,
+                                controller: widget.type == "Create" ?controller  : addressController,
                                 labelText: "Address",
-                                maxLines: 5,
-                                textInputType: TextInputType.text,
+
                               ),
                               SizedBox(
                                 height: mHeight * .02,
@@ -310,7 +307,7 @@ class _CreateAndEditLedgerState extends State<CreateAndEditLedger> {
                                      },
 
                                           obscureText: false,
-                                          controller: vatNumberController,
+                                          controller:widget.type == "Create" ?controller  : vatNumberController,
                                           labelText: "VAT No",
                                           textInputType: TextInputType.number,
                                         ) : const SizedBox(),
@@ -437,7 +434,7 @@ class _AddressWidgetState extends State<AddressWidget> {
                             child: Checkbox(
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(10)),
-                              activeColor: Colors.red,
+                              activeColor: const Color(0xffB53211),
                               value: valueFirst,
                               onChanged: ( value) {
                                 setState(() {

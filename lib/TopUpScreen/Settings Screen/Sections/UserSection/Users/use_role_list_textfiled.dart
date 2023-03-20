@@ -71,7 +71,7 @@ class UseRoleListScreen extends StatelessWidget {
                     child: Card(
                       elevation: 0,
                       child: Container(
-                        height: mHeight * .05,
+                        height: mHeight * .1,
                         decoration: BoxDecoration(
                           color: const Color(0xffF5F5F5),
                           borderRadius: BorderRadius.circular(10),
@@ -82,7 +82,8 @@ class UseRoleListScreen extends StatelessWidget {
                               particulars[index],
                               textAlign: TextAlign.start,
                               style: GoogleFonts.poppins(textStyle: const TextStyle(
-                                  fontWeight: FontWeight.bold),
+                                  fontWeight: FontWeight.bold
+                              ),
                               ))),
                       ),
                     ),

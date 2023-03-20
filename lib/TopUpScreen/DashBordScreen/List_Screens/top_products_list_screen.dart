@@ -51,7 +51,7 @@ class TopProductsListScreen extends StatelessWidget {
                       // color: Color(0xffF2F2F2),
                       elevation: 0,
                       child: Container(
-                        height: mHeight * .12,
+                        height: mHeight * .13,
                         width: mWidth * .4,
                         decoration: BoxDecoration(
                             color: const Color(0xffE9E9E9),
@@ -78,7 +78,7 @@ class TopProductsListScreen extends StatelessWidget {
                                 "Yeezy 380 Alien",
                     style:GoogleFonts.poppins(textStyle: const  TextStyle(
                                     fontWeight: FontWeight.w900,
-                                    fontSize: 15,
+                                    fontSize: 13,
                                     color: Colors.black),)
                               ),
                               Text(

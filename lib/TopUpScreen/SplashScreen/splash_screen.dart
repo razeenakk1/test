@@ -15,7 +15,7 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> {
 
- Future<void> checkLogin()async {
+ Future<void> checkLogin()async{
     SharedPreferences prefs =await SharedPreferences.getInstance();
     var userName = prefs.getString("userName");
 

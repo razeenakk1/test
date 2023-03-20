@@ -5,6 +5,7 @@ import '../../../../Widgets/text_field_widget.dart';
 
 class TaxBottomSheetClass {
   TextEditingController nameController = TextEditingController();
+  TextEditingController nameControllerValue = TextEditingController()..text = "editController";
   TextEditingController salesTaxController = TextEditingController();
   TextEditingController purchaseTaxController = TextEditingController();
 
@@ -33,7 +34,7 @@ class TaxBottomSheetClass {
                     ),
                   ),
                   TextFieldWidget(
-                    controller: nameController,
+                    controller: type == "Edit"  ? nameControllerValue         :nameController,
                     labelText: 'Name',
                     validator: (val) {
                       if (val == null || val.isEmpty) {
@@ -43,7 +44,7 @@ class TaxBottomSheetClass {
                     }, textInputAction: TextInputAction.next,
                   ),
                   TextFieldWidget(
-                    controller:  salesTaxController  ,
+                    controller: type == "Edit"  ? nameControllerValue         : salesTaxController  ,
                     labelText: 'Sales Tax',
                     validator: (val) {
                       if (val == null || val.isEmpty) {
@@ -54,7 +55,7 @@ class TaxBottomSheetClass {
                     textInputAction: TextInputAction.next,
                   ),
                   TextFieldWidget(
-                    controller: purchaseTaxController,
+                    controller:type == "Edit"  ? nameControllerValue         : purchaseTaxController,
                     labelText: 'Purchase TAX',
                     validator: (val) {
                       if (val == null || val.isEmpty) {

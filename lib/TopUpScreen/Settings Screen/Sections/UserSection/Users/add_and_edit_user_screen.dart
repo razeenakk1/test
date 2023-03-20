@@ -31,6 +31,8 @@ class _AddAndEitUserState extends State<AddAndEitUser> {
 
   final TextEditingController passwordController = TextEditingController()
     ..text = "123456";
+  final TextEditingController controller = TextEditingController();
+  final TextEditingController controllerUserole = TextEditingController();
 
   final TextEditingController userRollController = TextEditingController()
     ..text = "Accountant";
@@ -95,12 +97,8 @@ class _AddAndEitUserState extends State<AddAndEitUser> {
                  shareFunction( context,  userNameText, passwordText);
                     // print("_______________$text");
 
-                    print(userNameText);
-                    print(passwordText);
-                    print("before");
-                    print("after");
                   },
-                  child: share_button_widget(mHeight: mHeight, mWidth: mWidth),
+                  child: ShareButtonWidget(mHeight: mHeight, mWidth: mWidth),
                 ):const SizedBox()
               ),
             ]),
@@ -115,7 +113,6 @@ class _AddAndEitUserState extends State<AddAndEitUser> {
                   children: [
                     TextFormFieldWidget(
                       enabled: !newValue,
-                      focusNode:myFocus ,
                       readOnly: false,
                       validator: (val) {
                         if (val == null || val.isEmpty) {
@@ -124,7 +121,7 @@ class _AddAndEitUserState extends State<AddAndEitUser> {
                         return null;
                       },
                       obscureText: false,
-                      controller: nameController,
+                      controller: widget.type == "Add" ?controller  : nameController,
                       labelText: 'Name',
                       textInputType: TextInputType.text,
                       prefixIcon: const Icon(
@@ -139,7 +136,6 @@ class _AddAndEitUserState extends State<AddAndEitUser> {
 
                       onChanged: (String value) => setState(() {
                         userNameText = value;
-                        print(userNameText);
                       }),
                       textInputAction: TextInputAction.next,
                       validator: (val) {
@@ -149,7 +145,7 @@ class _AddAndEitUserState extends State<AddAndEitUser> {
                         return null;
                       },
                       obscureText: false,
-                      controller: userNameController,
+                      controller:widget.type == "Add" ?controller  : userNameController,
                       labelText: 'User Name',
                       textInputType: TextInputType.text,
                       prefixIcon: const Icon(
@@ -169,7 +165,7 @@ class _AddAndEitUserState extends State<AddAndEitUser> {
                         return null;
                       },
                       obscureText: false,
-                      controller: phoneNumberController,
+                      controller:widget.type == "Add" ?controller  : phoneNumberController,
                       labelText: 'Phone',
                       textInputType: TextInputType.phone,
                       prefixIcon: const Icon(
@@ -189,7 +185,7 @@ class _AddAndEitUserState extends State<AddAndEitUser> {
                         return null;
                       },
                       obscureText: false,
-                      controller: emailController,
+                      controller:widget.type == "Add" ?controller  : emailController,
                       labelText: 'Email',
                       textInputType: TextInputType.emailAddress,
                       prefixIcon: Image.asset("assets/profile_image/sendimage.png"),
@@ -209,11 +205,10 @@ class _AddAndEitUserState extends State<AddAndEitUser> {
                                       onChanged: (String value) => setState(() {
                                             passwordText = value;
 
-                                            print(passwordText);
                                           }),
                                       textInputAction: TextInputAction.done,
                                       obscureText: passwordNewValue,
-                                      controller: passwordController,
+                                      controller:widget.type == "Add" ?controller  : passwordController,
                                       maxLines: 1,
                                       labelText: "Password",
                                       textInputType: TextInputType.number,
@@ -279,7 +274,7 @@ class _AddAndEitUserState extends State<AddAndEitUser> {
                     TextFormFieldWidget(
                       textInputAction: TextInputAction.done,
                       obscureText: false,
-                      controller: userRollController,
+                      controller: widget.type == "Add" ?controllerUserole  : userRollController,
                       readOnly: true,
                       enabled: !newValue,
                       labelText: "User Roles",
@@ -294,6 +289,7 @@ class _AddAndEitUserState extends State<AddAndEitUser> {
                               builder: (context) => UseRoleListScreen()),
                         );
                         result != null ? userRollController.text = result[0] : Null;
+                        result != null ? controllerUserole.text = result[0] : Null;
                       },
                       textInputType: TextInputType.none,
                     ),
@@ -319,8 +315,8 @@ class _AddAndEitUserState extends State<AddAndEitUser> {
   }
 }
 
-class share_button_widget extends StatelessWidget {
-  const share_button_widget({
+class ShareButtonWidget extends StatelessWidget {
+  const ShareButtonWidget({
     super.key,
     required this.mHeight,
     required this.mWidth,

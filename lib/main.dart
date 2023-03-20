@@ -1,18 +1,17 @@
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:topuptest/Api_Section/All_Api/brand_API.dart';
 import 'package:topuptest/Api_Section/All_Api/get_api.dart';
 import 'package:topuptest/Api_Section/All_Api/login_api.dart';
 import 'package:topuptest/Api_Section/Bloc/BrandBloc/brand_bloc.dart';
 import 'package:topuptest/Api_Section/Bloc/LoginBloc/login_bloc.dart';
 import 'package:topuptest/Api_Section/Bloc/get_bloc/get_bloc.dart';
-import 'package:topuptest/TopUpScreen/Login_Screen/login_screen.dart';
-import 'package:topuptest/TopUpScreen/MainScreen/main_screen.dart';
+import 'package:topuptest/ListAndSearch/Api_Section/Api_Function/product_list_api.dart';
+import 'package:topuptest/ListAndSearch/Api_Section/Bloc/product_list_bloc.dart';
 import 'package:topuptest/TopUpScreen/SplashScreen/splash_screen.dart';
-import 'package:topuptest/screens/HomeScreen/homeScreen.dart';
-import 'package:topuptest/share_example.dart';
+import 'ListAndSearch/Api_Section/Api_Function/search_api.dart';
+import 'ListAndSearch/list_and_search.dart';
 import 'TopUpScreen/CameraSecton/camera_screen.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -25,6 +24,8 @@ class MyApp extends StatelessWidget {
 final  UserApi userApi = UserApi();
    final BrandApi brandApi = BrandApi();
    final  GetApi getApi = GetApi();
+   final ProductListApi productListApi = ProductListApi();
+   final ApiSearchProduct apiSearchProduct = ApiSearchProduct();
 
    @override
   Widget build(BuildContext context) {
@@ -38,37 +39,20 @@ final  UserApi userApi = UserApi();
         ),
         BlocProvider<GetBloc>(
           create: (context) => GetBloc(getApi),
-        ),],
+        ),
+        BlocProvider<ProductListBloc>(
+          create: (context) => ProductListBloc(productListApi,apiSearchProduct),
+        ),
+
+
+      ],
        child: MaterialApp(
           debugShowCheckedModeBanner: false,
            theme: ThemeData(
              primarySwatch: Colors.blue,),
-         home:   const SplashScreen()
+         home:   ListAndSearchScreen()
 
-         // initialRoute: "/splashScreen",
-         // routes: {
-         //   '/splashScreen': (context) => SplashScreen(),
-         //   '/loginScreen': (context) => LoginScreen(),
-         //   '/': (context) => MainScreen(
-         //     initialPageIndex: 0,
-         //   ),
-         //   '/dashBord': (context) => MainScreen(
-         //     initialPageIndex: 0,
-         //   ),
-         //   '/menu': (context) => MainScreen(
-         //     initialPageIndex: 1,
-         //   ),
-         //   '/menuScreen': (context) => MainScreen(
-         //     initialPageIndex: 2,
-         //   ),
-         //   '/profile': (context) => MainScreen(
-         //     initialPageIndex: 3,
-         //   ),
-         //   '/settings': (context) => MainScreen(
-         //     initialPageIndex: 4,
-         //   ),
-         //
-         // },
+
         ),
 
     );

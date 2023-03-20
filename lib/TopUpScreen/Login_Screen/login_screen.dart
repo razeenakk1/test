@@ -15,8 +15,7 @@ class LoginScreen extends StatelessWidget {
   final ValueNotifier<bool> passwordVisible = ValueNotifier(true);
   final ValueNotifier<bool> isChecked = ValueNotifier(true);
   final formKey = GlobalKey<FormState>();
-  final _formFieldKey = GlobalKey<FormFieldState>();
-  final _formFieldKey1 = GlobalKey<FormFieldState>();
+
   late LoginModelClass loginModelClass;
 
   loginFunction(
@@ -66,7 +65,7 @@ class LoginScreen extends StatelessWidget {
                     height: mHeight * .15,
                   ),
                   SizedBox(
-                    height: mHeight * .15,
+                    height: mHeight * .17,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -74,13 +73,13 @@ class LoginScreen extends StatelessWidget {
                           "assets/login_bg_image/topup_text_image.png",
                           height: mHeight * .06,
                         ),
-                        SizedBox(
-                          height: mHeight * .01,
-                        ),
+                        // SizedBox(
+                        //   height: mHeight * .01,
+                        // ),
                          Text(
                           "Login.",
                           style: GoogleFonts.poppins(textStyle: const TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 37),
+                              fontWeight: FontWeight.bold, fontSize: 36),
                         )
                          )],
                     ),
@@ -175,7 +174,7 @@ class LoginScreen extends StatelessWidget {
                           height: mHeight * .07,
                           width: mWidth * .4,
                           child: ElevatedButton(
-                            onPressed: () async {
+                            onPressed: ()async{
                               SharedPreferences pref = await SharedPreferences.getInstance();
                               pref.setString("userName", "vikntest");
                            formKey.currentState!.validate()  ?  Navigator.pushReplacement(context, MaterialPageRoute(builder: ( _ ){

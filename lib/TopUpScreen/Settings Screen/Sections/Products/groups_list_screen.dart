@@ -85,7 +85,6 @@ class GroupListScreen extends StatelessWidget {
             icon: Icons.add,
             onPressed: () {
               commonBottomSheetClass .settingsBottomSheetFunction(context: context, type: "Group", addOrEdit: 'Add');
-
             }));
   }
 }

@@ -6,8 +6,8 @@ import '../../../../Widgets/appbar_widget.dart';
 import '../../../../Widgets/search_widget.dart';
 
 
-class SupplierListScreen extends StatelessWidget {
-   SupplierListScreen({Key? key}) : super(key: key);
+class LedgerGroupListScreen extends StatelessWidget {
+   LedgerGroupListScreen({Key? key}) : super(key: key);
 
   final particulars = [
     "Supplier",
@@ -66,7 +66,7 @@ class SupplierListScreen extends StatelessWidget {
                     child: Card(
                       elevation: 0,
                       child: Container(
-                        height: mHeight*.05,
+                        height: mHeight*.1,
                         decoration: BoxDecoration(
                           color: const Color(0xffF5F5F5),
                           borderRadius: BorderRadius.circular(10),),

@@ -61,17 +61,18 @@ final  bool isTrue = false;
           backgroundColor: backGroundColor,
           elevation: 0,
           bottom: PreferredSize(
-            preferredSize: Size.fromHeight(mHeight * .06),
+            preferredSize: Size.fromHeight(mHeight * .08),
             child: Container(
               alignment: Alignment.centerLeft,
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+              padding:  EdgeInsets.symmetric(horizontal: mWidth*.04, vertical: mHeight*.02),
               child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
 
 
                 children: [
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                        Text(
                         "Hello,",
@@ -90,7 +91,7 @@ final  bool isTrue = false;
                     ],
                   ),
                   SizedBox(
-                    width: mWidth * .19,
+                    width: mWidth * .13,
                   ),
                   AppBarButtonWidget(
                       mHeight: mHeight,
@@ -102,7 +103,7 @@ final  bool isTrue = false;
                         "assets/LogoutImage/logout.png",
                       )),
                   SizedBox(
-                    width: mWidth * .02,
+                    width: mWidth * .01,
                   ),
                   AppBarButtonWidget(
                     mHeight: mHeight,
@@ -194,8 +195,8 @@ final  bool isTrue = false;
                 ),
               ),
               Container(
-                margin: EdgeInsets.only(bottom: mHeight * .01),
-                height: mHeight * .19,
+                //margin: EdgeInsets.only(bottom: mHeight * .01),
+                height: mHeight * .2,
                 width: mWidth * .8,
                 decoration: BoxDecoration(
                     color: const Color(0xffE6F5E6),
@@ -222,7 +223,7 @@ final  bool isTrue = false;
                                  Text("Total Profit",
                               style:GoogleFonts.poppins(textStyle: const  TextStyle(
                                         fontWeight: FontWeight.w900,
-                                        fontSize: 18)),),
+                                        fontSize: 16)),),
                                 ThisMonthWidget(
                                   mHeight: mHeight,
                                   mWidth: mWidth,
@@ -251,7 +252,7 @@ final  bool isTrue = false;
                         children: [
                            Text('\$ 45,000,000.00',
                             style:GoogleFonts.poppins(textStyle: const  TextStyle(
-                                  fontWeight: FontWeight.w900, fontSize: 18)),),
+                                  fontWeight: FontWeight.w900, fontSize: 16)),),
                           SizedBox(
                             width: mWidth * .02,
                           ),
@@ -365,7 +366,7 @@ final  bool isTrue = false;
                                 "Yeezy 380 Alien",
                     style:GoogleFonts.poppins(textStyle: const  TextStyle(
                                     fontWeight: FontWeight.w900,
-                                    fontSize: 15,
+                                    fontSize: 13,
                                     color: Colors.black),)
                               ),
                               Text(
@@ -644,7 +645,7 @@ class AnalyticsSectionContainer extends StatelessWidget {
               ),
               Text(text,
                   style:GoogleFonts.poppins(textStyle: const TextStyle(
-                  fontWeight: FontWeight.w900, fontSize: 18)),),
+                  fontWeight: FontWeight.w900, fontSize: 16)),),
               ThisMonthWidget(
                 mHeight: mHeight,
                 mWidth: mWidth,
@@ -664,9 +665,9 @@ class AnalyticsSectionContainer extends StatelessWidget {
                   fit: BoxFit.fitWidth,
                 ),
               ),
-              Text(text1,
+              Text(text1,overflow: TextOverflow.ellipsis,
                 style:GoogleFonts.poppins(textStyle: const  TextStyle(
-                      fontWeight: FontWeight.w900, fontSize: 18))),
+                      fontWeight: FontWeight.w900, fontSize: 15))),
               Container(
                   height: mHeight * .033,
                   width: mWidth * .1,
@@ -695,9 +696,9 @@ class AnalyticsSectionContainer extends StatelessWidget {
                                 border: Border.all(color: Colors.white)),
                             child: const Icon(
                               Icons.add,
-                              size: 22,
+                              size: 20,
                             )),
-                        Text(buttonText,style: GoogleFonts.poppins(),),
+                        Text(buttonText,style: GoogleFonts.poppins(fontSize: 12),),
                       ],
                     )),
               )
@@ -802,7 +803,7 @@ class _ThisMonthWidgetState extends State<ThisMonthWidget> {
             isExpanded: true,
             value: widget.dropDownValue,
             style: const TextStyle(
-                fontSize: 13,
+                fontSize: 10,
                 color: Color(0xff818181),
                 fontWeight: FontWeight.w600),
             icon: const SizedBox.shrink(),

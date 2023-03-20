@@ -9,6 +9,7 @@ import '../../Widgets/text_field_widget.dart';
 class CommonBottomSheetClass {
   TextEditingController controller = TextEditingController()
     ..text = "controller";
+  TextEditingController controllerNotValue = TextEditingController();
   final formKey = GlobalKey<FormState>();
 
 
@@ -31,7 +32,7 @@ class CommonBottomSheetClass {
                 children: [
                   TextWidget(text: "$addOrEdit $type"),
                   TextFieldWidget(
-                    controller: controller,
+                    controller:  addOrEdit  == 'Add' ? controllerNotValue :controller ,
                     labelText: 'Enter $type Name',
                     validator: (val ) {
                       if (val == null || val.isEmpty) {

@@ -13,6 +13,7 @@ class AddAndEditDeliveryMan extends StatelessWidget {
  final TextEditingController nameController = TextEditingController()..text = "savad farooque";
    final TextEditingController phoneController = TextEditingController()..text = "+901235874695";
    final TextEditingController emailController = TextEditingController()..text = "savadfarooque@gmail.com";
+   final TextEditingController controller = TextEditingController();
 
    final formKey = GlobalKey<FormState>();
 
@@ -49,7 +50,7 @@ class AddAndEditDeliveryMan extends StatelessWidget {
                   obscureText: false,
 
                   prefixIcon: const Icon(Icons.person,color: Color(0xff707070),),
-                  controller: nameController,
+                  controller: type == "Add" ? controller  : nameController,
                   labelText: 'Name',
                   textInputType: TextInputType.name, readOnly: false,
                 ),
@@ -65,9 +66,9 @@ class AddAndEditDeliveryMan extends StatelessWidget {
                   obscureText: false,
 
                   prefixIcon: const Icon(Icons.phone,color: Color(0xff707070),),
-                  controller: phoneController,
+                  controller: type == "Add" ? controller  : phoneController,
                   labelText: 'Phone',
-                  textInputType: TextInputType.streetAddress,
+                  textInputType: TextInputType.phone,
                 ),
                 TextFormFieldWidget(
                   readOnly: false,
@@ -83,7 +84,7 @@ class AddAndEditDeliveryMan extends StatelessWidget {
                   obscureText: false,
 
                   prefixIcon: Image.asset("assets/profile_image/sendimage.png",color: const Color(0xff707070),),
-                  controller: emailController,
+                  controller: type == "Add" ? controller  : emailController,
                   labelText: 'Email',
                   textInputType: TextInputType.text,
                 ),

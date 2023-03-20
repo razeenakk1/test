@@ -25,7 +25,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   final constantImage =
       "https://icon-library.com/images/unknown-person-icon/unknown-person-icon-4.jpg";
   String name = 'Savad Farooque';
-  String phone = '912536985698';
+  String phone = '+912536985698';
   String email = 'savadfarooque@gmail.com';
 
 
@@ -83,7 +83,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               size: size,
                               firstText: "Phone",
                             icon: const Icon(Icons.phone,
-                                size: 20, color: Color(0xff707070)), secondText: "+$phone",
+                                size: 20, color: Color(0xff707070)), secondText: phone,
                               buttonOnPressed: () {
                                 profileBottomSheetClass.profileModelBottomSheet(
                                   type: 'Phone',

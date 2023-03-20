@@ -70,8 +70,8 @@ class StockFinderScreen extends StatelessWidget {
             ),
             Container(
               padding: EdgeInsets.only(top: mHeight * .02),
-              //color: Colors.orange,
-              height: mHeight * .1,
+             // color: Colors.orange,
+              height: mHeight * .13,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 //crossAxisAlignment: CrossAxisAlignment.center,
@@ -79,7 +79,7 @@ class StockFinderScreen extends StatelessWidget {
                   SearchProductDetailsWidget(
                     text: productId,
                     textColor: Colors.blue,
-                    fontSize: 15,
+                    fontSize: 13,
                     text1: 'Yeezy Boost 350 v2',
                     text1Color: Colors.black,
                     text1fontSize: 20,
@@ -190,7 +190,7 @@ class ColorAndSizeWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
 
       height: mHeight * .15,
       // color: Colors.grey,
@@ -228,7 +228,7 @@ class ColorAndSizeWidget extends StatelessWidget {
                           Text(
                             "4",
                         style:GoogleFonts.poppins(textStyle: const  TextStyle(
-                                fontSize: 23, fontWeight: FontWeight.w700),
+                                fontSize: 20, fontWeight: FontWeight.w700),
                         ) ),
                           Text(
                             "10",
