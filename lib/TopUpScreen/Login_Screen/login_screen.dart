@@ -3,43 +3,38 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:topuptest/Api_Section/Bloc/LoginBloc/login_bloc.dart';
-import 'package:topuptest/Api_Section/ModelClasses/LoginModelClass.dart';
 import 'package:topuptest/TopUpScreen/MainScreen/main_screen.dart';
+import 'package:topuptest/TopUpScreen/TopUpApiSection/Bloc/TopUpLoginBloc/top_up_login_bloc.dart';
+import 'package:topuptest/TopUpScreen/TopUpApiSection/ModelClasses/TopUpLoginModelClass.dart';
 
 class LoginScreen extends StatelessWidget {
   LoginScreen({Key? key}) : super(key: key);
-  final TextEditingController userNameController = TextEditingController()
-    ..text = "vikntest";
-  final TextEditingController passwordController = TextEditingController()
-    ..text = "test@123";
+  final TextEditingController userNameController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
   final ValueNotifier<bool> passwordVisible = ValueNotifier(true);
   final ValueNotifier<bool> isChecked = ValueNotifier(true);
   final formKey = GlobalKey<FormState>();
 
-  late LoginModelClass loginModelClass;
+late TopUpLoginModelClass topUpLoginModelClass;
 
-  loginFunction(
-      {required String userName,
-      required String password,
-      required String service}) async {}
 
   @override
   Widget build(BuildContext context) {
     final mWidth = MediaQuery.of(context).size.width;
     final mHeight = MediaQuery.of(context).size.height;
-    return BlocListener<LoginBloc, LoginState>(
+    return BlocListener<TopUpLoginBloc, TopUpLoginState>(
       listener: (context, state) {
-        if (state is LoginLoading) {
+        if (state is TopUpLoginLoading) {
           const CircularProgressIndicator();
         }
-        if (state is LoginLoaded) {
-          // Navigator.of(context).pushAndRemoveUntil(
-          //     MaterialPageRoute(
-          //       builder: (context) => MainScreen(),
-          //     ),
-          //     (route) => false);
+        if (state is TopUpLoginLoaded) {
+          Navigator.of(context).pushAndRemoveUntil(
+              MaterialPageRoute(
+                builder: (context) => MainScreen(),
+              ),
+              (route) => false);
         }
-        if (state is LoginError) {
+        if (state is TopUpLoginError) {
           const Text("Something went wrong");
         }
         // TODO: implement listener
@@ -175,16 +170,13 @@ class LoginScreen extends StatelessWidget {
                           width: mWidth * .4,
                           child: ElevatedButton(
                             onPressed: ()async{
-                              SharedPreferences pref = await SharedPreferences.getInstance();
-                              pref.setString("userName", "vikntest");
-                           formKey.currentState!.validate()  ?  Navigator.pushReplacement(context, MaterialPageRoute(builder: ( _ ){
-                                return MainScreen();
-                              })): Null;
-                              // return BlocProvider.of<LoginBloc>(context).add(
-                              //     FetchLogin(
-                              //         username: userNameController.text,
-                              //         password: passwordController.text,
-                              //         service: "application service"));
+                              // SharedPreferences pref = await SharedPreferences.getInstance();
+                              // pref.setString("userName", "vikntest");
+                           formKey.currentState!.validate()  ?
+                           BlocProvider.of<TopUpLoginBloc>(context).add(
+                                PostLoginEvent(userName: userNameController.text, password: passwordController.text)
+
+                              ): null;
                             },
                             style: ElevatedButton.styleFrom(
                               backgroundColor: const Color(0xffA42910),

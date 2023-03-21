@@ -363,7 +363,7 @@ final  bool isTrue = false;
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children:  [
                               Text(
-                                "Yeezy 380 Alien",
+                                "Yeezy 380 Aliene",
                     style:GoogleFonts.poppins(textStyle: const  TextStyle(
                                     fontWeight: FontWeight.w900,
                                     fontSize: 13,

@@ -15,21 +15,19 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> {
 
- Future<void> checkLogin()async{
-    SharedPreferences prefs =await SharedPreferences.getInstance();
-    var userName = prefs.getString("userName");
+  Future<void> getSaveDate() async {
+    final prefs = await SharedPreferences.getInstance();
+    if (prefs.getString('token') != null) {
+      Navigator.of(context).pushAndRemoveUntil(
+          MaterialPageRoute(
+            builder: (context) => MainScreen(),
+          ),
+              (route) => false);
 
-    if(userName != null){
-      Navigator.pushReplacement(context,
-                  MaterialPageRoute(builder:
-                      (context) =>   MainScreen()));
-    } else{
-      Navigator.pushReplacement(context,
-          MaterialPageRoute(builder:
-              (context) =>   LoginScreen()));
-
+    } else {
+      Navigator.of(context).pushAndRemoveUntil(
+          MaterialPageRoute(builder: (ctx) =>  LoginScreen()), (route) => false);
     }
-
   }
 
   @override
@@ -50,7 +48,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
   Future splashFunc() async {
     Future.delayed(const Duration(seconds: 3), () {
-    checkLogin();
+      getSaveDate();
     });
   }
 }

@@ -25,9 +25,3 @@ class ApiSearchProduct {
     return SearchModelClass.fromJson(jsonDecode(response.body));
   }
 }
-// SearchModelClass searchModelClass = SearchModelClass();
-// Future<SearchModelClass>getSearchMovieFunction(String query )async{
-//   final String searchpath = '&language=en-US&query=$query&page=1&include_adult=false';
-//   Response response = await apiClient.invokeAPI(searchpath, 'SEARCH_', null);
-//   return SearchModelClass.fromJson(jsonDecode(response.body));
-// }

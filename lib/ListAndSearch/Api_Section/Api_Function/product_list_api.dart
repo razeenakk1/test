@@ -27,6 +27,6 @@ class ProductListApi {
     await apiClientNew.invokeAPI(path: productListPath, method: "POST", body: body);
     print("========================================**************************" +
         response.toString());
-    return ListModelClass.fromJson(jsonDecode(response.body));
+    return ListModelClass.fromJson(jsonDecode(utf8.decode(response.bodyBytes)));
   }
 }

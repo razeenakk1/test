@@ -9,10 +9,14 @@ import 'package:topuptest/Api_Section/Bloc/LoginBloc/login_bloc.dart';
 import 'package:topuptest/Api_Section/Bloc/get_bloc/get_bloc.dart';
 import 'package:topuptest/ListAndSearch/Api_Section/Api_Function/product_list_api.dart';
 import 'package:topuptest/ListAndSearch/Api_Section/Bloc/product_list_bloc.dart';
+import 'package:topuptest/TopUpScreen/Login_Screen/login_screen.dart';
 import 'package:topuptest/TopUpScreen/SplashScreen/splash_screen.dart';
+import 'package:topuptest/TopUpScreen/TopUpApiSection/Bloc/TopUpLoginBloc/top_up_login_bloc.dart';
 import 'ListAndSearch/Api_Section/Api_Function/search_api.dart';
-import 'ListAndSearch/list_and_search.dart';
 import 'TopUpScreen/CameraSecton/camera_screen.dart';
+import 'TopUpScreen/TopUpApiSection/Api Function/login_api.dart';
+
+
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   cameras = await availableCameras();
@@ -26,6 +30,7 @@ final  UserApi userApi = UserApi();
    final  GetApi getApi = GetApi();
    final ProductListApi productListApi = ProductListApi();
    final ApiSearchProduct apiSearchProduct = ApiSearchProduct();
+   final ApiLoginTopUp apiLoginTopUp = ApiLoginTopUp();
 
    @override
   Widget build(BuildContext context) {
@@ -43,17 +48,18 @@ final  UserApi userApi = UserApi();
         BlocProvider<ProductListBloc>(
           create: (context) => ProductListBloc(productListApi,apiSearchProduct),
         ),
+        BlocProvider<TopUpLoginBloc>(
+          create: (context) => TopUpLoginBloc(apiLoginTopUp),
+        ),
 
 
       ],
-       child: MaterialApp(
+       child:
+       MaterialApp(
           debugShowCheckedModeBanner: false,
            theme: ThemeData(
              primarySwatch: Colors.blue,),
-         home:   ListAndSearchScreen()
-
-
-        ),
+         home:   SplashScreen()),
 
     );
   }

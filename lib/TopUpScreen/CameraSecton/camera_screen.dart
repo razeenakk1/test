@@ -124,19 +124,19 @@ class _CameraScreenState extends State<CameraScreen> {
                           });
                         },
                         /// vdo recording code;
-                        // onLongPressUp: () async {
-                        //   XFile videopath =
-                        //   await _cameraController.stopVideoRecording();
-                        //   setState(() {
-                        //     isRecoring = false;
-                        //   });
-                        //   // Navigator.push(
-                        //   //     context,
-                        //   //     MaterialPageRoute(
-                        //   //         builder: (builder) => VideoViewPage(
-                        //   //           path: videopath.path,
-                        //   //         )));
-                        // },
+                        onLongPressUp: () async {
+                          XFile videopath =
+                          await _cameraController.stopVideoRecording();
+                          setState(() {
+                            isRecording = false;
+                          });
+                          // Navigator.push(
+                          //     context,
+                          //     MaterialPageRoute(
+                          //         builder: (builder) => VideoViewPage(
+                          //           path: videopath.path,
+                          //         )));
+                        },
                         onTap: () {
                           if (!isRecording) takePhoto();
                         },

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:share_plus/share_plus.dart';
 import '../../../../Constens/constens.dart';
+import '../../../../Functions/auto_generate_function.dart';
 import '../../../../Functions/floating_action_function.dart';
 import '../../../../Functions/toggle_button_function.dart';
 import '../../../../Widgets/appbar_widget.dart';
@@ -33,6 +34,7 @@ class _AddAndEitUserState extends State<AddAndEitUser> {
     ..text = "123456";
   final TextEditingController controller = TextEditingController();
   final TextEditingController controllerUserole = TextEditingController();
+  final TextEditingController controllerPassword = TextEditingController();
 
   final TextEditingController userRollController = TextEditingController()
     ..text = "Accountant";
@@ -86,7 +88,7 @@ class _AddAndEitUserState extends State<AddAndEitUser> {
       valueListenable: isVisible,
         builder: (BuildContext context, bool newValue, _) {
         return Scaffold(
-            resizeToAvoidBottomInset: false,
+            //resizeToAvoidBottomInset: false,
             backgroundColor: backGroundColor,
             appBar: appBar(appBarTitle: '${widget.type} User', actions: [
               SizedBox(
@@ -199,6 +201,15 @@ class _AddAndEitUserState extends State<AddAndEitUser> {
                               return Expanded(
                                   flex: 8,
                                   child: TextFormFieldWidget(
+                                      validator: (val) {
+
+                                        if (val == null || val.isEmpty) {
+                                          return 'This field is required';
+                                        }if (val.length < 8 ) {
+                                          return 'Too short';
+                                        }
+                                        return null;
+                                      },
                                       readOnly: false,
                                       enabled: !newValue,
 
@@ -208,10 +219,10 @@ class _AddAndEitUserState extends State<AddAndEitUser> {
                                           }),
                                       textInputAction: TextInputAction.done,
                                       obscureText: passwordNewValue,
-                                      controller:widget.type == "Add" ?controller  : passwordController,
+                                      controller:widget.type == "Add" ?controllerPassword  : passwordController,
                                       maxLines: 1,
                                       labelText: "Password",
-                                      textInputType: TextInputType.number,
+                                      textInputType: TextInputType.visiblePassword,
                                       prefixIcon: Image.asset(
                                         "assets/settingsimage/paswrd.png",
                                       ),
@@ -237,7 +248,10 @@ class _AddAndEitUserState extends State<AddAndEitUser> {
                             child: Padding(
                           padding: const EdgeInsets.only(top: 20.0),
                           child: GestureDetector(
-                              onTap: () {},
+                              onTap: () {
+                                final password =generatePassword();
+                                controllerPassword.text = password;
+                              },
                               child: Image.asset(
                                   "assets/settingsimage/reloadicon.png")),
                         )),
