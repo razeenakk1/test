@@ -18,14 +18,12 @@ class TextFieldWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextFormField(
         textInputAction: textInputAction,
+        onChanged:onChanged ,
+        style: GoogleFonts.poppins(textStyle: const TextStyle(fontWeight: FontWeight.bold)),
 
-      onChanged:onChanged ,
-        style: const TextStyle(fontWeight: FontWeight.bold),
         validator: validator ,
-
         controller: controller,
         autofocus: true,
-
         decoration: InputDecoration(
           labelText: labelText,
           labelStyle:  GoogleFonts.poppins(

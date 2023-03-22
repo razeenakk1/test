@@ -11,6 +11,8 @@ import 'package:topuptest/ListAndSearch/Api_Section/Api_Function/product_list_ap
 import 'package:topuptest/ListAndSearch/Api_Section/Bloc/product_list_bloc.dart';
 import 'package:topuptest/TopUpScreen/Login_Screen/login_screen.dart';
 import 'package:topuptest/TopUpScreen/SplashScreen/splash_screen.dart';
+import 'package:topuptest/TopUpScreen/TopUpApiSection/Api%20Function/Tax/tax_api.dart';
+import 'package:topuptest/TopUpScreen/TopUpApiSection/Bloc/Tax/tax_bloc.dart';
 import 'package:topuptest/TopUpScreen/TopUpApiSection/Bloc/TopUpLoginBloc/top_up_login_bloc.dart';
 import 'ListAndSearch/Api_Section/Api_Function/search_api.dart';
 import 'TopUpScreen/CameraSecton/camera_screen.dart';
@@ -31,6 +33,7 @@ final  UserApi userApi = UserApi();
    final ProductListApi productListApi = ProductListApi();
    final ApiSearchProduct apiSearchProduct = ApiSearchProduct();
    final ApiLoginTopUp apiLoginTopUp = ApiLoginTopUp();
+   final TaxApi taxApi = TaxApi();
 
    @override
   Widget build(BuildContext context) {
@@ -50,6 +53,9 @@ final  UserApi userApi = UserApi();
         ),
         BlocProvider<TopUpLoginBloc>(
           create: (context) => TopUpLoginBloc(apiLoginTopUp),
+        ),
+        BlocProvider<TaxBloc>(
+          create: (context) => TaxBloc(taxApi),
         ),
 
 

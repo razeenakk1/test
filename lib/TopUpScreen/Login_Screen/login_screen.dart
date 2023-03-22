@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:topuptest/Api_Section/Bloc/LoginBloc/login_bloc.dart';
 import 'package:topuptest/TopUpScreen/MainScreen/main_screen.dart';
 import 'package:topuptest/TopUpScreen/TopUpApiSection/Bloc/TopUpLoginBloc/top_up_login_bloc.dart';
 import 'package:topuptest/TopUpScreen/TopUpApiSection/ModelClasses/TopUpLoginModelClass.dart';
@@ -37,7 +35,7 @@ late TopUpLoginModelClass topUpLoginModelClass;
         if (state is TopUpLoginError) {
           const Text("Something went wrong");
         }
-        // TODO: implement listener
+
       },
       child: Scaffold(
           resizeToAvoidBottomInset: false,
@@ -92,7 +90,7 @@ late TopUpLoginModelClass topUpLoginModelClass;
                     },
                     prefixIcon: Icons.person,
                     labelText: "Username",
-                    obscureText: false,
+                    obscureText: false, textInputAction: TextInputAction.next,
                   ),
                   ValueListenableBuilder(
                       valueListenable: passwordVisible,
@@ -124,7 +122,7 @@ late TopUpLoginModelClass topUpLoginModelClass;
                                     )),
                           prefixIcon: Icons.lock,
                           labelText: 'Password',
-                          obscureText: newValue,
+                          obscureText: newValue, textInputAction: TextInputAction.done,
                         );
                       }),
                   Container(
@@ -206,7 +204,7 @@ class LoginTextFieldWidget extends StatelessWidget {
       required this.prefixIcon,
       required this.labelText,
       required this.obscureText,
-      this.suffixIcon})
+      this.suffixIcon, required this.textInputAction})
   ;
 
   final double mHeight;
@@ -217,6 +215,7 @@ class LoginTextFieldWidget extends StatelessWidget {
   final IconData prefixIcon;
   final String labelText;
   final bool obscureText;
+  final TextInputAction textInputAction;
   Widget? suffixIcon;
 
   @override
@@ -224,6 +223,7 @@ class LoginTextFieldWidget extends StatelessWidget {
     return SizedBox(
       height: mHeight * .07,
       child: TextFormField(
+        textInputAction: textInputAction,
         obscureText: obscureText,
         style: GoogleFonts.poppins(textStyle: const TextStyle(fontWeight: FontWeight.bold)),
         // key: _formFieldKey,

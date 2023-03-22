@@ -14,7 +14,7 @@ class TopUpApiClient {
     SharedPreferences prefs = await SharedPreferences.getInstance();
 
     final token = prefs.getString('token');
-    print(prefs.getString('token'));
+    print("____________________________________________________________________${prefs.getString('token')}");
     // print(prefs.getString('token'));
     print("Invoke Api worked");
     print(method);

@@ -19,7 +19,7 @@ class TopUpLoginBloc extends Bloc<TopUpLoginEvent, TopUpLoginState> {
       emit(TopUpLoginLoading());
       try{
         topUpLoginModelClass = await apiLoginTopUp.loginFunction(username: event.userName, password: event.password);
-        preference.setString('token', topUpLoginModelClass.data!.refresh.toString());
+        preference.setString('token', topUpLoginModelClass.data!.access.toString());
         emit(TopUpLoginLoaded());
       }catch(e){
         emit(TopUpLoginError());

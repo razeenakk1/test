@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:topuptest/TopUpScreen/DashBordScreen/SearchScreen/search_screen.dart';
 import 'package:topuptest/TopUpScreen/ProfileScreen/profile_screen.dart';
 import '../Constens/constens.dart';
 import '../Functions/exitbuttonfunction.dart';
 import '../Functions/floating_action_function.dart';
+import '../Login_Screen/login_screen.dart';
 import 'List_Screens/top_customers_screen.dart';
 import 'List_Screens/top_products_list_screen.dart';
 
@@ -97,7 +99,23 @@ final  bool isTrue = false;
                       mHeight: mHeight,
                       mWidth: mWidth,
                       onPressed: () {
-                        exitBtn(context);
+                        btmDialogueFunction(context: context, textMsg: 'Are you sure Logout ?',
+                            fistBtnOnPressed: () {
+                          Navigator.of(context);
+
+
+                        }, secondBtnPressed: () async{
+                              SharedPreferences preference =
+                                  await SharedPreferences.getInstance();
+                              preference.clear();
+                              Navigator.of(context).pushAndRemoveUntil(
+                                  MaterialPageRoute(
+                                    builder: (context) => LoginScreen(),
+                                  ),
+                                      (route) => false);
+
+
+                        }, secondBtnText: 'Yes');
                       },
                       widget: Image.asset(
                         "assets/LogoutImage/logout.png",
