@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class TextFieldWidget extends StatelessWidget {
@@ -6,6 +7,7 @@ class TextFieldWidget extends StatelessWidget {
     super.key,
     required this.controller,
     required this.labelText,  this.onChanged, required this.validator, required this.textInputAction,
+     this.textInputType,this.list
   });
 
   final TextEditingController controller;
@@ -13,6 +15,8 @@ class TextFieldWidget extends StatelessWidget {
   Function(String)? onChanged;
   final String? Function(String?) validator;
   final TextInputAction textInputAction;
+   TextInputType? textInputType;
+   List<TextInputFormatter>? list;
 
   @override
   Widget build(BuildContext context) {
@@ -20,6 +24,8 @@ class TextFieldWidget extends StatelessWidget {
         textInputAction: textInputAction,
         onChanged:onChanged ,
         style: GoogleFonts.poppins(textStyle: const TextStyle(fontWeight: FontWeight.bold)),
+        keyboardType: textInputType,
+        inputFormatters: list,
 
         validator: validator ,
         controller: controller,

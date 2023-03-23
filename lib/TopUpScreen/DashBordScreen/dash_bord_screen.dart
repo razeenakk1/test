@@ -101,7 +101,7 @@ final  bool isTrue = false;
                       onPressed: () {
                         btmDialogueFunction(context: context, textMsg: 'Are you sure Logout ?',
                             fistBtnOnPressed: () {
-                          Navigator.of(context);
+                              Navigator.of(context).pop(true);
 
 
                         }, secondBtnPressed: () async{

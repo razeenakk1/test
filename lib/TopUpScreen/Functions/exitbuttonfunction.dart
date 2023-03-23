@@ -86,3 +86,28 @@ btmDialogueFunction({required BuildContext context,required String textMsg,requi
     },
   );
 }
+msgBtmDialogueFunction({required BuildContext context ,required String textMsg }) {
+  return showModalBottomSheet(
+
+    context: context,
+    isScrollControlled: true,
+    builder: (BuildContext context) {
+      return Container(
+        padding:
+        EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+        child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child:Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(textMsg,style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18),),
+                TextButton(onPressed: (){
+                  Navigator.pop(context);
+                }, child: Text("Okay",style: TextStyle(color: Color(0xffB53211)),)),
+              ],
+            )
+        ),
+      );
+    },
+  );
+}

@@ -4,7 +4,7 @@ import 'package:http/http.dart';
 import 'package:topuptest/Api_Section/ModelClasses/LoginModelClass.dart';
 import 'package:topuptest/TopUpScreen/TopUpApiSection/Repository/api_client.dart';
 
-import '../ModelClasses/TopUpLoginModelClass.dart';
+import '../../ModelClasses/LoginModelClass/TopUpLoginModelClass.dart';
 
 class ApiLoginTopUp {
   TopUpApiClient topUpApiClient = TopUpApiClient();

@@ -3,29 +3,67 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:topuptest/TopUpScreen/MainScreen/main_screen.dart';
 import 'package:topuptest/TopUpScreen/TopUpApiSection/Bloc/TopUpLoginBloc/top_up_login_bloc.dart';
-import 'package:topuptest/TopUpScreen/TopUpApiSection/ModelClasses/TopUpLoginModelClass.dart';
+import 'package:topuptest/TopUpScreen/TopUpApiSection/ModelClasses/LoginModelClass/TopUpLoginModelClass.dart';
 
-class LoginScreen extends StatelessWidget {
-  LoginScreen({Key? key}) : super(key: key);
+import '../Widgets/Custom_Overlay_Loader/custom_overlay_loader.dart';
+
+class LoginScreen extends StatefulWidget {
+  const LoginScreen({Key? key}) : super(key: key);
+
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController userNameController = TextEditingController();
+
   final TextEditingController passwordController = TextEditingController();
+
   final ValueNotifier<bool> passwordVisible = ValueNotifier(true);
+
   final ValueNotifier<bool> isChecked = ValueNotifier(true);
+
   final formKey = GlobalKey<FormState>();
+
+  late ProgressBar progressBar;
+
+  @override
+  void initState() {
+    progressBar = ProgressBar();
+    super.initState();
+  }
+
+  void showProgressBar() {
+    progressBar.show(context);
+  }
+
+  void hideProgressBar() {
+    progressBar.hide();
+  }
+
+  @override
+  void dispose() {
+    progressBar.hide();
+    super.dispose();
+  }
 
 late TopUpLoginModelClass topUpLoginModelClass;
 
-
-  @override
+@override
   Widget build(BuildContext context) {
     final mWidth = MediaQuery.of(context).size.width;
     final mHeight = MediaQuery.of(context).size.height;
     return BlocListener<TopUpLoginBloc, TopUpLoginState>(
       listener: (context, state) {
         if (state is TopUpLoginLoading) {
-          const CircularProgressIndicator();
+          const CircularProgressIndicator(
+            color:  Color(0xffB73312),
+
+          );
         }
         if (state is TopUpLoginLoaded) {
+          hideProgressBar();
+
           Navigator.of(context).pushAndRemoveUntil(
               MaterialPageRoute(
                 builder: (context) => MainScreen(),
@@ -33,6 +71,7 @@ late TopUpLoginModelClass topUpLoginModelClass;
               (route) => false);
         }
         if (state is TopUpLoginError) {
+          hideProgressBar();
           const Text("Something went wrong");
         }
 
@@ -168,9 +207,10 @@ late TopUpLoginModelClass topUpLoginModelClass;
                           width: mWidth * .4,
                           child: ElevatedButton(
                             onPressed: ()async{
-                              // SharedPreferences pref = await SharedPreferences.getInstance();
-                              // pref.setString("userName", "vikntest");
-                           formKey.currentState!.validate()  ?
+                              showProgressBar();
+
+
+                              formKey.currentState!.validate()  ?
                            BlocProvider.of<TopUpLoginBloc>(context).add(
                                 PostLoginEvent(userName: userNameController.text, password: passwordController.text)
 
@@ -216,6 +256,7 @@ class LoginTextFieldWidget extends StatelessWidget {
   final String labelText;
   final bool obscureText;
   final TextInputAction textInputAction;
+  final
   Widget? suffixIcon;
 
   @override
@@ -223,6 +264,7 @@ class LoginTextFieldWidget extends StatelessWidget {
     return SizedBox(
       height: mHeight * .07,
       child: TextFormField(
+        
         textInputAction: textInputAction,
         obscureText: obscureText,
         style: GoogleFonts.poppins(textStyle: const TextStyle(fontWeight: FontWeight.bold)),

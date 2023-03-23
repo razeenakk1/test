@@ -13,3 +13,13 @@ class TaxListError extends TaxState {}
 class SingleViewTaxListLoading extends TaxState {}
 class SingleViewTaxListLoaded extends TaxState {}
 class SingleViewTaxListError extends TaxState {}
+class EditTaxLoading extends TaxState {}
+class EditTaxLoaded extends TaxState {}
+class EditTaxError extends TaxState {}
+class DeleteTaxLoading extends TaxState {}
+class DeleteTaxLoaded extends TaxState {}
+class DeleteTaxError extends TaxState {
+  final String msg;
+
+  DeleteTaxError({required this.msg});
+}

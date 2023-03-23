@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import '../../../../Constens/constens.dart';
@@ -175,7 +176,11 @@ class _CreateAndEditLedgerState extends State<CreateAndEditLedger> {
                       obscureText: false,
                       controller:widget.type == "Create" ?controller  : balanceController,
                       labelText: "Balance",
-                      textInputType: TextInputType.number,
+                      textInputType: const TextInputType.numberWithOptions(
+                          decimal: true, signed: true),
+                          list: [
+                            FilteringTextInputFormatter.allow(RegExp(r'^\d+\.?\d{0,8}')),
+                          ],
                     )),
                     SizedBox(
                       width: mWidth * .05,
