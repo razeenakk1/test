@@ -22,6 +22,7 @@ class SearchFieldWidget extends StatelessWidget {
         color: const Color(0xffF5F5F5),
         borderRadius: BorderRadius.circular(10),),
       child: TextFormField(
+        textCapitalization: TextCapitalization.words,
         style: GoogleFonts.poppins(textStyle: const TextStyle(fontWeight: FontWeight.bold)),
 
         onChanged: onChanged,

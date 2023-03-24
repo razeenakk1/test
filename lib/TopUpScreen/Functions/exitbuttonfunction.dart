@@ -4,9 +4,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
-import '../Login_Screen/login_screen.dart';
 
 exitBtn(BuildContext context) async {
   return showDialog(
@@ -74,11 +72,11 @@ btmDialogueFunction({required BuildContext context,required String textMsg,requi
           child:Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(textMsg,style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18),),
+              Text(textMsg,style: const TextStyle(fontWeight: FontWeight.bold,fontSize: 18),),
               SizedBox(width: MediaQuery.of(context).size.width*.05,),
-              TextButton(onPressed:fistBtnOnPressed,  child: Text("Cancel",style: TextStyle(color: Color(0xffB53211)),)),
+              TextButton(onPressed:fistBtnOnPressed,  child: const Text("Cancel",style: TextStyle(color: Color(0xffB53211)),)),
 
-              TextButton(onPressed: secondBtnPressed, child: Text(secondBtnText,style: TextStyle(color: Color(0xffB53211)),)),
+              TextButton(onPressed: secondBtnPressed, child: Text(secondBtnText,style: const TextStyle(color: Color(0xffB53211)),)),
             ],
           )
         ),
@@ -100,10 +98,10 @@ msgBtmDialogueFunction({required BuildContext context ,required String textMsg }
             child:Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(textMsg,style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18),),
+                Text(textMsg,overflow:TextOverflow.ellipsis,style: const TextStyle(fontWeight: FontWeight.bold,fontSize: 15),),
                 TextButton(onPressed: (){
                   Navigator.pop(context);
-                }, child: Text("Okay",style: TextStyle(color: Color(0xffB53211)),)),
+                }, child: const Text("Okay",style: TextStyle(color: Color(0xffB53211)),)),
               ],
             )
         ),

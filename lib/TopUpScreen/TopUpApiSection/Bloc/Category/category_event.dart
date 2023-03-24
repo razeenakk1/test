@@ -12,3 +12,25 @@ class CreateCategoryEvent extends CategoryEvent {
 
   CreateCategoryEvent({required this.categoryName});
 }
+class SingleViewCategoryEvent extends CategoryEvent{
+  final String id;
+
+  SingleViewCategoryEvent({required this.id});
+}
+
+
+
+class EditCategoryEvent extends CategoryEvent{
+  final String id;
+  final String categoryName;
+
+  EditCategoryEvent({required this.id, required this.categoryName});
+}
+class DeleteCategoryEvent extends CategoryEvent{
+  final String id;
+
+  DeleteCategoryEvent({required this.id});
+
+
+
+}

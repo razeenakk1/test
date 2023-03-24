@@ -21,6 +21,8 @@ class TextFieldWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+        textCapitalization: TextCapitalization.words,
+       // keyboardType: TextInputType.text,
         textInputAction: textInputAction,
         onChanged:onChanged ,
         style: GoogleFonts.poppins(textStyle: const TextStyle(fontWeight: FontWeight.bold)),

@@ -6,6 +6,9 @@ import 'package:topuptest/TopUpScreen/TopUpApiSection/ModelClasses/Category/Crea
 
 import '../../Api Function/Category/category_api.dart';
 import '../../ModelClasses/Category/CategoryListModelClass.dart';
+import '../../ModelClasses/Category/DeleteCategorModelClass.dart';
+import '../../ModelClasses/Category/EditCategoryModelClass.dart';
+import '../../ModelClasses/Category/SingleViewCategoryModelClass.dart';
 
 part 'category_event.dart';
 part 'category_state.dart';
@@ -13,6 +16,9 @@ part 'category_state.dart';
 class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
   late CategoryListModelClass categoryListModelClass;
   late CreateCategoryModlClass createCategoryModelClass;
+  late SingleViewCategoryModelClass singleViewCategoryModelClass;
+ late  EditCategoryModelClass editCategoryModelClass;
+ late  DeleteCategorModelClass deleteCategoryModelClass ;
   CategoryApi categoryApi;
   CategoryBloc(this.categoryApi) : super(CategoryInitial()) {
     on<ListCategoryEvent>((event, emit)async {
@@ -42,5 +48,51 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
 
       }
     });
+    on<SingleViewCategoryEvent>((event, emit)async {
+      emit(CategorySingleViewLoading());
+      try{
+        singleViewCategoryModelClass = await categoryApi.singleViewCategoryFunction(id: event.id);
+        emit(CategorySingleViewLoaded());
+
+      }catch(e){
+        emit(CategorySingleViewError());
+        print("-----------------singleViewCategoryBlocCatchError $e");
+
+
+      }
+    });
+    on<EditCategoryEvent>((event, emit)async {
+      emit(CategoryEditLoading());
+      try{
+        editCategoryModelClass = await categoryApi.editCategoryFunction(id: event.id, categoryName: event.categoryName);
+        emit(CategoryEditLoaded());
+
+      }catch(e){
+        emit(CategoryEditError());
+        print("-----------------editCategoryBlocCatchError $e");
+
+
+      }
+    });
+
+
+
+    on<DeleteCategoryEvent>((event, emit)async {
+      emit(CategoryDeleteLoading());
+      try{
+        deleteCategoryModelClass = await categoryApi.deleteCategoryFunction(id: event.id);
+
+        emit(CategoryDeleteLoaded());
+
+      }catch(e){
+        emit(CategoryDeleteError());
+        print("-----------------deleteCategoryBlocCatchError $e");
+
+
+      }
+    });
+
+
+
   }
 }

@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:topuptest/TopUpScreen/TopUpApiSection/Bloc/Tax/tax_bloc.dart';
+import '../../../../Functions/exitbuttonfunction.dart';
 import '../../../../TopUpApiSection/ModelClasses/TaxModelClasses/CreateTaxModelClass.dart';
 import '../../../../Widgets/bottom_sheet_button_widget.dart';
 import '../../../../Widgets/text_field_widget.dart';
@@ -47,6 +48,13 @@ class TaxBottomSheetClass {
                     purchaseTaxController.clear();
                     salesTaxController.clear();
                     Navigator.pop(context);
+                    BlocProvider.of<TaxBloc>(context)
+                        .add(ListTaxEvent(search: ''));
+                  }
+                  if(createTaxModelClass.statusCode == 6001){
+                    msgBtmDialogueFunction(
+                        context: context,
+                        textMsg: createTaxModelClass.message.toString());
                     BlocProvider.of<TaxBloc>(context)
                         .add(ListTaxEvent(search: ''));
                   }

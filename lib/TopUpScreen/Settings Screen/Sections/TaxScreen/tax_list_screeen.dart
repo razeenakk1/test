@@ -47,8 +47,9 @@ class _TaxListScreenState extends State<TaxListScreen> {
 
   @override
   void initState() {
-    BlocProvider.of<TaxBloc>(context).add(ListTaxEvent(search: ''));
     progressBar = ProgressBar();
+
+    BlocProvider.of<TaxBloc>(context).add(ListTaxEvent(search: ''));
 
     // TODO: implement initState
     super.initState();

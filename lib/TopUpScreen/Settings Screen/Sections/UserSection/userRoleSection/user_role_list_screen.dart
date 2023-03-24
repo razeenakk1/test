@@ -1,20 +1,38 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:topuptest/TopUpScreen/TopUpApiSection/Bloc/UserRole/user_role_bloc.dart';
+
+import 'package:topuptest/TopUpScreen/TopUpApiSection/ModelClasses/Userole/UserRoleListModelClass.dart';
 
 
 import '../../../../Constens/constens.dart';
+import '../../../../Functions/exitbuttonfunction.dart';
 import '../../../../Functions/floating_action_function.dart';
 import '../../../../Widgets/appbar_widget.dart';
 import '../../../../Widgets/search_widget.dart';
-import '../../Accounts/Ledgers_Secrion/ledgers_screen.dart';
 import 'add_and_edit_user_role_screen.dart';
 
-class UserRoleListScreen extends StatelessWidget {
+class UserRoleListScreen extends StatefulWidget {
    UserRoleListScreen({Key? key}) : super(key: key);
-  final TextEditingController searchController = TextEditingController();
-
 
   @override
+  State<UserRoleListScreen> createState() => _UserRoleListScreenState();
+}
+
+class _UserRoleListScreenState extends State<UserRoleListScreen> {
+  final TextEditingController searchController = TextEditingController();
+  @override
+  void initState() {
+    BlocProvider.of<UserRoleBloc>(context)
+        .add(UserRoleListEvent(search: ""));
+    // TODO: implement initState
+    super.initState();
+  }
+
+   late  UserRoleListModelClass userRoleListModelClass;
+
+   @override
   Widget build(BuildContext context) {
     final mHeight = MediaQuery.of(context).size.height;
     final mWidth = MediaQuery.of(context).size.width;
@@ -25,63 +43,157 @@ class UserRoleListScreen extends StatelessWidget {
         appBar: appBar(
             appBarTitle: 'User Roles'),
         body: Container(
-          padding: EdgeInsets.only(left: mWidth * .02, right: mWidth * .02),
-          height: mHeight,
           decoration: containerDecoration,
-          child: ListView(
-            shrinkWrap: true,
-            physics: const BouncingScrollPhysics(),
+          padding: EdgeInsets.only(left: mWidth * .04, right: mWidth * .04),
+          height: mHeight,
+          // color: Colors.white,
+
+          child: Column(
             children: [
               SizedBox(height: mHeight * .02),
               SearchFieldWidget(
-
                 mHeight: mHeight,
                 hintText: 'Search',
                 controller: searchController,
+                onChanged: (quary) {
+                  if (quary.isNotEmpty) {
+                    BlocProvider.of<UserRoleBloc>(context)
+                        .add(UserRoleListEvent(search: quary));
+                  } else {
+                    BlocProvider.of<UserRoleBloc>(context)
+                        .add(UserRoleListEvent(search: ""));
+                  }
+                },
               ),
               SizedBox(height: mHeight * .01),
-              ListView.builder(
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  itemCount: 5,
-                  itemBuilder: (BuildContext context, int index) {
-                    return GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => AddAndEditUserole(type: 'Edit',)),
-                        );
-
-                      },
-                      child: Card(
-                        elevation: 0,
-                        child: Container(
-
-                          height: mHeight * .1,
-                          decoration: listPageContainerDecorationVariable,
-                          child: Center(
-                            child: ListTile(
-                              title: Text(particulars[index],
-                                style: GoogleFonts.poppins(textStyle: const TextStyle(fontWeight: FontWeight.bold),)),
-
-                              trailing: Column(
-                                crossAxisAlignment: CrossAxisAlignment.end,
-                                children: [
-                                  SizedBox(height: mHeight * .01,),
-                                   Text("Balance", style: GoogleFonts.poppins(textStyle:  const TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      color: Color(0xff9C9C9C))) ),
-                                   Text("121.00", style:  GoogleFonts.poppins(textStyle: const TextStyle(
-                                    fontWeight: FontWeight.bold,)))
-                                ],
-                              ),
-                            ),
-                          ),
-
+              Expanded(
+                child: BlocBuilder<UserRoleBloc, UserRoleState>(
+                  builder: (context, state) {
+                    if (state is UserRoleListLoading) {
+                      return const Center(
+                        child: CircularProgressIndicator(
+                          color: Color(0xffB73312),
                         ),
-                      ),
+                      );
+                    }
+                    if (state is UserRoleListLoaded) {
+                      userRoleListModelClass =
+                          BlocProvider.of<UserRoleBloc>(context).userRoleListModelClass;
+                      return ListView(
+                        shrinkWrap: true,
+                        physics: const BouncingScrollPhysics(),
+                        children: [
+                          userRoleListModelClass.data!.isNotEmpty
+                              ? ListView.builder(
+                              shrinkWrap: true,
+                              physics: const NeverScrollableScrollPhysics(),
+                              itemCount: userRoleListModelClass.data!.length,
+                              itemBuilder:
+                                  (BuildContext context, int index) {
+                                return GestureDetector(
+                                  onTap: () async {
+                                    // showProgressBar();
+                                    // BlocProvider.of<UserRoleBloc>(context).add(
+                                    //     SingleViewTaxEvent(
+                                    //         id: taxListModelClass
+                                    //             .data![index].id
+                                    //             .toString()));
+                                    // customId = taxListModelClass
+                                    //     .data![index].id
+                                    //     .toString();
+                                  },
+                                  child: Dismissible(
+                                    background: Container(
+                                        color: Colors.red,
+                                        child: const Icon(
+                                          Icons.delete,
+                                          color: Colors.white,
+                                        )),
+                                    confirmDismiss:
+                                        (DismissDirection direction) async {
+                                      return await btmDialogueFunction(
+                                          context: context,
+                                          textMsg: 'Are you sure delete ?',
+                                          fistBtnOnPressed: () {
+                                            Navigator.of(context)
+                                                .pop(false);
+                                          },
+                                          secondBtnPressed: () {
+                                            // BlocProvider.of<UserRoleBloc>(
+                                            //     context)
+                                            //     .add(DeleteTaxEvent(
+                                            //     id: taxListModelClass
+                                            //         .data![index].id
+                                            //         .toString()));
+                                            Navigator.of(context).pop(true);
+                                          },
+                                          secondBtnText: 'Delete');
+                                    },
+                                    key: Key(userRoleListModelClass.data!.length
+                                        .toString()),
+                                    onDismissed: (direction) {
+                                      // BlocProvider.of<UserRoleBloc>(context).add(
+                                      //     DeleteTaxEvent(
+                                      //         id: taxListModelClass
+                                      //             .data![index].id
+                                      //             .toString()));
+                                    },
+                                    child: Card(
+                                      elevation: 0,
+                                      child: Container(
+                                        height: mHeight * .07,
+                                        decoration:
+                                        listPageContainerDecorationVariable,
+                                        child: Center(
+                                          child: ListTile(
+                                            title: Text(
+                                                userRoleListModelClass
+                                                    .data![index]
+                                                    .userRoleName !=
+                                                    null
+                                                    ? userRoleListModelClass
+                                                    .data![index]
+                                                    .userRoleName
+                                                    .toString()
+                                                    : "not found list name!",
+                                                style: GoogleFonts.poppins(
+                                                  textStyle:
+                                                  const TextStyle(
+                                                      fontWeight:
+                                                      FontWeight
+                                                          .bold),
+                                                )),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                );
+                              })
+                              : SizedBox(
+                              height: mHeight * .7,
+                              child: const Center(
+                                  child: Text(
+                                    "Items not found !",
+                                    style:
+                                    TextStyle(fontWeight: FontWeight.bold),
+                                  )))
+                        ],
+                      );
+                    }
+                    if (state is UserRoleListError) {
+                      const Text("Something went wrong");
+                    }
+
+                    return const Center(
+                      child: SizedBox(),
+                      // child: CircularProgressIndicator(
+                      //   color:  Color(0xffB73312),
+                      // ),
                     );
-                  }),
+                  },
+                ),
+              ),
             ],
           ),
         ),
@@ -97,5 +209,4 @@ class UserRoleListScreen extends StatelessWidget {
             })
     );
   }
-
 }

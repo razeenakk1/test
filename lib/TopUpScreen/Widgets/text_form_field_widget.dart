@@ -42,6 +42,7 @@ final int? maxLines;
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+        textCapitalization: TextCapitalization.words,
         inputFormatters: list,
       enabled: enabled,
       focusNode: focusNode,
