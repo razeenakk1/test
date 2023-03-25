@@ -7,7 +7,16 @@ class UserRoleInitial extends UserRoleState {}
 class UserRoleListLoading extends UserRoleState {}
 class UserRoleListLoaded extends UserRoleState {}
 class UserRoleListError extends UserRoleState {}
-class UserRoleListCreateLoading extends UserRoleState {}
-class UserRoleListCreateLoaded extends UserRoleState {}
-class UserRoleListCreateError extends UserRoleState {}
+class UserRoleCreateLoading extends UserRoleState {}
+class UserRoleCreateLoaded extends UserRoleState {}
+class UserRoleCreateError extends UserRoleState {}
+class UserRoleSingleViewLoading extends UserRoleState {}
+class UserRoleSingleViewLoaded extends UserRoleState {}
+class UserRoleSingleViewError extends UserRoleState {}
+class UserRoleEditLoading extends UserRoleState {}
+class UserRoleEditLoaded extends UserRoleState {}
+class UserRoleEditError extends UserRoleState {}
+class UserRoleDeleteLoading extends UserRoleState {}
+class UserRoleDeleteLoaded extends UserRoleState {}
+class UserRoleDeleteError extends UserRoleState {}
 

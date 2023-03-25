@@ -99,6 +99,7 @@ class _GroupListScreenState extends State<GroupListScreen> {
               );
             }
             if (state is GroupDeleteLoaded) {
+              hideProgressBar();
               BlocProvider.of<GroupBloc>(context).add(ListGroupEvent(search: ''));
              deleteGroupModelClass  =
                   BlocProvider.of<GroupBloc>(context).deleteGroupModelClass;
@@ -109,6 +110,7 @@ class _GroupListScreenState extends State<GroupListScreen> {
               }
 
               if (state is GroupDeleteError) {}
+              hideProgressBar();
             }
           },
         )
@@ -197,6 +199,8 @@ class _GroupListScreenState extends State<GroupListScreen> {
                                                   .pop(false);
                                             },
                                             secondBtnPressed: () {
+                                              showProgressBar();
+
                                               BlocProvider.of<GroupBloc>(context)
                                                   .add(DeleteGroupEvent(id: groupListModelClass.data![index].id.toString()
                                               ));
@@ -209,6 +213,8 @@ class _GroupListScreenState extends State<GroupListScreen> {
                                           .data!.length
                                           .toString()),
                                       onDismissed: (direction) {
+                                        showProgressBar();
+
 
                                         BlocProvider.of<GroupBloc>(context)
                                             .add(DeleteGroupEvent(id: groupListModelClass.data![index].id.toString()));

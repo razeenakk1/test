@@ -102,6 +102,7 @@ class _TaxListScreenState extends State<TaxListScreen> {
               );
             }
             if (state is DeleteTaxLoaded) {
+              hideProgressBar();
               BlocProvider.of<TaxBloc>(context).add(ListTaxEvent(search: ''));
               deleteTaxModelClass =
                   BlocProvider.of<TaxBloc>(context).deleteTaxModelClass;
@@ -111,7 +112,9 @@ class _TaxListScreenState extends State<TaxListScreen> {
                     textMsg: deleteTaxModelClass.message.toString());
               }
 
-              if (state is DeleteTaxError) {}
+              if (state is DeleteTaxError) {
+                hideProgressBar();
+              }
             }
           },
         )
@@ -199,6 +202,7 @@ class _TaxListScreenState extends State<TaxListScreen> {
                                                     .pop(false);
                                               },
                                               secondBtnPressed: () {
+                                                showProgressBar();
                                                 BlocProvider.of<TaxBloc>(
                                                         context)
                                                     .add(DeleteTaxEvent(
@@ -212,6 +216,7 @@ class _TaxListScreenState extends State<TaxListScreen> {
                                         key: Key(taxListModelClass.data!.length
                                             .toString()),
                                         onDismissed: (direction) {
+                                          showProgressBar();
                                           BlocProvider.of<TaxBloc>(context).add(
                                               DeleteTaxEvent(
                                                   id: taxListModelClass

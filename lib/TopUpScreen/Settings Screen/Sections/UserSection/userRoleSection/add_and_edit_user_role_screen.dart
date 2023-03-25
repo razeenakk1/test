@@ -3,67 +3,122 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:topuptest/TopUpScreen/TopUpApiSection/ModelClasses/Userole/CreateUserRoleModelClass.dart';
 
 import '../../../../Constens/constens.dart';
+import '../../../../Functions/exitbuttonfunction.dart';
 import '../../../../Functions/floating_action_function.dart';
 import '../../../../Functions/toggle_button_function.dart';
-import '../../../../TopUpApiSection/Bloc/Tax/tax_bloc.dart';
 import '../../../../TopUpApiSection/Bloc/UserRole/user_role_bloc.dart';
 import '../../../../Widgets/appbar_widget.dart';
 import '../../../../Widgets/text_form_field_widget.dart';
 
 
 
-class AddAndEditUserole extends StatelessWidget {
-  AddAndEditUserole({Key? key, required this.type}) : super(key: key);
+class AddAndEditUserole extends StatefulWidget {
   final String type;
+  String? id;
+  String? selectedItem;
+  bool? isSale;
+  bool? isPurchase;
+  bool? isStockUpdate;
+  bool? isReports;
 
- final TextEditingController userRollController = TextEditingController()
-    ..text = "Accountant";
+
+
+  AddAndEditUserole({Key? key, required this.type,this.id,this.selectedItem,this.isSale,this.isPurchase,this.isStockUpdate,
+  this.isReports}) : super(key: key);
+
+  @override
+  State<AddAndEditUserole> createState() => _AddAndEditUseroleState();
+}
+
+class _AddAndEditUseroleState extends State<AddAndEditUserole> {
+  final formKey = GlobalKey<FormState>();
+
+  late  CreateUserRoleModelClass createUserRoleModelClass;
   final TextEditingController userRollNotValueController = TextEditingController();
 
-  final  ValueNotifier<bool> isSwitched = ValueNotifier(false);
-
-  final ValueNotifier<bool> isSwitchedOne = ValueNotifier(false);
-
-  final ValueNotifier<bool> isSwitchedTwo = ValueNotifier(false);
-
-  final  ValueNotifier<bool> isSwitchedThree = ValueNotifier(false);
-  final formKey = GlobalKey<FormState>();
-  late  CreateUserRoleModelClass createUserRoleModelClass;
 
 
+
+
+  late   TextEditingController userRollController;
+  late  ValueNotifier<bool> isSwitched ;
+  late   ValueNotifier<bool> isSwitchedOne  ;
+  late   ValueNotifier<bool> isSwitchedTwo;
+  late    ValueNotifier<bool> isSwitchedThree;
+  @override
+  void initState() {
+    userRollController = TextEditingController()..text = widget.type == "Edit"?widget.selectedItem.toString() :"";
+
+    isSwitched = ValueNotifier( widget.type == "Edit" ?  widget.isSale!: false);
+
+    isSwitchedOne = ValueNotifier(widget.type == "Edit"?  widget.isPurchase! :false);
+
+    isSwitchedTwo = ValueNotifier(widget.type == "Edit"?  widget.isStockUpdate!:false);
+
+    isSwitchedThree = ValueNotifier(widget.type == "Edit" ?  widget.isReports!: false);
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
+
+
+
     // final mWidth = MediaQuery.of(context).size.width;
     final mHeight = MediaQuery.of(context).size.height;
     return MultiBlocListener(
       listeners: [
       BlocListener<UserRoleBloc, UserRoleState>(
     listener: (context, state) {
-      if (state is UserRoleListCreateLoading) {
+      if (state is UserRoleCreateLoading) {
         const CircularProgressIndicator(
           color: Color(0xffB73312),
         );
       }
-      if (state is UserRoleListCreateLoaded) {
+      if (state is UserRoleCreateLoaded) {
       //  hideProgressBar();
         createUserRoleModelClass =
             BlocProvider.of<UserRoleBloc>(context).createUserRoleModelClass;
+        Navigator.pop(context);
+        BlocProvider.of<UserRoleBloc>(context)
+            .add(UserRoleListEvent(search: ""));
+        if (createUserRoleModelClass.statusCode == 6001) {
+          msgBtmDialogueFunction(
+              context: context,
+              textMsg: createUserRoleModelClass.message.toString());
+          BlocProvider.of<UserRoleBloc>(context)
+              .add(UserRoleListEvent(search: ""));
+        }
 
 
-        if (state is UserRoleListCreateError) {
+        if (state is UserRoleCreateError) {
        //   hideProgressBar();
           const Text("Something went wrong");
         }
       }
     },
     ),
+        BlocListener<UserRoleBloc, UserRoleState>(
+          listener: (context, state) {
+            if (state is UserRoleEditLoading) {
+              const CircularProgressIndicator();
+            }
+            if (state is UserRoleEditLoaded) {
+              Navigator.pop(context);
+              BlocProvider.of<UserRoleBloc>(context).add(UserRoleListEvent(search: ""));
+
+            }
+            if (state is UserRoleEditError) {
+              const Text("Something went wrong");
+            }
+          },
+        ),
       ],
       child: Scaffold(
           resizeToAvoidBottomInset: false,
 
           backgroundColor: const Color(0xffF2F2F2),
-          appBar: appBar(appBarTitle: "$type User Role"),
+          appBar: appBar(appBarTitle: "${widget.type} User Role"),
           body: Container(
               padding: const EdgeInsets.all(20),
               height: mHeight,
@@ -85,7 +140,7 @@ class AddAndEditUserole extends StatelessWidget {
 
                     obscureText: false,
 
-                    controller: type == "Edit" ?userRollController:userRollNotValueController,
+                    controller: userRollController,
                     labelText: 'User Roles',
                     textInputType: TextInputType.text, textInputAction: TextInputAction.done,
                   ),
@@ -94,9 +149,10 @@ class AddAndEditUserole extends StatelessWidget {
                           ValueListenableBuilder(
                               valueListenable: isSwitched,
                               builder: (BuildContext context, bool sWitched, _) {
-                              return particularItemFunction(text: 'Sales', toggleButtonBoolValue: sWitched, toggleButtonOnChanged: (value ) {
-                                value = isSwitched.value;
-                                isSwitched.value = !isSwitched.value;
+                              return particularItemFunction(text: 'Sales', toggleButtonBoolValue:sWitched, toggleButtonOnChanged: (value ) {
+
+                             value =  isSwitched.value;
+                             isSwitched.value = !isSwitched.value ;
                               });
                             }
                           ),
@@ -133,18 +189,28 @@ class AddAndEditUserole extends StatelessWidget {
               )
           ),
           floatingActionButton: floatingActionButton(context: context, color:  Colors.green, icon: Icons.done, onPressed: () {
-            /// api check type and pass apis
             if (formKey.currentState!.validate() == true &&
-    type == "Add") {
+    widget.type == "Add") {
               BlocProvider.of<UserRoleBloc>(context).add(UserRoleCreateEvent(
-                  userRoleName: userRollNotValueController.text,
+                  userRoleName: userRollController.text,
                   isSale: isSwitched.value,
                   isPurchase: isSwitchedOne.value,
                   isReports: isSwitchedTwo.value,
-                  isStockUpdate: isSwitchedThree.value)
+                  isStockUpdate: isSwitchedThree.value
+              )
               );
-              //     formKey.currentState!.validate() ?
-            }   // Navigator.pop(context) :const  SizedBox();
+            }if(formKey.currentState!.validate() == true && widget.type == "Edit"){
+              BlocProvider.of<UserRoleBloc>(context).add(EditUseroleEvent(id: widget.id.toString(),
+                  useroleName: userRollController.text,
+                  isSale: isSwitched.value,
+                  isPurchase: isSwitchedOne.value,
+                  isReports: isSwitchedTwo.value,
+                  isStockUpdate: isSwitchedThree.value
+              ));
+
+            }else {
+              null;
+            }
       })
       ),
     );

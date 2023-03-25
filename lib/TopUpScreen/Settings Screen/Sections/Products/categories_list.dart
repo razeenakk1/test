@@ -100,6 +100,7 @@ class _CategoryListScreenState extends State<CategoryListScreen> {
               );
             }
             if (state is CategoryDeleteLoaded) {
+              hideProgressBar();
               BlocProvider.of<CategoryBloc>(context).add(ListCategoryEvent(search: ''));
               deleteCategoryModelClass =
                   BlocProvider.of<CategoryBloc>(context).deleteCategoryModelClass;
@@ -109,7 +110,9 @@ class _CategoryListScreenState extends State<CategoryListScreen> {
                     textMsg: deleteCategoryModelClass.message.toString());
               }
 
-              if (state is CategoryDeleteError) {}
+              if (state is CategoryDeleteError) {
+                hideProgressBar();
+              }
             }
           },
         )
@@ -200,6 +203,8 @@ class _CategoryListScreenState extends State<CategoryListScreen> {
                                                       .pop(false);
                                                 },
                                                 secondBtnPressed: () {
+                                                  showProgressBar();
+
                                                   BlocProvider.of<CategoryBloc>(context)
                                                       .add(DeleteCategoryEvent(id: categoryListModelClass.data![index].id.toString()
                                                   ));
@@ -212,6 +217,8 @@ class _CategoryListScreenState extends State<CategoryListScreen> {
                                               .data!.length
                                               .toString()),
                                           onDismissed: (direction) {
+                                            showProgressBar();
+
 
                                             BlocProvider.of<CategoryBloc>(context)
                                                 .add(DeleteCategoryEvent(id: categoryListModelClass.data![index].id.toString()

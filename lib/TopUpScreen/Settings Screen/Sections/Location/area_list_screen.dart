@@ -99,6 +99,7 @@ class _AreaListScreenState extends State<AreaListScreen> {
               );
             }
             if (state is AreaDeleteLoaded) {
+              hideProgressBar();
               BlocProvider.of<AreaBloc>(context).add(ListAreaEvent(search: ''));
               deleteAreaModelClass =
                   BlocProvider.of<AreaBloc>(context).deleteAreaModelClass;
@@ -108,7 +109,9 @@ class _AreaListScreenState extends State<AreaListScreen> {
                     textMsg: deleteAreaModelClass.message.toString());
               }
 
-              if (state is AreaDeleteError) {}
+              if (state is AreaDeleteError) {
+                hideProgressBar();
+              }
             }
           },
         )
@@ -199,6 +202,8 @@ class _AreaListScreenState extends State<AreaListScreen> {
                                                   .pop(false);
                                             },
                                             secondBtnPressed: () {
+                                              showProgressBar();
+
                                               BlocProvider.of<AreaBloc>(context)
                                                   .add(DeleteAreaEvent(id: areaListModelClass.data![index].id.toString()
                                               ));
@@ -211,6 +216,8 @@ class _AreaListScreenState extends State<AreaListScreen> {
                                           .data!.length
                                           .toString()),
                                       onDismissed: (direction) {
+                                        showProgressBar();
+
 
                                         BlocProvider.of<AreaBloc>(context)
                                             .add(DeleteAreaEvent(id: areaListModelClass.data![index].id.toString()
