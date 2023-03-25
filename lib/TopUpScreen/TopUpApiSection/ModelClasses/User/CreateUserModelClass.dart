@@ -1,42 +1,51 @@
 import 'dart:convert';
 /// StatusCode : 6000
-/// data : {"first_name":"muhammed","username":"rabeeh","email":"rabee@vikncodes.com","password1":"123456","password2":"123456","phone":"9876543210"}
-/// userID : 4
+/// message : "A user with that username already exists."
+/// data : {"first_name":"murgghggham","username":"dfghhfrghjyh","email":"rarjmhhkbee@viknces.com","password1":"123456","password2":"123456","phone":"9876543210"}
+/// userID : 38
 
 CreateUserModelClass createUserModelClassFromJson(String str) => CreateUserModelClass.fromJson(json.decode(str));
 String createUserModelClassToJson(CreateUserModelClass data) => json.encode(data.toJson());
 class CreateUserModelClass {
   CreateUserModelClass({
       num? statusCode, 
+      String? message, 
       Data? data, 
       num? userID,}){
     _statusCode = statusCode;
+    _message = message;
     _data = data;
     _userID = userID;
 }
 
   CreateUserModelClass.fromJson(dynamic json) {
     _statusCode = json['StatusCode'];
+    _message = json['message'];
     _data = json['data'] != null ? Data.fromJson(json['data']) : null;
     _userID = json['userID'];
   }
   num? _statusCode;
+  String? _message;
   Data? _data;
   num? _userID;
 CreateUserModelClass copyWith({  num? statusCode,
+  String? message,
   Data? data,
   num? userID,
 }) => CreateUserModelClass(  statusCode: statusCode ?? _statusCode,
+  message: message ?? _message,
   data: data ?? _data,
   userID: userID ?? _userID,
 );
   num? get statusCode => _statusCode;
+  String? get message => _message;
   Data? get data => _data;
   num? get userID => _userID;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
     map['StatusCode'] = _statusCode;
+    map['message'] = _message;
     if (_data != null) {
       map['data'] = _data?.toJson();
     }
@@ -46,9 +55,9 @@ CreateUserModelClass copyWith({  num? statusCode,
 
 }
 
-/// first_name : "muhammed"
-/// username : "rabeeh"
-/// email : "rabee@vikncodes.com"
+/// first_name : "murgghggham"
+/// username : "dfghhfrghjyh"
+/// email : "rarjmhhkbee@viknces.com"
 /// password1 : "123456"
 /// password2 : "123456"
 /// phone : "9876543210"

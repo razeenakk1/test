@@ -10,7 +10,7 @@ class CreateUserEvent extends UserEvent {
   final String password2;
   final String phone;
   final String userRoles;
-  final String isAdmin;
+  final bool isAdmin;
 
   CreateUserEvent(
       {required this.firstName,
@@ -21,6 +21,13 @@ class CreateUserEvent extends UserEvent {
       required this.phone,
       required this.userRoles,
       required this.isAdmin});
+
+
+}
+class ListUserEvent extends UserEvent {
+  final String search;
+
+  ListUserEvent({required this.search});
 
 
 }

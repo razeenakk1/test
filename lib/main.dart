@@ -13,6 +13,7 @@ import 'package:topuptest/TopUpScreen/SplashScreen/splash_screen.dart';
 import 'package:topuptest/TopUpScreen/TopUpApiSection/Api%20Function/Area/area_api.dart';
 import 'package:topuptest/TopUpScreen/TopUpApiSection/Api%20Function/Category/category_api.dart';
 import 'package:topuptest/TopUpScreen/TopUpApiSection/Api%20Function/Group/group_api.dart';
+import 'package:topuptest/TopUpScreen/TopUpApiSection/Api%20Function/User/UserApi.dart';
 import 'package:topuptest/TopUpScreen/TopUpApiSection/Api%20Function/UserRoleApi/userole_api.dart';
 import 'package:topuptest/TopUpScreen/TopUpApiSection/Bloc/Area/area_bloc.dart';
 import 'package:topuptest/TopUpScreen/TopUpApiSection/Bloc/Category/category_bloc.dart';
@@ -24,6 +25,7 @@ import 'ListAndSearch/Api_Section/Api_Function/search_api.dart';
 import 'TopUpScreen/CameraSecton/camera_screen.dart';
 import 'TopUpScreen/TopUpApiSection/Api Function/Login_Api/login_api.dart';
 import 'TopUpScreen/TopUpApiSection/Api Function/Tax_Api/tax_api.dart';
+import 'TopUpScreen/TopUpApiSection/Bloc/User/user_bloc.dart';
 
 
 Future<void> main() async {
@@ -45,6 +47,7 @@ final  UserApi userApi = UserApi();
    final GroupApi groupApi = GroupApi();
    final AreaApi areaApi = AreaApi();
    final UserRoleApi userRoleApi = UserRoleApi();
+   final ApiUser apiUser = ApiUser();
 
 
    @override
@@ -82,6 +85,10 @@ final  UserApi userApi = UserApi();
         BlocProvider<UserRoleBloc>(
           create: (context) => UserRoleBloc(userRoleApi),
         ),
+        BlocProvider<UserBloc>(
+          create: (context) => UserBloc(apiUser),
+        ),
+
 
 
       ],

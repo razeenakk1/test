@@ -14,7 +14,7 @@ class TextFormFieldWidget extends StatelessWidget {
      required this.readOnly,
       required this.textInputType,
       this.onChanged,
-      required this.obscureText,this.autoFocus,  this.validator, required this.textInputAction,this.focusNode,this.enabled,this.list});
+      required this.obscureText,this.autoFocus,  this.validator, required this.textInputAction,this.focusNode,this.enabled,this.list,  this.textCapitalization});
 
   final TextEditingController controller;
   final String labelText;
@@ -37,6 +37,7 @@ final int? maxLines;
     String? Function(String?)?  validator;
     final TextInputAction textInputAction;
   List<TextInputFormatter>? list;
+  final TextCapitalization? textCapitalization;
  // final Key textFieldKey;
 
   @override

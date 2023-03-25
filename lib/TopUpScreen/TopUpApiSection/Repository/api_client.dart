@@ -84,6 +84,7 @@ class TopUpApiClient {
       default:
         response = await get(Uri.parse(url), headers: headerParams);
     }
+    log("**************${response.body}");
 
     print('status of $path =>' + (response.statusCode).toString());
     print(response.body);
