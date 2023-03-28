@@ -13,11 +13,13 @@ import 'package:topuptest/TopUpScreen/SplashScreen/splash_screen.dart';
 import 'package:topuptest/TopUpScreen/TopUpApiSection/Api%20Function/Area/area_api.dart';
 import 'package:topuptest/TopUpScreen/TopUpApiSection/Api%20Function/Category/category_api.dart';
 import 'package:topuptest/TopUpScreen/TopUpApiSection/Api%20Function/Group/group_api.dart';
+import 'package:topuptest/TopUpScreen/TopUpApiSection/Api%20Function/Ledger/ledger_api.dart';
 import 'package:topuptest/TopUpScreen/TopUpApiSection/Api%20Function/User/UserApi.dart';
 import 'package:topuptest/TopUpScreen/TopUpApiSection/Api%20Function/UserRoleApi/userole_api.dart';
 import 'package:topuptest/TopUpScreen/TopUpApiSection/Bloc/Area/area_bloc.dart';
 import 'package:topuptest/TopUpScreen/TopUpApiSection/Bloc/Category/category_bloc.dart';
 import 'package:topuptest/TopUpScreen/TopUpApiSection/Bloc/Group/group_bloc.dart';
+import 'package:topuptest/TopUpScreen/TopUpApiSection/Bloc/Ledger/ledger_bloc.dart';
 import 'package:topuptest/TopUpScreen/TopUpApiSection/Bloc/Tax/tax_bloc.dart';
 import 'package:topuptest/TopUpScreen/TopUpApiSection/Bloc/TopUpLoginBloc/top_up_login_bloc.dart';
 import 'package:topuptest/TopUpScreen/TopUpApiSection/Bloc/UserRole/user_role_bloc.dart';
@@ -48,6 +50,7 @@ final  UserApi userApi = UserApi();
    final AreaApi areaApi = AreaApi();
    final UserRoleApi userRoleApi = UserRoleApi();
    final ApiUser apiUser = ApiUser();
+   final LedgerApi ledgerApi = LedgerApi();
 
 
    @override
@@ -88,6 +91,10 @@ final  UserApi userApi = UserApi();
         BlocProvider<UserBloc>(
           create: (context) => UserBloc(apiUser),
         ),
+        BlocProvider<LedgerBloc>(
+          create: (context) => LedgerBloc(ledgerApi),
+        ),
+
 
 
 

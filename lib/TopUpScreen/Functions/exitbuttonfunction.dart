@@ -72,7 +72,7 @@ btmDialogueFunction({required BuildContext context,required String textMsg,requi
           child:Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(textMsg,style: const TextStyle(fontWeight: FontWeight.bold,fontSize: 18),),
+              Text(textMsg,style: const TextStyle(fontWeight: FontWeight.bold,fontSize: 16),),
               SizedBox(width: MediaQuery.of(context).size.width*.05,),
               TextButton(onPressed:fistBtnOnPressed,  child: const Text("Cancel",style: TextStyle(color: Color(0xffB53211)),)),
 

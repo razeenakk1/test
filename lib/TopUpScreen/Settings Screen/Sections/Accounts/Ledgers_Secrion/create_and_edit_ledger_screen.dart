@@ -94,6 +94,8 @@ class _CreateAndEditLedgerState extends State<CreateAndEditLedger> {
               physics: const BouncingScrollPhysics(),
               children: [
                 TextFormFieldWidget(
+                  textCapitalization: TextCapitalization.words,
+
                   readOnly: false,
                   obscureText: false,
                   controller:   widget.type == "Create" ?controller  : nameController,
@@ -108,6 +110,8 @@ class _CreateAndEditLedgerState extends State<CreateAndEditLedger> {
 
                 ),
                 TextFormFieldWidget(
+                  textCapitalization: TextCapitalization.words,
+
                   textInputAction: TextInputAction.next,
 
                   obscureText: false,
@@ -163,6 +167,8 @@ class _CreateAndEditLedgerState extends State<CreateAndEditLedger> {
                   children: [
                     Expanded(
                         child: TextFormFieldWidget(
+                          textCapitalization: TextCapitalization.none,
+
                           readOnly: false,
 
                           textInputAction: TextInputAction.done,
@@ -232,6 +238,8 @@ class _CreateAndEditLedgerState extends State<CreateAndEditLedger> {
                           TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
                       )),
                     TextFormFieldWidget(
+                      textCapitalization: TextCapitalization.none,
+
                       readOnly: false,
 
                       textInputAction: TextInputAction.next,
@@ -245,6 +253,8 @@ class _CreateAndEditLedgerState extends State<CreateAndEditLedger> {
                       textInputType: TextInputType.phone,
                     ),
                     TextFormFieldWidget(
+                        textCapitalization: TextCapitalization.none,
+
                         readOnly: false,
 
                         textInputAction: widget.type  == "Create" ? TextInputAction.next :TextInputAction.done,
@@ -258,6 +268,8 @@ class _CreateAndEditLedgerState extends State<CreateAndEditLedger> {
                         ? Column(
                             children: [
                               TextFormFieldWidget(
+                                textCapitalization: TextCapitalization.words,
+
                                 readOnly: false,
                                 maxLines: null,
                                 textInputType: TextInputType.multiline,
@@ -301,6 +313,8 @@ class _CreateAndEditLedgerState extends State<CreateAndEditLedger> {
                                           ],
                                         ),
                                    newCheckValue ?     TextFormFieldWidget(
+                                     textCapitalization: TextCapitalization.none,
+
                                      readOnly: false,
 
                                      textInputAction: TextInputAction.done,

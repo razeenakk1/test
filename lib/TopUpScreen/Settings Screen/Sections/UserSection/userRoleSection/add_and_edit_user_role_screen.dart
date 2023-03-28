@@ -129,6 +129,8 @@ class _AddAndEditUseroleState extends State<AddAndEditUserole> {
                   physics: const BouncingScrollPhysics(),
                     children: [
                   TextFormFieldWidget(
+                    textCapitalization: TextCapitalization.words,
+
                     readOnly: false,
 
                     validator: (val ) {

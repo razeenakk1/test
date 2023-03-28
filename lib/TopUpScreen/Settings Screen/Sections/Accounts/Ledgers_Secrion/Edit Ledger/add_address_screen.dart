@@ -43,6 +43,8 @@ class AddAddressScreen extends StatelessWidget {
                             fontWeight: FontWeight.w900, fontSize: 18),
                       )),
                   TextFormFieldWidget(
+                    textCapitalization: TextCapitalization.words,
+
                     readOnly: false,
                     textInputAction: TextInputAction.next,
                     validator: (val) {
@@ -58,6 +60,8 @@ class AddAddressScreen extends StatelessWidget {
                     textInputType: TextInputType.name,
                   ),
                   TextFormFieldWidget(
+                    textCapitalization: TextCapitalization.words,
+
                     maxLines: null,
                     textInputType: TextInputType.multiline,
 
@@ -77,6 +81,8 @@ class AddAddressScreen extends StatelessWidget {
                     valueListenable: buttonClickedTimes,
                     builder: (BuildContext context, int newValue, _) {
                       return TextFormFieldWidget(
+                        textCapitalization: TextCapitalization.words,
+
                         readOnly: true,
                         textInputType: TextInputType.none,
                         onTap: () async {

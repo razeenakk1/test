@@ -39,6 +39,8 @@ class AddAndEditDeliveryMan extends StatelessWidget {
               children: [
 
                 TextFormFieldWidget(
+                  textCapitalization: TextCapitalization.words,
+
                   textInputAction: TextInputAction.next,
                   validator: (val ) {
                     if (val == null || val.isEmpty) {
@@ -55,6 +57,8 @@ class AddAndEditDeliveryMan extends StatelessWidget {
                   textInputType: TextInputType.name, readOnly: false,
                 ),
                 TextFormFieldWidget(
+                  textCapitalization: TextCapitalization.none,
+
                   readOnly: false,
                   textInputAction: TextInputAction.next,
                   validator: (val ) {
@@ -71,6 +75,8 @@ class AddAndEditDeliveryMan extends StatelessWidget {
                   textInputType: TextInputType.phone,
                 ),
                 TextFormFieldWidget(
+                  textCapitalization: TextCapitalization.none,
+
                   readOnly: false,
 
                   textInputAction: TextInputAction.done,

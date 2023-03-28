@@ -14,25 +14,35 @@ import '../../../../Widgets/text_form_field_widget.dart';
 import 'use_role_list_textfiled.dart';
 
 class AddAndEitUser extends StatefulWidget {
-  const AddAndEitUser({Key? key, required this.type}) : super(key: key);
+   AddAndEitUser({Key? key, required this.type,this.id, this.name,this.userName,this.email,this.phone ,this.userRoleName ,this.userRolesId,this.isAdmin,this.password}) : super(key: key);
   final String type;
+  num? id;
+  String? name;
+  String? userName;
+  String? email;
+  String? phone;
+  String? userRoleName;
+  String? password;
+
+
+  String? userRolesId;
+  bool? isAdmin;
+
+
+
+
+
 
   @override
   State<AddAndEitUser> createState() => _AddAndEitUserState();
 }
 
 class _AddAndEitUserState extends State<AddAndEitUser> {
-  final TextEditingController nameController = TextEditingController();
 
-  final TextEditingController userNameController = TextEditingController();
 
-  final TextEditingController phoneNumberController = TextEditingController();
 
-  final TextEditingController emailController = TextEditingController();
 
-  final TextEditingController passwordController = TextEditingController();
 
-  final TextEditingController userRollController = TextEditingController();
 
   String userNameText = "";
   String passwordText = "";
@@ -49,10 +59,27 @@ class _AddAndEitUserState extends State<AddAndEitUser> {
   //       'Our inviting you and providing your user name is $userNameText and password is $passwordText';
   //   textMsg = msgText;
   // }
+  late   TextEditingController nameController;
+  late   TextEditingController userNameController;
+  late  TextEditingController phoneNumberController ;
+  late  TextEditingController emailController ;
+  late  TextEditingController userRollController ;
+  late TextEditingController passwordController ;
+  late  ValueNotifier<bool> isSwitched ;
 
 
   @override
   void initState() {
+    userID = widget.type == "Edit"? widget.userRolesId.toString() : "";
+    isSwitched = ValueNotifier( widget.type == "Edit" ?  widget.isAdmin!: false);
+    nameController = TextEditingController()..text = widget.type == "Edit"? widget.name.toString() :"";
+     userNameController = TextEditingController()..text = widget.type == "Edit"? widget.userName.toString() :"";
+    phoneNumberController = TextEditingController()..text = widget.type == "Edit"? widget.phone.toString() :"";
+    emailController = TextEditingController()..text = widget.type == "Edit"? widget.email.toString() :"";
+    userRollController = TextEditingController()..text = widget.type == "Edit"? widget.userRoleName.toString() :"";
+    passwordController = TextEditingController()..text = widget.type == "Edit"? widget.password.toString() :"";
+    print("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&${widget.isAdmin}");
+
     // passwordText = passwordController.value.text;
     // userNameText = userNameController.value.text;
 
@@ -63,7 +90,6 @@ class _AddAndEitUserState extends State<AddAndEitUser> {
   // bool isSwitched = false;
   final ValueNotifier<bool> passwordVisible = ValueNotifier(true);
 
-  final ValueNotifier<bool> isSwitched = ValueNotifier(false);
   final ValueNotifier<bool> isVisible = ValueNotifier(false);
 
 
@@ -105,13 +131,16 @@ class _AddAndEitUserState extends State<AddAndEitUser> {
               );
             }
             if (state is UserCreateLoaded) {
+              BlocProvider.of<UserBloc>(context).add(ListUserEvent(search: ''));
+
 
               print("hy_______________________");
               //  hideProgressBar();
               createUserModelClass = BlocProvider.of<UserBloc>(context).createUserModelClass;
               if(createUserModelClass.statusCode == 6000){
                 btmDialogueFunction(context: context,
-                    textMsg: 'Do you want to share?', fistBtnOnPressed: () {
+                    textMsg: 'Successfully created user\n'
+                        'Do you want to share?', fistBtnOnPressed: () {
                       Navigator.of(context).pop(true);
                       clearText();
 
@@ -120,26 +149,17 @@ class _AddAndEitUserState extends State<AddAndEitUser> {
                       clearText();
                       Navigator.of(context).pop(true);
 
-
-
-                    }, secondBtnText: 'share'
+                      }, secondBtnText: 'share'
                 );
 
               }if(createUserModelClass.statusCode == 6001){
                 msgBtmDialogueFunction(context: context, textMsg: createUserModelClass.message.toString());
+                BlocProvider.of<UserBloc>(context).add(ListUserEvent(search: ''));
+
               }
 
 
-              // Navigator.pop(context);
-              // BlocProvider.of<UserBloc>(context)
-              //     .add(UserListEvent(search: ""));
-              // if (createUserModelClass.statusCode == 6001) {
-              //   msgBtmDialogueFunction(
-              //       context: context,
-              //       textMsg: createUserModelClass.message.toString());
-              //   BlocProvider.of<UserBloc>(context)
-              //       .add(UserListEvent(search: ""));
-              // }
+
 
 
               if (state is UserCreateError) {
@@ -149,44 +169,29 @@ class _AddAndEitUserState extends State<AddAndEitUser> {
             }
           },
         ),
-        // BlocListener<UserBloc, UserState>(
-        //   listener: (context, state) {
-        //     if (state is UserEditLoading) {
-        //       const CircularProgressIndicator();
-        //     }
-        //     if (state is UserEditLoaded) {
-        //       Navigator.pop(context);
-        //       BlocProvider.of<UserBloc>(context).add(UserListEvent(search: ""));
-        //
-        //     }
-        //     if (state is UserEditError) {
-        //       const Text("Something went wrong");
-        //     }
-        //   },
-        // ),
+        BlocListener<UserBloc, UserState>(
+          listener: (context, state) {
+            if (state is EditUserLoading) {
+              const CircularProgressIndicator();
+            }
+            if (state is EditUserLoaded) {
+              BlocProvider.of<UserBloc>(context).add(ListUserEvent(search: ''));
+
+              Navigator.pop(context);
+
+            }
+            if (state is EditUserError) {
+              const Text("Something went wrong");
+            }
+          },
+        ),
       ],
 
 
-      child: ValueListenableBuilder(
-        valueListenable: isVisible,
-          builder: (BuildContext context, bool newValue, _) {
-          return Scaffold(
+      child:  Scaffold(
               //resizeToAvoidBottomInset: false,
               backgroundColor: backGroundColor,
-              appBar: appBar(appBarTitle: '${widget.type} User', actions: [
-                SizedBox(
-                  width: mWidth * .2,
-                  child:  newValue ?GestureDetector(
-                    onTap: () {
-                     // assigningFunction();
-                   shareFunction( context,  userNameText, passwordText);
-                      // print("_______________$text");
-
-                    },
-                    child: ShareButtonWidget(mHeight: mHeight, mWidth: mWidth),
-                  ):const SizedBox()
-                ),
-              ]),
+              appBar: appBar(appBarTitle: '${widget.type} User'),
               body: Container(
                 padding: const EdgeInsets.all(20),
                 height: mHeight,
@@ -197,7 +202,8 @@ class _AddAndEitUserState extends State<AddAndEitUser> {
                     physics: const BouncingScrollPhysics(),
                     children: [
                       TextFormFieldWidget(
-                        enabled: !newValue,
+                        textCapitalization: TextCapitalization.words,
+
                         readOnly: false,
                         validator: (val) {
                           if (val == null || val.isEmpty) {
@@ -216,8 +222,9 @@ class _AddAndEitUserState extends State<AddAndEitUser> {
                         textInputAction: TextInputAction.next,
                       ),
                       TextFormFieldWidget(
+                        textCapitalization: TextCapitalization.words,
+
                         readOnly: false,
-                        enabled: !newValue,
 
                         onChanged: (String value) => setState(() {
                           userNameText = value;
@@ -239,8 +246,8 @@ class _AddAndEitUserState extends State<AddAndEitUser> {
                         ),
                       ),
                       TextFormFieldWidget(
+                        textCapitalization: TextCapitalization.none,
                         readOnly: false,
-                        enabled: !newValue,
 
                         textInputAction: TextInputAction.next,
                         validator: (val) {
@@ -259,7 +266,8 @@ class _AddAndEitUserState extends State<AddAndEitUser> {
                         ),
                       ),
                       TextFormFieldWidget(
-                        enabled: !newValue,
+                        textCapitalization: TextCapitalization.none,
+
                         readOnly: false,
 
                         textInputAction: TextInputAction.next,
@@ -287,17 +295,18 @@ class _AddAndEitUserState extends State<AddAndEitUser> {
                                 return Expanded(
                                     flex: 8,
                                     child: TextFormFieldWidget(
+                                        textCapitalization: TextCapitalization.none,
+
                                         validator: (val) {
 
                                           if (val == null || val.isEmpty) {
                                             return 'This field is required';
-                                          }if (val.length < 8 ) {
+                                          }if (val.length < 6 ) {
                                             return 'Too short';
                                           }
                                           return null;
                                         },
-                                        readOnly: false,
-                                        enabled: !newValue,
+                                        readOnly:widget.type == "Add" ?false: true,
 
                                         onChanged: (String value) => setState(() {
                                               passwordText = value;
@@ -333,11 +342,18 @@ class _AddAndEitUserState extends State<AddAndEitUser> {
                           Expanded(
                               child: Padding(
                             padding: const EdgeInsets.only(top: 20.0),
-                            child: GestureDetector(
-                                onTap: () {
-                                   passwordText =generatePassword();
-                                  passwordController.text = passwordText;
-                                },
+                            child:   GestureDetector(
+                              onTap: widget.type == "Add" ?() async {
+                                await Future.delayed(const Duration(seconds: 1), (){
+                                  passwordController.clear();
+                                });
+
+
+
+                                passwordText = generatePassword();
+
+                                   passwordController.text = passwordText;
+                                }: null,
                                 child: Image.asset(
                                     "assets/settingsimage/reloadicon.png")),
                           )),
@@ -372,20 +388,22 @@ class _AddAndEitUserState extends State<AddAndEitUser> {
                                 fontSize: 17, fontWeight: FontWeight.w900),
                           )),
                       TextFormFieldWidget(
+                        textCapitalization: TextCapitalization.none,
+
 
                         validator: (val) {
 
-                          if (val == null || val.isEmpty) {
+                          if (val == null || val.isEmpty || userID.isEmpty) {
                             return 'This field is required';
 
                           }
+
                           return null;
                         },
                         textInputAction: TextInputAction.done,
                         obscureText: false,
                         controller:  userRollController,
                         readOnly: true,
-                        enabled: !newValue,
                         labelText: "User Roles",
                         suffixIcon: const Icon(
                           Icons.keyboard_arrow_down_outlined,
@@ -420,7 +438,6 @@ class _AddAndEitUserState extends State<AddAndEitUser> {
                     print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~$userID");
 
                     if(  formKey.currentState!.validate() && widget.type == "Add"){
-                      // isVisible.value = !isVisible.value;
                       BlocProvider.of<UserBloc>(context).add(CreateUserEvent(
                           firstName: nameController.text, username: userNameController.text, email: emailController.text,
                           password1: passwordController.text, password2: passwordController.text, phone: phoneNumberController.text,
@@ -428,17 +445,23 @@ class _AddAndEitUserState extends State<AddAndEitUser> {
                       print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~${nameController.text}");
                       print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~${userNameController.text}");
                       print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~$userID");
+                    } if( formKey.currentState!.validate() && widget.type == "Edit"){
+                      BlocProvider.of<UserBloc>(context).add(EditUserEvent(
+                          id: widget.id!.toInt(), firstName: nameController.text, username: userNameController.text,
+                          email: emailController.text, password1: passwordController.text, password2: passwordController.text,
+                          phone: phoneNumberController.text, userRoles: userID, isAdmin: isSwitched.value));
+                      print("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&${widget.isAdmin}");
+
+                      print("############################${isSwitched.value}");
+
                     }
 
-                    // formKey.currentState!.validate()
-                    //     ?   isVisible.value = !isVisible.value
-                    //     : const SizedBox();
 
 
 
-                  }));
-        }
-      ),
+                  }))
+
+
     );
   }
 }
