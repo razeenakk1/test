@@ -92,7 +92,8 @@ class _LedgerGroupListScreenState extends State<LedgerGroupListScreen> {
 
      print(ledgerGroupListModelClass.data![index]);
      print("${ledgerGroupListModelClass.data![index].id}");
-     Navigator.pop(context, [ledgerGroupListModelClass.data![index],ledgerGroupListModelClass.data![index].id],);
+     Navigator.pop(context, [ledgerGroupListModelClass.data![index].accountGroupName,
+       ledgerGroupListModelClass.data![index].accountGroupID],);
 
 
                                 },

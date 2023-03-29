@@ -344,15 +344,17 @@ class _AddAndEitUserState extends State<AddAndEitUser> {
                             padding: const EdgeInsets.only(top: 20.0),
                             child:   GestureDetector(
                               onTap: widget.type == "Add" ?() async {
-                                await Future.delayed(const Duration(seconds: 1), (){
-                                  passwordController.clear();
+                                passwordController.clear();
+                                await Future.delayed(const Duration(milliseconds: 10), (){
+                                  passwordText = generatePassword();
+
+                                  passwordController.text = passwordText;
+
                                 });
 
 
 
-                                passwordText = generatePassword();
 
-                                   passwordController.text = passwordText;
                                 }: null,
                                 child: Image.asset(
                                     "assets/settingsimage/reloadicon.png")),

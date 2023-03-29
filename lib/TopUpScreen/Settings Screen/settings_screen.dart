@@ -68,7 +68,7 @@ class SettingsScreen extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => const  CreateAndEditLedger(type: 'Create',)),
+                      builder: (context) =>   CreateAndEditLedger(type: 'Create')),
                 );
               },
               mWidth: mWidth,

@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 DateTime dateTime =DateTime.now();
-DateFormat dateFormat = DateFormat("dd/MM/yyy");
+ DateFormat dateFormat = DateFormat("dd/MM/yyy");
+DateFormat apiDateFormat = DateFormat("y-M-d");
+
 late ValueNotifier<String> dateNotifier ;
 
 showDatePickerFunction(context,ValueNotifier dateNotifier) {
@@ -41,7 +43,8 @@ showDatePickerFunction(context,ValueNotifier dateNotifier) {
             ),
             CalendarDatePicker(
               onDateChanged: (selectedDate) {
-                dateNotifier.value = dateFormat.format(selectedDate);
+                dateNotifier.value = selectedDate;
+              //  dateNotifier.value = apiDateFormat.format(selectedDate);
                 Navigator.pop(context);
               },
               initialDate: DateTime.now(),

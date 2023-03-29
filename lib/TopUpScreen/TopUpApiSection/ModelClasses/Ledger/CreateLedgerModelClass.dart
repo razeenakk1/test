@@ -1,15 +1,15 @@
 import 'dart:convert';
 /// StatusCode : 6000
 /// message : "Successfully created Ledger"
-/// LedgerID : 93
+/// LedgerID : 96
 
 CreateLedgerModelClass createLedgerModelClassFromJson(String str) => CreateLedgerModelClass.fromJson(json.decode(str));
 String createLedgerModelClassToJson(CreateLedgerModelClass data) => json.encode(data.toJson());
 class CreateLedgerModelClass {
   CreateLedgerModelClass({
-      num? statusCode, 
+      int? statusCode, 
       String? message, 
-      num? ledgerID,}){
+      int? ledgerID,}){
     _statusCode = statusCode;
     _message = message;
     _ledgerID = ledgerID;
@@ -20,19 +20,19 @@ class CreateLedgerModelClass {
     _message = json['message'];
     _ledgerID = json['LedgerID'];
   }
-  num? _statusCode;
+  int? _statusCode;
   String? _message;
-  num? _ledgerID;
-CreateLedgerModelClass copyWith({  num? statusCode,
+  int? _ledgerID;
+CreateLedgerModelClass copyWith({  int? statusCode,
   String? message,
-  num? ledgerID,
+  int? ledgerID,
 }) => CreateLedgerModelClass(  statusCode: statusCode ?? _statusCode,
   message: message ?? _message,
   ledgerID: ledgerID ?? _ledgerID,
 );
-  num? get statusCode => _statusCode;
+  int? get statusCode => _statusCode;
   String? get message => _message;
-  num? get ledgerID => _ledgerID;
+  int? get ledgerID => _ledgerID;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
