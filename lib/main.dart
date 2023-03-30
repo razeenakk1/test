@@ -1,5 +1,6 @@
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:topuptest/Api_Section/All_Api/brand_API.dart';
 import 'package:topuptest/Api_Section/All_Api/get_api.dart';
@@ -32,6 +33,8 @@ import 'TopUpScreen/TopUpApiSection/Bloc/User/user_bloc.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+
   cameras = await availableCameras();
   runApp(MyApp());
 }

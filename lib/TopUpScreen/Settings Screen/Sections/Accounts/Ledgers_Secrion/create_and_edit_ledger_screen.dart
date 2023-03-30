@@ -4,11 +4,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:topuptest/TopUpScreen/TopUpApiSection/Bloc/Ledger/ledger_bloc.dart';
+import 'package:topuptest/TopUpScreen/TopUpApiSection/ModelClasses/Ledger/SingleViewModelClass.dart';
 import '../../../../Constens/constens.dart';
 import '../../../../Functions/date_picker_function.dart';
 import '../../../../Functions/exitbuttonfunction.dart';
 import '../../../../Functions/floating_action_function.dart';
 import '../../../../Functions/roundoff_function.dart';
+import '../../../../TopUpApiSection/ModelClasses/Ledger/AddressModelClass/SingleViewAddressModelClass.dart';
 import '../../../../TopUpApiSection/ModelClasses/Ledger/CreateLedgerModelClass.dart';
 import '../../../../Widgets/appbar_widget.dart';
 import '../../../../Widgets/text_form_field_widget.dart';
@@ -25,14 +27,17 @@ class CreateAndEditLedger extends StatefulWidget {
       this.ledgerName,
       this.balance,
       this.asOnDate,
-
-      this.phone,
+        this.phone,
       this.isVat,
       this.vatNo,
       this.address,
       this.areaId,
       this.areaName,
-      this.email})
+      this.email,
+        this.ledgerId,
+        this.accountGroupUnderName,
+        this.addressList
+      })
       : super(key: key);
   final String type;
   String? id;
@@ -47,6 +52,10 @@ class CreateAndEditLedger extends StatefulWidget {
   String? areaId;
   String? areaName;
   String? email;
+  String? ledgerId;
+  String? accountGroupUnderName;
+  List<Addresses>? addressList;
+
 
   @override
   State<CreateAndEditLedger> createState() => _CreateAndEditLedgerState();
@@ -83,10 +92,25 @@ class _CreateAndEditLedgerState extends State<CreateAndEditLedger> {
   late TextEditingController vatNumberController;
   late TextEditingController controllerLedgerGroup;
   String areaId = "";
+  bool valueFirst = true;
+  ValueNotifier<int> buttonClickedTimes = ValueNotifier(0);
+
+  // ValueNotifier<bool>
+
+  final decorationContainer = BoxDecoration(
+      color: const Color(0xffF5F5F5), borderRadius: BorderRadius.circular(10));
+  List<String>? items;
+  late SingleViewModelClass singleViewModelClass ;
+
+  late SingleViewAddressModelClass singleViewAddressModelClass ;
+
 
   @override
   void initState() {
-    groupId = widget.type == "Edit" ?widget.accountGroupUnder!.toInt()  : groupId;
+
+
+    grpId = widget.type == "Edit" ?widget.accountGroupUnder! : grpId;
+    groupId = widget.type == "Edit" ?widget.accountGroupUnder!  : groupId;
     areaId = widget.type == "Edit" ? widget.areaId.toString() : "";
     //  dateNotifier = ValueNotifier(dateFormat.format(dateTime).toString());
     //  dateNotifier = ValueNotifier(apiDateFormat.format(dateTime).toString());
@@ -94,7 +118,7 @@ class _CreateAndEditLedgerState extends State<CreateAndEditLedger> {
     nameController = TextEditingController()
       ..text = widget.type == "Edit" ? widget.ledgerName.toString() : "";
     controllerLedgerGroup = TextEditingController()
-      ..text = widget.type == "Edit" ? widget.accountGroupUnder.toString() : "";
+      ..text = widget.type == "Edit" ? widget.accountGroupUnderName.toString() : "";
     balanceController = TextEditingController()
       ..text = widget.type == "Edit"
           ? widget.balance.toString()
@@ -115,7 +139,7 @@ class _CreateAndEditLedgerState extends State<CreateAndEditLedger> {
   }
 
   // ValueNotifier<int> buttonClickedTimes =ValueNotifier(0);
-
+ bool isShow = false;
   @override
   Widget build(BuildContext context) {
     final mWidth = MediaQuery.of(context).size.width;
@@ -151,21 +175,63 @@ class _CreateAndEditLedgerState extends State<CreateAndEditLedger> {
             }
           },
         ),
-        // BlocListener<LedgerBloc, LedgerState>(
-        //   listener: (context, state) {
-        //     if (state is LedgerEditLoading) {
-        //       const CircularProgressIndicator();
-        //     }
-        //     if (state is LedgerEditLoaded) {
-        //       Navigator.pop(context);
-        //       BlocProvider.of<LedgerBloc>(context).add(LedgerListEvent(search: ""));
-        //
-        //     }
-        //     if (state is LedgerEditError) {
-        //       const Text("Something went wrong");
-        //     }
-        //   },
-        // ),
+        BlocListener<LedgerBloc, LedgerState>(
+          listener: (context, state) {
+            if (state is EditLedgerLoading) {
+              const CircularProgressIndicator();
+            }
+            if (state is EditLedgerLoaded) {
+              Navigator.pop(context);
+              BlocProvider.of<LedgerBloc>(context).add(ListLedgerEvent(search: ''));
+
+            }
+            if (state is EditLedgerError) {
+              const Text("Something went wrong");
+            }
+          },
+        ),
+        BlocListener<LedgerBloc, LedgerState>(
+          listener: (context, state) {
+            if (state is DeleteAddressLoading) {
+              const CircularProgressIndicator();
+            }
+            if (state is DeleteAddressLoaded) {
+          //    Navigator.pop(context);
+
+          //    BlocProvider.of<LedgerBloc>(context).add(ListAddressEvent(search: ''));
+
+            }
+            if (state is DeleteAddressError) {
+              const Text("Something went wrong");
+            }
+          },
+        ),
+        BlocListener<LedgerBloc, LedgerState>(
+          listener: (context, state) {
+            if (state is AddressSingleViewLoading) {
+              const CircularProgressIndicator();
+            }
+            if (state is AddressSingleViewLoaded) {
+              singleViewAddressModelClass =
+                  BlocProvider.of<LedgerBloc>(context).singleViewAddressModelClass;
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => AddAddressScreen(type: 'Edit', ledgerId:widget.id.toString(),
+                    address: singleViewAddressModelClass.data!.address.toString() ,
+                      areaName:singleViewAddressModelClass.data!.areaName.toString() ,
+                      addressId: singleViewAddressModelClass.data!.id.toString(),
+                      areaSid: singleViewAddressModelClass.data!.areas.toString(),
+                      name: singleViewAddressModelClass.data!.addressName.toString(),
+                    )),
+              );
+
+            }
+            if (state is AddressSingleViewError) {
+              const Text("Something went wrong");
+            }
+          },
+        ),
       ],
       child: Scaffold(
           //  resizeToAvoidBottomInset: false,
@@ -314,7 +380,7 @@ class _CreateAndEditLedgerState extends State<CreateAndEditLedger> {
                   SizedBox(
                     height: mHeight * .03,
                   ),
-                  Column(
+                      groupId != 10 || grpId != 29?    Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       groupId == 10 || grpId == 29
@@ -341,32 +407,48 @@ class _CreateAndEditLedgerState extends State<CreateAndEditLedger> {
                                   textInputType: TextInputType.phone,
                                 ),
                                 TextFormFieldWidget(
+
                                     textCapitalization: TextCapitalization.none,
                                     readOnly: false,
                                     textInputAction: widget.type == "Create"
                                         ? TextInputAction.next
                                         : TextInputAction.done,
                                     obscureText: false,
-                                    textInputType: TextInputType.multiline,
+                                    textInputType: TextInputType.emailAddress,
                                     controller: emailController,
                                     labelText: "Email",
                                     prefixIcon: Image.asset(
                                         "assets/profile_image/sendimage.png")),
-                                TextFormFieldWidget(
-                                  textCapitalization: TextCapitalization.words,
-                                  readOnly: false,
-                                  maxLines: null,
-                                  textInputType: TextInputType.multiline,
-                                  textInputAction: TextInputAction.newline,
-                                  obscureText: false,
-                                  controller: addressController,
-                                  labelText: "Address",
-                                ),
+
                               ],
                             )
                           : SizedBox(),
-                      grpId == 10
-                          ? TextFormFieldWidget(
+                      widget.type == "Create" &&
+                      groupId == 10?     Column(
+                          children: [
+                            TextFormFieldWidget(
+                              textCapitalization: TextCapitalization.words,
+                              readOnly: false,
+                              maxLines: null,
+                              textInputType: TextInputType.multiline,
+                              textInputAction: TextInputAction.newline,
+                              obscureText: false,
+                              controller: addressController,
+                              labelText: "Address",
+                              validator: (val) {
+                                if (val == null || val.isEmpty) {
+                                  return 'This field is required';
+                                }
+                                return null;
+                              },
+                            ),
+                            TextFormFieldWidget(
+                              validator: (val) {
+                                if (val == null || val.isEmpty) {
+                                  return 'This field is required';
+                                }
+                                return null;
+                              },
                               textCapitalization: TextCapitalization.words,
                               readOnly: true,
                               textInputType: TextInputType.none,
@@ -392,8 +474,10 @@ class _CreateAndEditLedgerState extends State<CreateAndEditLedger> {
                               obscureText: false,
                               controller: areaController,
                               labelText: 'Area',
-                            )
-                          : SizedBox(),
+                            ),
+
+                          ],
+                        ): SizedBox(),
                       widget.type == "Create"
                           ? Column(children: [
                               SizedBox(
@@ -470,12 +554,154 @@ class _CreateAndEditLedgerState extends State<CreateAndEditLedger> {
                                   : SizedBox()
                             ])
                           : const SizedBox(),
-                      widget.type == "Edit"
-                          ? const AddressWidget()
+                      widget.type == "Edit" &&
+                      groupId == 10
+                          ? ListView(
+                        shrinkWrap: true,
+                        physics: const BouncingScrollPhysics(),
+                        // crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          SizedBox(
+                            height: mHeight * .03,
+                          ),
+                          Text("Addresses",
+                              style: GoogleFonts.poppins(
+                                textStyle:
+                                const TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
+                              )),
+                          SizedBox(
+                            height: mHeight * .02,
+                          ),
+                          SizedBox(
+                            // color: Colors.grey,
+                              height: mHeight * .3,
+                              child:
+                                     ListView.builder(
+                                        shrinkWrap: true,
+                                        physics: const BouncingScrollPhysics(),
+                                        scrollDirection: Axis.horizontal,
+                                        itemCount: widget.addressList!.length + 1,
+                                        itemBuilder: (BuildContext context, int index) {
+                                          if (widget.addressList!.isEmpty || widget.addressList!.length == index) {
+
+                                            return Card(
+                                              elevation: 0,
+                                              child: Container(
+                                                decoration: decorationContainer,
+                                                width: mWidth * .7,
+                                                child: Center(
+                                                  child: SizedBox(
+                                                    height: mHeight * .1,
+                                                    child: ElevatedButton(
+                                                      style: ElevatedButton.styleFrom(
+                                                        backgroundColor: const Color(0xffB53211),
+                                                        shape: const CircleBorder(),
+                                                        //  padding: const EdgeInsets.only(24),
+                                                      ),
+                                                      onPressed: () {
+                                                        Navigator.push(
+                                                          context,
+                                                          MaterialPageRoute(
+                                                              builder: (context) => AddAddressScreen(type: 'Add', ledgerId:widget.id.toString(),)),
+                                                        );
+                                                      },
+                                                      child: const Icon(Icons.add),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                            );
+                                          } else {
+                                            return GestureDetector(
+                                              onTap: (){
+                                                BlocProvider.of<LedgerBloc>(context)
+                                                    .add(SingleViewAddressEvent(addressId: widget.addressList![index].id.toString()));
+
+                                              },
+                                              child: Card(
+                                                elevation: 0,
+                                                child: Container(
+                                                  width: mWidth * .8,
+                                                  height: mHeight * .2,
+                                                  decoration: decorationContainer,
+                                                  child: ListTile(
+                                                    leading: Transform(
+                                                      transform: Matrix4.translationValues(-10, -10, 0.0),
+                                                      child: Checkbox(
+                                                        shape: RoundedRectangleBorder(
+                                                            borderRadius: BorderRadius.circular(10)),
+                                                        activeColor: const Color(0xffB53211),
+                                                        value:  widget.addressList![index].isDefault!,
+                                                        onChanged: (value) {
+                                                          setState(() {
+                                                            print("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&${widget.addressList![index].isDefault}");
+                                                          // valueFirst = widget.addressList![index].isDefault!;
+                                                            value =  widget.addressList![index].isDefault;
+                                                            BlocProvider.of<LedgerBloc>(context).add(DefaultAddressEvent(
+                                                                addressId: widget.addressList![index].id.toString(), isDefault: widget.addressList![index].isDefault!));
+                                                          });
+                                                        },
+                                                      ),
+                                                    ),
+                                                    title: Transform(
+                                                        transform:
+                                                        Matrix4.translationValues(-30, 12, 0.0),
+                                                        child: Text(
+                                                          "Home",
+                                                          style: GoogleFonts.poppins(
+                                                              textStyle: const TextStyle(
+                                                                  fontWeight: FontWeight.bold,
+                                                                  color: Colors.grey)),
+                                                        )),
+                                                    trailing: Container(
+                                                      height: mHeight*.1,
+                                                      color: Colors.green,
+                                                    //  width: mWidth*.05,
+                                                    //  margin: const EdgeInsets.only(bottom: 50),
+                                                      child: IconButton(
+                                                        onPressed: () {
+                                                          print("***************************************");
+                                                          print("^^^^^^^^^^^^^^^^^^${ widget.addressList![index].id.toString()}");
+                                                BlocProvider.of<LedgerBloc>(context).add(DeleteAddressEvent(addressId:
+                                                          widget.addressList![index].id.toString()));
+                                                          print("****&&&&&&&&&&&********************");
+                                                        },
+                                                        icon: const Icon(
+                                                          Icons.delete,
+                                                          size: 30,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    subtitle: Transform(
+                                                      transform: Matrix4.translationValues(-30, 20, 0.0),
+                                                      child: Expanded(
+                                                        child: Text(
+                                                            widget.addressList![index].address.toString(),
+                                                          // singleViewModelClass.data!.details!.addresses![index].address.toString(),
+                                                          style: GoogleFonts.poppins(
+                                                              textStyle: const TextStyle(
+                                                                  fontSize: 15, color: Colors.black)),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                            );
+                                          }
+                                        })
+
+
+                             ),
+                          SizedBox(
+                            height: mHeight * .05,
+                          ),
+                        ],
+                      )
                           : const SizedBox()
                     ],
-                  )
-                ]),
+                  ): SizedBox()
+                ])
               )),
           floatingActionButton: floatingActionButton(
               context: context,
@@ -497,163 +723,19 @@ class _CreateAndEditLedgerState extends State<CreateAndEditLedger> {
                       areaId: areaId));
                   print(
                       "##################################################${areaId}");
+                }if(formKey.currentState!.validate() == true &&
+                    widget.type == "Edit"){
+                  BlocProvider.of<LedgerBloc>(context).add(EditLedgerEvent(
+                      ledgerId: widget.ledgerId.toString(), ledgerName:nameController.text ,
+                      balance: balanceController.text, asOnDate:  apiDateFormat.format(dateNotifier.value),
+                      address:addressController.text, phone: phoneNumberController.text,
+                 email: emailController.text, isVat:  isChecked.value, vatNo: vatNumberController.text,
+                      areaID: areaId, partyID: 2));
                 }
-                // formKey.currentState!.validate() == true ?
-                // Navigator.pop(context): const SizedBox();
+
               })),
     );
   }
 }
 
-class AddressWidget extends StatefulWidget {
-  const AddressWidget({Key? key}) : super(key: key);
 
-  @override
-  State<AddressWidget> createState() => _AddressWidgetState();
-}
-
-class _AddressWidgetState extends State<AddressWidget> {
-  final particulars = ["Cash in hand"];
-
-  ///
-  bool valueFirst = true;
-  ValueNotifier<int> buttonClickedTimes = ValueNotifier(0);
-
-  // ValueNotifier<bool>
-
-  final decorationContainer = BoxDecoration(
-      color: const Color(0xffF5F5F5), borderRadius: BorderRadius.circular(10));
-  List<String>? items;
-
-  // "Kunnummal House Karkkunnu, Thirakkalangod po Malppuram Destrict Kerala 765463 Area";
-
-  @override
-  Widget build(BuildContext context) {
-    final mWidth = MediaQuery.of(context).size.width;
-    final mHeight = MediaQuery.of(context).size.height;
-    return ListView(
-      shrinkWrap: true,
-      physics: const BouncingScrollPhysics(),
-      // crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        SizedBox(
-          height: mHeight * .03,
-        ),
-        Text("Addresses",
-            style: GoogleFonts.poppins(
-              textStyle:
-                  const TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
-            )),
-        SizedBox(
-          height: mHeight * .02,
-        ),
-        SizedBox(
-            // color: Colors.grey,
-            height: mHeight * .28,
-            child: ListView.builder(
-                shrinkWrap: true,
-                physics: const BouncingScrollPhysics(),
-                scrollDirection: Axis.horizontal,
-                itemCount: particulars.length + 1,
-                itemBuilder: (BuildContext context, int index) {
-                  if (particulars.isEmpty || particulars.length == index) {
-                    return Card(
-                      elevation: 0,
-                      child: Container(
-                        decoration: decorationContainer,
-                        width: mWidth * .7,
-                        child: Center(
-                          child: SizedBox(
-                            height: mHeight * .1,
-                            child: ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor: const Color(0xffB53211),
-                                shape: const CircleBorder(),
-                                //  padding: const EdgeInsets.only(24),
-                              ),
-                              onPressed: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => AddAddressScreen()),
-                                );
-                              },
-                              child: const Icon(Icons.add),
-                            ),
-                          ),
-                        ),
-                      ),
-                    );
-                  } else {
-                    return Card(
-                      elevation: 0,
-                      child: Container(
-                        width: mWidth * .8,
-                        height: mHeight * .1,
-                        decoration: decorationContainer,
-                        child: ListTile(
-                          leading: Transform(
-                            transform: Matrix4.translationValues(-10, -10, 0.0),
-                            child: Checkbox(
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10)),
-                              activeColor: const Color(0xffB53211),
-                              value: valueFirst,
-                              onChanged: (value) {
-                                setState(() {
-                                  valueFirst = value!;
-                                });
-                              },
-                            ),
-                          ),
-                          title: Transform(
-                              transform:
-                                  Matrix4.translationValues(-30, 12, 0.0),
-                              child: Text(
-                                "Home",
-                                style: GoogleFonts.poppins(
-                                    textStyle: const TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.grey)),
-                              )),
-                          trailing: Container(
-                            margin: const EdgeInsets.only(bottom: 50),
-                            child: IconButton(
-                              onPressed: () {},
-                              icon: const Icon(
-                                Icons.delete,
-                                size: 20,
-                              ),
-                            ),
-                          ),
-                          subtitle: Transform(
-                            transform: Matrix4.translationValues(-30, 20, 0.0),
-                            child: Expanded(
-                              child: FittedBox(
-                                fit: BoxFit.fitHeight,
-                                child: Text(
-                                  "Kunnummal House  \n"
-                                  "karakkkunn \n"
-                                  "malappuram \n"
-                                  "kerala \n"
-                                  "676123\n"
-                                  "Area",
-                                  style: GoogleFonts.poppins(
-                                      textStyle: const TextStyle(
-                                          fontSize: 30, color: Colors.black)),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                    );
-                  }
-                })),
-        SizedBox(
-          height: mHeight * .05,
-        ),
-      ],
-    );
-  }
-}

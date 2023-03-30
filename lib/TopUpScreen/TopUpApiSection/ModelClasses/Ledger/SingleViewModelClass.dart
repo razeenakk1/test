@@ -1,7 +1,7 @@
 import 'dart:convert';
 /// StatusCode : 6000
 /// message : "Successfully listed LedgerDetails"
-/// data : {"id":"3e01fba9-aade-4447-9af5-55a22b0cd5a2","LedgerID":110,"AccountGroupUnder":29,"LedgerName":"Sundar Cr","Balance":"88.00000000","AsOnDate":"2023-03-29","Details":{"id":"39ded53d-a706-426c-9ef0-f377e7c0f4a4","PartyID":7,"Phone":54648484,"Email":"sggshshshs@gmail.com ","Addresses":[{"id":"40b9b6fe-b7de-48aa-9cd2-7431e551f221","AddressID":18,"Address":"Sjhshshs","Areas":"6ee8ac6c-b76a-4172-a6af-7c4e47a9881b","AreaName":"Kerala ","IsDefault":true}],"IsVat":true,"VatNo":"77878676764"}}
+/// data : {"id":"83e71363-52d3-4f3f-b83e-d4b22a0325f8","LedgerID":109,"AccountGroupUnder":10,"AccountGroupUnderName":"Sundry Debtors","LedgerName":"Sunday Dr","Balance":"55.00000000","AsOnDate":"2023-03-29","Details":{"id":"a66664da-2e14-4c93-b835-642f43bf81a2","PartyID":6,"Phone":56325809,"Email":"sundry@gmail.com ","Addresses":[{"id":"d3bc4127-ab63-49fc-8fad-05b216ddc383","AddressID":17,"Address":"Sundry ","Areas":"6ee8ac6c-b76a-4172-a6af-7c4e47a9881b","AreaName":"Kerala ","IsDefault":true}],"IsVat":false,"VatNo":""}}
 
 SingleViewModelClass singleViewModelClassFromJson(String str) => SingleViewModelClass.fromJson(json.decode(str));
 String singleViewModelClassToJson(SingleViewModelClass data) => json.encode(data.toJson());
@@ -46,13 +46,14 @@ SingleViewModelClass copyWith({  int? statusCode,
 
 }
 
-/// id : "3e01fba9-aade-4447-9af5-55a22b0cd5a2"
-/// LedgerID : 110
-/// AccountGroupUnder : 29
-/// LedgerName : "Sundar Cr"
-/// Balance : "88.00000000"
+/// id : "83e71363-52d3-4f3f-b83e-d4b22a0325f8"
+/// LedgerID : 109
+/// AccountGroupUnder : 10
+/// AccountGroupUnderName : "Sundry Debtors"
+/// LedgerName : "Sunday Dr"
+/// Balance : "55.00000000"
 /// AsOnDate : "2023-03-29"
-/// Details : {"id":"39ded53d-a706-426c-9ef0-f377e7c0f4a4","PartyID":7,"Phone":54648484,"Email":"sggshshshs@gmail.com ","Addresses":[{"id":"40b9b6fe-b7de-48aa-9cd2-7431e551f221","AddressID":18,"Address":"Sjhshshs","Areas":"6ee8ac6c-b76a-4172-a6af-7c4e47a9881b","AreaName":"Kerala ","IsDefault":true}],"IsVat":true,"VatNo":"77878676764"}
+/// Details : {"id":"a66664da-2e14-4c93-b835-642f43bf81a2","PartyID":6,"Phone":56325809,"Email":"sundry@gmail.com ","Addresses":[{"id":"d3bc4127-ab63-49fc-8fad-05b216ddc383","AddressID":17,"Address":"Sundry ","Areas":"6ee8ac6c-b76a-4172-a6af-7c4e47a9881b","AreaName":"Kerala ","IsDefault":true}],"IsVat":false,"VatNo":""}
 
 Data dataFromJson(String str) => Data.fromJson(json.decode(str));
 String dataToJson(Data data) => json.encode(data.toJson());
@@ -61,6 +62,7 @@ class Data {
       String? id, 
       int? ledgerID, 
       int? accountGroupUnder, 
+      String? accountGroupUnderName, 
       String? ledgerName, 
       String? balance, 
       String? asOnDate, 
@@ -68,6 +70,7 @@ class Data {
     _id = id;
     _ledgerID = ledgerID;
     _accountGroupUnder = accountGroupUnder;
+    _accountGroupUnderName = accountGroupUnderName;
     _ledgerName = ledgerName;
     _balance = balance;
     _asOnDate = asOnDate;
@@ -78,6 +81,7 @@ class Data {
     _id = json['id'];
     _ledgerID = json['LedgerID'];
     _accountGroupUnder = json['AccountGroupUnder'];
+    _accountGroupUnderName = json['AccountGroupUnderName'];
     _ledgerName = json['LedgerName'];
     _balance = json['Balance'];
     _asOnDate = json['AsOnDate'];
@@ -86,6 +90,7 @@ class Data {
   String? _id;
   int? _ledgerID;
   int? _accountGroupUnder;
+  String? _accountGroupUnderName;
   String? _ledgerName;
   String? _balance;
   String? _asOnDate;
@@ -93,6 +98,7 @@ class Data {
 Data copyWith({  String? id,
   int? ledgerID,
   int? accountGroupUnder,
+  String? accountGroupUnderName,
   String? ledgerName,
   String? balance,
   String? asOnDate,
@@ -100,6 +106,7 @@ Data copyWith({  String? id,
 }) => Data(  id: id ?? _id,
   ledgerID: ledgerID ?? _ledgerID,
   accountGroupUnder: accountGroupUnder ?? _accountGroupUnder,
+  accountGroupUnderName: accountGroupUnderName ?? _accountGroupUnderName,
   ledgerName: ledgerName ?? _ledgerName,
   balance: balance ?? _balance,
   asOnDate: asOnDate ?? _asOnDate,
@@ -108,6 +115,7 @@ Data copyWith({  String? id,
   String? get id => _id;
   int? get ledgerID => _ledgerID;
   int? get accountGroupUnder => _accountGroupUnder;
+  String? get accountGroupUnderName => _accountGroupUnderName;
   String? get ledgerName => _ledgerName;
   String? get balance => _balance;
   String? get asOnDate => _asOnDate;
@@ -118,6 +126,7 @@ Data copyWith({  String? id,
     map['id'] = _id;
     map['LedgerID'] = _ledgerID;
     map['AccountGroupUnder'] = _accountGroupUnder;
+    map['AccountGroupUnderName'] = _accountGroupUnderName;
     map['LedgerName'] = _ledgerName;
     map['Balance'] = _balance;
     map['AsOnDate'] = _asOnDate;
@@ -129,13 +138,13 @@ Data copyWith({  String? id,
 
 }
 
-/// id : "39ded53d-a706-426c-9ef0-f377e7c0f4a4"
-/// PartyID : 7
-/// Phone : 54648484
-/// Email : "sggshshshs@gmail.com "
-/// Addresses : [{"id":"40b9b6fe-b7de-48aa-9cd2-7431e551f221","AddressID":18,"Address":"Sjhshshs","Areas":"6ee8ac6c-b76a-4172-a6af-7c4e47a9881b","AreaName":"Kerala ","IsDefault":true}]
-/// IsVat : true
-/// VatNo : "77878676764"
+/// id : "a66664da-2e14-4c93-b835-642f43bf81a2"
+/// PartyID : 6
+/// Phone : 56325809
+/// Email : "sundry@gmail.com "
+/// Addresses : [{"id":"d3bc4127-ab63-49fc-8fad-05b216ddc383","AddressID":17,"Address":"Sundry ","Areas":"6ee8ac6c-b76a-4172-a6af-7c4e47a9881b","AreaName":"Kerala ","IsDefault":true}]
+/// IsVat : false
+/// VatNo : ""
 
 Details detailsFromJson(String str) => Details.fromJson(json.decode(str));
 String detailsToJson(Details data) => json.encode(data.toJson());
@@ -217,9 +226,9 @@ Details copyWith({  String? id,
 
 }
 
-/// id : "40b9b6fe-b7de-48aa-9cd2-7431e551f221"
-/// AddressID : 18
-/// Address : "Sjhshshs"
+/// id : "d3bc4127-ab63-49fc-8fad-05b216ddc383"
+/// AddressID : 17
+/// Address : "Sundry "
 /// Areas : "6ee8ac6c-b76a-4172-a6af-7c4e47a9881b"
 /// AreaName : "Kerala "
 /// IsDefault : true

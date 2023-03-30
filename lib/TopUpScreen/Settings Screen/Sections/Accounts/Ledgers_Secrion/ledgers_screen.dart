@@ -94,7 +94,8 @@ class _LedgersScreenState extends State<LedgersScreen> {
 
                     accountGroupUnder: singleViewModelClass.data!.accountGroupUnder,
                     ledgerName: singleViewModelClass.data!.ledgerName,
-                  balance: singleViewModelClass.data!.balance,
+                  balance: roundStringWith(singleViewModelClass.data!.balance.toString()),
+
                   asOnDate: singleViewModelClass.data!.asOnDate,
                    phone: singleViewModelClass.data!.accountGroupUnder == 29 ||singleViewModelClass.data!.accountGroupUnder == 10 ? singleViewModelClass.data!.details!.phone : null,
                   isVat: groupId == 10 || grpId == 29 ? singleViewModelClass.data!.details!.isVat : null,
@@ -103,6 +104,10 @@ class _LedgersScreenState extends State<LedgersScreen> {
                   areaId:groupId == 10 || grpId == 29 ?singleViewModelClass.data!.details!.addresses!.first.areas : null,
                   areaName: groupId == 10 || grpId == 29 ?singleViewModelClass.data!.details!.addresses!.first.areaName: null,
                   email:groupId == 10 || grpId == 29 ?singleViewModelClass.data!.details!.email: null,
+                  ledgerId:  singleViewModelClass.data!.ledgerID.toString(),
+
+                  accountGroupUnderName:  singleViewModelClass.data!.accountGroupUnderName.toString(),
+                  addressList:groupId == 10 || grpId == 29 ? singleViewModelClass.data!.details!.addresses : null
 
 
 

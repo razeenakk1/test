@@ -88,7 +88,8 @@ class _ListAreaScreeenState extends State<ListAreaScreeen> {
                               return GestureDetector(
                                 onTap: () async {
                                   Navigator.pop(context,
-                                    [areaListModelClass.data![index].areaName,areaListModelClass.data![index].areaID.toString()],);
+                                    [areaListModelClass.data![index].areaName,areaListModelClass.data![index].areaID.toString(),
+                                      areaListModelClass.data![index].id.toString()],);
 
                                 },
                                 child: Card(
