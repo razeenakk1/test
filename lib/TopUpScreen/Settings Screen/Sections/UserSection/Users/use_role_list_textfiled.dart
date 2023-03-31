@@ -35,7 +35,7 @@ class _UseRoleListScreenState extends State<UseRoleListScreen> {
     final mWidth = MediaQuery.of(context).size.width;
 
     return Scaffold(
-      appBar: appBar(appBarTitle: ""),
+      appBar: appBar(appBarTitle: "Userole List"),
       backgroundColor:backGroundColor,
       body: Container(
         decoration: containerDecoration,

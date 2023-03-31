@@ -278,12 +278,10 @@ class ProfileRowWidget extends StatelessWidget {
                       SizedBox(
                         width: size.width*.6,
                        // color: Colors.blue,
-                        child: Expanded(
-                            child: Text(secondText, overflow: TextOverflow.ellipsis,
+                        child: Text(secondText, overflow: TextOverflow.ellipsis,
 
 
-                                style:GoogleFonts.poppins(textStyle: const  TextStyle(fontWeight: FontWeight.bold,fontSize: 15),)),
-                      ))
+                            style:GoogleFonts.poppins(textStyle: const  TextStyle(fontWeight: FontWeight.bold,fontSize: 15),)))
                     ],
                   )
 

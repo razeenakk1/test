@@ -85,8 +85,14 @@ class _LedgersScreenState extends State<LedgersScreen> {
                   BlocProvider.of<LedgerBloc>(context).singleViewModelClass;
               groupId = singleViewModelClass.data!.accountGroupUnder!.toInt();
               grpId = singleViewModelClass.data!.accountGroupUnder!.toInt();
+              print("((((((((((((((((((((${singleViewModelClass.data!.ledgerID}");
+              print("((((((((((((((((((((${customId}");
+              print("((((((((((((((((((((${singleViewModelClass.data!.accountGroupUnder}");
+              print("((((((((((((((((((((${singleViewModelClass.data!.ledgerName}");
+              print("((((((((((((((((((((${singleViewModelClass.data!.balance.toString()}");
+              print("((((((((((((((((((((${singleViewModelClass.data!.asOnDate}");
 
-
+             // BlocProvider.of<LedgerBloc>(context).add(ListAddressEvent(search: "", ledgerUuId: customId.toString()));
               Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => CreateAndEditLedger (type: 'Edit',
@@ -96,7 +102,7 @@ class _LedgersScreenState extends State<LedgersScreen> {
                     ledgerName: singleViewModelClass.data!.ledgerName,
                   balance: roundStringWith(singleViewModelClass.data!.balance.toString()),
 
-                  asOnDate: singleViewModelClass.data!.asOnDate,
+                 // asOnDate: singleViewModelClass.data!.asOnDate!.isEmpty ? DateTime.now().toString() :singleViewModelClass.data!.asOnDate,
                    phone: singleViewModelClass.data!.accountGroupUnder == 29 ||singleViewModelClass.data!.accountGroupUnder == 10 ? singleViewModelClass.data!.details!.phone : null,
                   isVat: groupId == 10 || grpId == 29 ? singleViewModelClass.data!.details!.isVat : null,
                   vatNo:groupId == 10 || grpId == 29 ? singleViewModelClass.data!.details!.vatNo: null,
@@ -104,7 +110,7 @@ class _LedgersScreenState extends State<LedgersScreen> {
                   areaId:groupId == 10 || grpId == 29 ?singleViewModelClass.data!.details!.addresses!.first.areas : null,
                   areaName: groupId == 10 || grpId == 29 ?singleViewModelClass.data!.details!.addresses!.first.areaName: null,
                   email:groupId == 10 || grpId == 29 ?singleViewModelClass.data!.details!.email: null,
-                  ledgerId:  singleViewModelClass.data!.ledgerID.toString(),
+                  ledgerId:  singleViewModelClass.data!.ledgerID,
 
                   accountGroupUnderName:  singleViewModelClass.data!.accountGroupUnderName.toString(),
                   addressList:groupId == 10 || grpId == 29 ? singleViewModelClass.data!.details!.addresses : null
@@ -115,8 +121,12 @@ class _LedgersScreenState extends State<LedgersScreen> {
 
 
 
+
+
                 ) ),
               );
+
+
 
               BlocProvider.of<LedgerBloc>(context).add(ListLedgerEvent(search: ''));
 

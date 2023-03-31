@@ -167,7 +167,7 @@ class LedgerBloc extends Bloc<LedgerEvent, LedgerState> {
     on<ListAddressEvent>((event, emit) async {
       emit(AddressListLoading());
       try {
-        listAddressModelClass = await ledgerApi.listAddressFunction(search: event.search);
+        listAddressModelClass = await ledgerApi.listAddressFunction(search: event.search, ledgerUuId: event.ledgerUuId);
         emit(AddressListLoaded());
       } catch (e) {
         emit(AddressListLoading());

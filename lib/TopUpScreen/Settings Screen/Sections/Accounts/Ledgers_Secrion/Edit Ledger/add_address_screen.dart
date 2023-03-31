@@ -67,18 +67,15 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
               //  hideProgressBar();
               createAddressModelClass =
                   BlocProvider.of<LedgerBloc>(context).createAddressModelClass;
-              BlocProvider.of<LedgerBloc>(context)
-                  .add(SingleViewLedgerEvent(
-                  id: widget.addressId.toString()));
+
               Navigator.pop(context);
 
               // if (createLedgerModelClass.statusCode == 6001) {
               //   msgBtmDialogueFunction(
               //       context: context,
               //       textMsg: createLedgerModelClass.message.toString());
-              //   BlocProvider.of<LedgerBloc>(context)
-              //       .add(LedgerListEvent(search: ""));
-              // }
+              BlocProvider.of<LedgerBloc>(context)
+                  .add(ListAddressEvent(search: "", ledgerUuId: widget.ledgerId.toString()));
 
 
               if (state is AddressCreateError) {
@@ -94,8 +91,9 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
               const CircularProgressIndicator();
             }
             if (state is AddressEditLoaded) {
-              Navigator.pop(context);
-             // BlocProvider.of<LedgerBloc>(context).add(LedgerListEvent(search: ""));
+              Navigator.pop(context,true);
+              BlocProvider.of<LedgerBloc>(context)
+                  .add(ListAddressEvent(search: "", ledgerUuId: widget.ledgerId.toString()));
 
             }
             if (state is AddressEditError) {

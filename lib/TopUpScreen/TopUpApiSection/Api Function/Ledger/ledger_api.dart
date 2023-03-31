@@ -108,7 +108,7 @@ class LedgerApi{
     return SingleViewModelClass.fromJson(jsonDecode(response.body));
   }
   Future<EditLedgerModelClass> editLedgerFunction({
-    required String id,
+    required int id,
     required String ledgerName,
     required String balance,
     required String asOnDate,
@@ -210,10 +210,11 @@ class LedgerApi{
     await topUpApiClient.invokeAPI(path: path, method: "POST", body: body);
     return EditAddressModelClass.fromJson(jsonDecode(response.body));
   }
-  Future<ListAddressModelClass> listAddressFunction({ required String search }) async {
+  Future<ListAddressModelClass> listAddressFunction({ required String search, required String ledgerUuId }) async {
     String path = 'accounts/list-address/';
     final body = {
-      "search":search
+      "search":search,
+      "id": ledgerUuId
     };
     log("_________________searchAddressGroup $body");
     Response response =

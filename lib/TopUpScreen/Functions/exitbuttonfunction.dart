@@ -86,9 +86,10 @@ btmDialogueFunction({required BuildContext context,required String textMsg,requi
 }
 msgBtmDialogueFunction({required BuildContext context ,required String textMsg }) {
   return showModalBottomSheet(
-
     context: context,
-    isScrollControlled: true,
+//     isScrollControlled: true,
+// isDismissible: false,
+    enableDrag: false,
     builder: (BuildContext context) {
       return Container(
         padding:

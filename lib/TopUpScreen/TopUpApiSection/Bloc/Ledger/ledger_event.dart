@@ -53,7 +53,7 @@ class SingleViewLedgerEvent extends LedgerEvent {
 }
 
 class EditLedgerEvent extends LedgerEvent {
-  final String ledgerId;
+  final int ledgerId;
   final String ledgerName;
   final String balance;
   final String asOnDate;
@@ -122,9 +122,10 @@ class EditAddressEvent extends LedgerEvent {
 }
 class ListAddressEvent extends LedgerEvent {
   final String search ;
+  final String ledgerUuId ;
 
 
-  ListAddressEvent({required this.search});
+  ListAddressEvent({required this.search,required this.ledgerUuId});
 
 
 }

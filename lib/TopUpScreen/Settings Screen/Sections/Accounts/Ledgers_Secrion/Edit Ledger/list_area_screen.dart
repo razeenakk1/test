@@ -33,7 +33,7 @@ class _ListAreaScreeenState extends State<ListAreaScreeen> {
     final mHeight = MediaQuery.of(context).size.height;
     final mWidth = MediaQuery.of(context).size.width;
     return Scaffold(
-      appBar: appBar(appBarTitle: ""),
+      appBar: appBar(appBarTitle: "Area List"),
       backgroundColor: backGroundColor,
       body: Container(
         decoration: containerDecoration,
