@@ -10,6 +10,10 @@ import 'package:topuptest/Api_Section/Bloc/LoginBloc/login_bloc.dart';
 import 'package:topuptest/Api_Section/Bloc/get_bloc/get_bloc.dart';
 import 'package:topuptest/ListAndSearch/Api_Section/Api_Function/product_list_api.dart';
 import 'package:topuptest/ListAndSearch/Api_Section/Bloc/product_list_bloc.dart';
+import 'package:topuptest/Pagiantion%20Test/Pagiantion_Bloc/pagiantion_bloc.dart';
+import 'package:topuptest/Pagiantion%20Test/Pagiantion_Bloc/pagination%20home.dart';
+import 'package:topuptest/Pagiantion%20Test/pagiantion_api.dart';
+import 'package:topuptest/Pagiantion%20Test/pagination_test.dart';
 import 'package:topuptest/TopUpScreen/SplashScreen/splash_screen.dart';
 import 'package:topuptest/TopUpScreen/TopUpApiSection/Api%20Function/Area/area_api.dart';
 import 'package:topuptest/TopUpScreen/TopUpApiSection/Api%20Function/Category/category_api.dart';
@@ -24,6 +28,9 @@ import 'package:topuptest/TopUpScreen/TopUpApiSection/Bloc/Ledger/ledger_bloc.da
 import 'package:topuptest/TopUpScreen/TopUpApiSection/Bloc/Tax/tax_bloc.dart';
 import 'package:topuptest/TopUpScreen/TopUpApiSection/Bloc/TopUpLoginBloc/top_up_login_bloc.dart';
 import 'package:topuptest/TopUpScreen/TopUpApiSection/Bloc/UserRole/user_role_bloc.dart';
+import 'package:topuptest/Ui%20design/ui_design.dart';
+import 'package:topuptest/payment_pagination/Bloc/payment_bloc.dart';
+import 'package:topuptest/payment_pagination/payment_pagiantion_api.dart';
 import 'ListAndSearch/Api_Section/Api_Function/search_api.dart';
 import 'TopUpScreen/CameraSecton/camera_screen.dart';
 import 'TopUpScreen/TopUpApiSection/Api Function/Login_Api/login_api.dart';
@@ -54,6 +61,9 @@ final  UserApi userApi = UserApi();
    final UserRoleApi userRoleApi = UserRoleApi();
    final ApiUser apiUser = ApiUser();
    final LedgerApi ledgerApi = LedgerApi();
+   PaginationApi paginationApi = PaginationApi();
+   PaymentPaginationApi paymentPaginationApi = PaymentPaginationApi();
+
 
 
    @override
@@ -97,6 +107,12 @@ final  UserApi userApi = UserApi();
         BlocProvider<LedgerBloc>(
           create: (context) => LedgerBloc(ledgerApi),
         ),
+        BlocProvider<PagiantionBloc>(
+          create: (context) => PagiantionBloc(paginationApi),
+        ),  BlocProvider<PaymentBloc>(
+          create: (context) => PaymentBloc(paymentPaginationApi),
+        ),
+
 
 
 
@@ -108,7 +124,7 @@ final  UserApi userApi = UserApi();
            theme: ThemeData(
              indicatorColor:    Color(0xffB73312),
            ),
-         home:   SplashScreen()),
+         home:   UiDesign()),
 
     );
   }
